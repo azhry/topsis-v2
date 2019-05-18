@@ -58,30 +58,26 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- BEGIN LOGIN -->
         <div class="content">
             <!-- BEGIN LOGIN FORM -->
-            <?= form_open('login', ['class' => 'login-form']) ?>
+            <?= form_open('login') ?>
                 <h3 class="form-title">Login to your account</h3>
                 <?= $this->session->flashdata('msg') ?>
-                <div class="alert alert-danger display-hide">
-                    <button class="close" data-close="alert"></button>
-                    <span> Enter any username and password. </span>
-                </div>
                 <div class="form-group">
                     <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-                    <label class="control-label visible-ie8 visible-ie9">Username</label>
+                    <label class="control-label">Username</label>
                     <div class="input-icon">
                         <i class="fa fa-user"></i>
-                        <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username" /> </div>
+                        <input class="form-control" type="text" autocomplete="off" placeholder="Username" name="username" /> </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label visible-ie8 visible-ie9">Password</label>
+                    <label class="control-label">Password</label>
                     <div class="input-icon">
                         <i class="fa fa-lock"></i>
-                        <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password" /> </div>
+                        <input class="form-control" type="password" autocomplete="off" placeholder="Password" name="password" /> </div>
                 </div>
                 <div class="form-actions">
                     <input type="submit" name="login" value="Login" class="btn green pull-right">
                 </div>
-            </form>
+            <?= form_close() ?>
             <!-- END LOGIN FORM -->
         </div>
         <!-- END LOGIN -->
@@ -91,10 +87,10 @@ License: You must have a valid license purchased only from themeforest(the above
 <![endif]-->
         <!-- BEGIN CORE PLUGINS -->
         <script src="<?= base_url() ?>/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-        <script src="<?= base_url() ?>/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- <script src="<?= base_url() ?>/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script> -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <script src="<?= base_url() ?>/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
-        <script src="<?= base_url() ?>/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+        <!-- <script src="<?= base_url() ?>/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="<?= base_url() ?>/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script> -->
     </body>
 
 </html>

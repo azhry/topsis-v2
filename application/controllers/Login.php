@@ -25,6 +25,7 @@ class Login extends MY_Controller
 		{
 			$this->load->model('pengguna_m');
 			$pengguna = $this->pengguna_m->get_row(['username' => $this->POST('username'), 'password' => md5($this->POST('password'))]);
+
 			if (isset($pengguna))
 			{
 				$this->session->set_userdata([
