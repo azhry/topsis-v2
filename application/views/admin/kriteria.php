@@ -4,7 +4,7 @@
 <link href="<?= base_url('assets') ?>/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
 <link href="<?= base_url('assets') ?>/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
-<div class="right_col" role="main">
+<div class="page-fixed-main-content">
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
@@ -35,14 +35,14 @@
                             <?php foreach ($kriteria as $row): ?>
                                 <tr>
                                     <td align="middle" style="vertical-align: middle;">
-                                        <?= $row->label ?>
+                                        <?= $row->kriteria ?>
                                     </td>
                                     <td align="middle" style="vertical-align: middle;"><?= $row->key ?></td>
                                     <td align="middle" style="vertical-align: middle;"><?= $row->type ?></td>
-                                    <td align="middle" style="vertical-align: middle;"><?= $row->weight ?></td>
+                                    <td align="middle" style="vertical-align: middle;"><?= $row->bobot ?></td>
                                     <td align="middle" style="vertical-align: middle;">
-                                        <a href="<?= base_url('admin/detail-kriteria/' . $row->id_kriteria) ?>" type="button" class="btn btn-info"><i class="fa fa-eye"></i> Detail</a>
-                                        <a href="<?= base_url('admin/kriteria/' . $row->id_kriteria) ?>" type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                        <a href="<?= base_url('admin/detail-kriteria/' . $row->id) ?>" type="button" class="btn btn-info"><i class="fa fa-eye"></i> Detail</a>
+                                        <a href="<?= base_url('admin/kriteria/' . $row->id) ?>" type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
