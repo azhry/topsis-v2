@@ -27,7 +27,6 @@ class Admin extends MY_Controller
 
 	public function index()
 	{
-		redirect('admin/cari');
 		$this->load->model('sekolah_m');
 		$this->data['sekolah']	= $this->sekolah_m->get();
 		$this->data['title']	= 'Dashboard';
@@ -35,11 +34,190 @@ class Admin extends MY_Controller
 		$this->template($this->data, $this->module);
 	}
 
+	public function daftar_pengguna()
+	{
+		$this->load->model('pengguna_m');
+		$this->data['id'] = $this->uri->segment(3);
+		if (isset($this->data['id']))
+		{
+			$this->pengguna_m->delete($this->data['id']);
+			$this->flashmsg('Data pengguna berhasil dihapuskan');
+			redirect('admin/daftar-pengguna');
+		}
+
+		$this->data['pengguna']		= $this->pengguna_m->get(['id !=' => $this->data['id_pengguna']]);
+		$this->load->model('role_m');
+		for ($i = 0; $i < count($this->data['pengguna']); $i++)
+		{
+			$this->data['pengguna'][$i]->role = $this->role_m->get_row(['id' => $this->data['pengguna'][$i]->id_role]);
+		}
+
+
+		$this->data['title']		= 'Daftar Pengguna';
+		$this->data['content']		= 'daftar_pengguna';
+		$this->template($this->data, $this->module);
+	}
+
+	public function detail_pengguna()
+	{
+		$this->data['id']	= $this->uri->segment(3);
+		$this->check_allowance(!isset($this->data['id']));
+
+		$this->load->model('pengguna_m');
+		$this->data['pengguna']		= $this->pengguna_m->get_row(['id' => $this->data['id']]);
+		$this->check_allowance(!isset($this->data['pengguna']), ['Data tidak ditemukan', 'danger']);
+
+		$this->load->model('role_m');
+		$this->data['pengguna']->role = $this->role_m->get_row(['id' => $this->data['pengguna']->id_role]);
+
+		$this->data['title']		= 'Detail Pengguna';
+		$this->data['content']		= 'detail_pengguna';
+		$this->template($this->data, $this->module);	
+	}
+
+	public function tambah_pengguna()
+	{
+		if ($this->POST('submit'))
+		{
+			$password 	= $this->POST('password');
+			$rpassword 	= $this->POST('rpassword');
+			if ($password !== $rpassword)
+			{
+				$this->flashmsg('Kolom Password harus sama dengan kolom Re-type Password', 'danger');
+				redirect('admin/tambah-pengguna');
+			}
+
+			$this->data['pengguna'] = [
+				'username'		=> $this->POST('username'),
+				'password'		=> md5($password),
+				'id_role'		=> $this->POST('id_role'),
+				'nama'			=> $this->POST('nama'),
+				'email'			=> $this->POST('email'),
+				'alamat'		=> $this->POST('alamat'),
+				'kontak'		=> $this->POST('kontak'),
+				'jenis_kelamin'	=> $this->POST('jenis_kelamin')
+			];
+
+			$this->load->model('pengguna_m');
+			$this->pengguna_m->insert($this->data['pengguna']);
+			$this->flashmsg('Data pengguna berhasil ditambahkan');
+			redirect('admin/daftar-pengguna');	
+		}
+
+		$this->load->model('role_m');
+		$this->data['role']			= $this->role_m->get();
+		$this->data['title']		= 'Tambah Pengguna';
+		$this->data['content']		= 'form_tambah_pengguna';
+		$this->template($this->data, $this->module);
+	}
+
+	public function edit_pengguna()
+	{
+		$this->data['id']	= $this->uri->segment(3);
+		$this->check_allowance(!isset($this->data['id']));
+
+		$this->load->model('pengguna_m');
+		$this->data['pengguna']		= $this->pengguna_m->get_row(['id' => $this->data['id']]);
+		$this->check_allowance(!isset($this->data['pengguna']), ['Data tidak ditemukan', 'danger']);
+
+		if ($this->POST('submit'))
+		{
+			$this->data['pengguna'] = [
+				'username'		=> $this->POST('username'),
+				'nama'			=> $this->POST('nama'),
+				'jenis_kelamin'	=> $this->POST('jenis_kelamin'),
+				'email'			=> $this->POST('email'),
+				'alamat'		=> $this->POST('alamat'),
+				'kontak'		=> $this->POST('kontak'),
+				'id_role'		=> $this->POST('id_role')
+			];
+
+			$password 	= $this->POST('password');
+			$rpassword 	= $this->POST('rpassword');
+			if (!empty($password) or !empty($rpassword))
+			{
+				if ($password !== $rpassword)
+				{
+					$this->flashmsg('Kolom Password harus sama dengan kolom Re-type Password', 'danger');
+					redirect('admin/edit-pengguna/' . $this->data['id']);
+				}
+
+				$this->data['pengguna']['password'] = md5($password);
+			}
+
+			$this->pengguna_m->update($this->data['id'], $this->data['pengguna']);
+			$this->flashmsg('Data pengguna berhasil diubah');
+			redirect('admin/edit-pengguna/' . $this->data['id']);
+		}
+
+		$this->load->model('role_m');
+		$this->data['role']			= $this->role_m->get();
+		$this->data['title']		= 'Edit Pengguna';
+		$this->data['content']		= 'form_edit_pengguna';
+		$this->template($this->data, $this->module);
+	}
+
+	public function profil()
+	{
+		$this->load->model('pengguna_m');
+		if ($this->POST('submit'))
+		{
+			$this->data['pengguna'] = [
+				'username'		=> $this->POST('username'),
+				'nama'			=> $this->POST('nama'),
+				'jenis_kelamin'	=> $this->POST('jenis_kelamin'),
+				'email'			=> $this->POST('email'),
+				'alamat'		=> $this->POST('alamat'),
+				'kontak'		=> $this->POST('kontak')
+			];
+
+			$password 	= $this->POST('password');
+			$rpassword 	= $this->POST('rpassword');
+			if (!empty($password) or !empty($rpassword))
+			{
+				if ($password !== $rpassword)
+				{
+					$this->flashmsg('Kolom Password harus sama dengan kolom Re-type Password', 'danger');
+					redirect('admin/profil');
+				}
+
+				$this->data['pengguna']['password'] = md5($password);
+			}
+
+			if (isset($this->data['pengguna']['username']) && !empty($this->data['pengguna']['username']))
+			{
+				$this->session->set_userdata('username', $this->data['pengguna']['username']);
+			}
+
+			$this->pengguna_m->update($this->data['id_pengguna'], $this->data['pengguna']);
+			$this->flashmsg('Profil anda berhasil diubah');
+			redirect('admin/profil');
+		}
+
+		$this->data['pengguna']	= $this->pengguna_m->get_row(['id' => $this->data['id_pengguna']]);
+		$this->data['title']	= 'Profil';
+		$this->data['content']	= 'profil';
+		$this->template($this->data, $this->module);
+	}
+
 	public function daftar_sekolah()
 	{
 		$this->load->model('sekolah_m');
-
 		$this->data['upload_dir'] 	= FCPATH . 'assets/foto/sekolah-';
+
+		$this->data['id'] = $this->uri->segment(3);
+		if (isset($this->data['id']))
+		{
+			if (file_exists($this->data['upload_dir'] . $this->data['id']))
+			{
+				$this->remove_directory($this->data['upload_dir'] . $this->data['id']);
+			}
+
+			$this->sekolah_m->delete($this->data['id']);
+			$this->flashmsg('Data sekolah berhasil dihapus');
+			redirect('admin/daftar-sekolah');
+		}
+
 		$this->data['sekolah']		= $this->sekolah_m->get_by_order('id', 'DESC');
 		$this->data['title']		= 'Daftar Sekolah';
 		$this->data['content']		= 'daftar_sekolah';
@@ -115,73 +293,6 @@ class Admin extends MY_Controller
 		$this->template($this->data, $this->module);
 	}
 
-	// public function edit_ruko()
-	// {
-	// 	$this->data['id_ruko']	= $this->uri->segment(3);
-	// 	$this->check_allowance(!isset($this->data['id_ruko']));
-
-	// 	$this->load->model('ruko_m');
-	// 	$this->data['ruko']			= $this->ruko_m->get_row(['id_ruko' => $this->data['id_ruko']]);
-	// 	$this->check_allowance(!isset($this->data['ruko']), ['Data ruko tidak ditemukan', 'danger']);
-
-	// 	if ($this->POST('submit'))
-	// 	{
-	// 		$assets_url = FCPATH . 'assets/';
-	// 		$uploaded_files = $this->POST('new_uploaded_files');
-
-	// 		$this->data['ruko'] = [
-	// 			'ruko'							=> $this->POST('ruko'),
-	// 			'biaya_sewa'					=> $this->POST('biaya_sewa'),
-	// 			'luas_bangunan'					=> $this->POST('luas_bangunan'),
-	// 			'akses_menuju_lokasi'			=> json_encode($this->POST('akses_menuju_lokasi')),
-	// 			'pusat_keramaian'				=> json_encode($this->POST('pusat_keramaian')),
-	// 			'zona_parkir'					=> $this->POST('zona_parkir'),
-	// 			'jumlah_pesaing_serupa'			=> $this->POST('jumlah_pesaing_serupa'),
-	// 			'tingkat_konsumtif_masyarakat'	=> $this->POST('tingkat_konsumtif_masyarakat'),
-	// 			'lingkungan_lokasi_ruko'		=> $this->POST('lingkungan_lokasi_ruko'),
-	// 			'latitude'						=> $this->POST('latitude'),
-	// 			'longitude'						=> $this->POST('longitude')
-	// 		];
-	// 		$this->ruko_m->update($this->data['id_ruko'], $this->data['ruko']);
-
-	// 		$uploaded_dir = $assets_url . 'foto/ruko-' . $this->data['id_ruko'];
-	// 		$deleted_photos = $this->POST('deleted_photo');
-	// 		if (isset($deleted_photos))
-	// 		{
-	// 			foreach ($deleted_photos as $photo)
-	// 			{
-	// 				@unlink($uploaded_dir . '/' . $photo);
-	// 			}
-	// 		}
-
-	// 		if (!file_exists($uploaded_dir))
-	// 		{
-	// 			mkdir($uploaded_dir);	
-	// 		}
-			
-	// 		if (isset($uploaded_files))
-	// 		{
-	// 			foreach ($uploaded_files as $file)
-	// 			{
-	// 				rename($assets_url . 'temp_files/' . $file, $uploaded_dir . '/' . $file);
-	// 			}
-	// 			$this->remove_directory($assets_url . 'temp_files/thumbnail');
-	// 			$this->remove_directory($assets_url . 'temp_files');
-	// 		}
-
-	// 		$this->flashmsg('Data ruko berhasil disimpan');
-	// 		redirect('pemilik/edit-ruko/' . $this->data['id_ruko']);	
-	// 	}
-
-	// 	$this->data['upload_dir'] 			= FCPATH . 'assets/foto/ruko-' . $this->data['ruko']->id_ruko;
-	// 	$this->data['files']				= array_values(array_diff(scandir($this->data['upload_dir']), ['.', '..']));
-	// 	$this->data['upload_path'] 			= base_url('assets/foto/ruko-' . $this->data['ruko']->id_ruko);
-	// 	$this->data['akses_menuju_lokasi']	= json_decode($this->data['ruko']->akses_menuju_lokasi);
-	// 	$this->data['pusat_keramaian']		= json_decode($this->data['ruko']->pusat_keramaian);
-	// 	$this->data['title']				= 'Form Edit Data Ruko';
-	// 	$this->data['content']				= 'form_edit_ruko';
-	// 	$this->template($this->data, $this->module);
-	// }
 
 	public function upload_handler()
 	{
@@ -364,6 +475,17 @@ class Admin extends MY_Controller
 				$spp_bulanan = $this->POST('spp_bulanan');
 				$range_spp = $range['spp_bulanan'];
                 $cond .= '(spp_bulanan >= ' . $range_spp[count($range_spp) - $spp_bulanan]['min'] . ' AND spp_bulanan <= ' . $range_spp[count($range_spp) - $spp_bulanan]['max'] . ') ';
+			}
+
+			if (!empty($this->POST('akreditasi')))
+			{
+				if (strlen($cond) > 0)
+				{
+					$cond .= 'AND ';
+				}
+
+				$akreditasi = $this->POST('akreditasi');
+                $cond .= 'akreditasi = "' . $akreditasi . '" ';
 			}
 
 			$len_fasilitas = count($this->POST('fasilitas'));

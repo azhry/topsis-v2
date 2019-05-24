@@ -10,48 +10,36 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Daftar Sekolah</h2>
+                    <h2>Daftar Pengguna</h2>
                 </div>
                 <div class="x_content">
-                    <a href="<?= base_url('admin/tambah-sekolah') ?>" class="btn green">
+                    <a href="<?= base_url('admin/tambah-pengguna') ?>" class="btn green">
                         <i class="fa fa-plus"></i> Tambah Data
                     </a>
+                    <?= $this->session->flashdata('msg') ?>
                     <br><br>
                     <table id="datatable-fixed-header" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th style="text-align: center;">Foto</th>
-                                <th style="text-align: center;">Nama Sekolah</th>
-                                <th style="text-align: center;">Akreditasi</th>
-                                <th style="text-align: center;">Alamat</th>
+                                <th style="text-align: center;">Nama</th>
+                                <th style="text-align: center;">Jenis Kelamin</th>
+                                <th style="text-align: center;">Email</th>
+                                <th style="text-align: center;">Role</th>
                                 <th style="text-align: center;">-</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <?php foreach ($sekolah as $row): ?>
-                                <?php  
-                                    if (!file_exists($upload_dir . $row->id)) 
-                                    {
-                                        $foto = [];
-                                    }
-                                    else
-                                    {
-                                        $foto = array_values(array_diff(scandir($upload_dir . $row->id), ['.', '..']));    
-                                    }
-                                    
-                                ?>
+                            <?php foreach ($pengguna as $row): ?>
                                 <tr>
+                                    <td align="middle" style="vertical-align: middle;"><?= $row->nama ?></td>
+                                    <td align="middle" style="vertical-align: middle;"><?= $row->jenis_kelamin ?></td>
+                                    <td align="middle" style="vertical-align: middle;"><?= $row->email ?></td>
+                                    <td align="middle" style="vertical-align: middle;"><?= $row->role->role ?></td>
                                     <td align="middle" style="vertical-align: middle;">
-                                        <img src="<?= count($foto) > 0 ? base_url('assets/foto/sekolah-' . $row->id . '/' . $foto[0]) : 'http://placehold.it/100' ?>" width="100" height="100">
-                                    </td>
-                                    <td align="middle" style="vertical-align: middle;"><?= $row->nama_sekolah ?></td>
-                                    <td align="middle" style="vertical-align: middle;"><?= $row->akreditasi ?></td>
-                                    <td align="middle" style="vertical-align: middle;"><?= $row->alamat ?></td>
-                                    <td align="middle" style="vertical-align: middle;">
-                                        <a href="<?= base_url('admin/detail-sekolah/' . $row->id) ?>" type="button" class="btn btn-info btn-xs"><i class="fa fa-eye"></i> Detail</a>
-                                        <a href="<?= base_url('admin/edit-sekolah/' . $row->id) ?>" type="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a>
-                                        <a href="<?= base_url('admin/daftar-sekolah/' . $row->id) ?>" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</a>
+                                        <a href="<?= base_url('admin/detail-pengguna/' . $row->id) ?>" type="button" class="btn btn-info btn-xs"><i class="fa fa-eye"></i> Detail</a>
+                                        <a href="<?= base_url('admin/edit-pengguna/' . $row->id) ?>" type="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a>
+                                        <a href="<?= base_url('admin/daftar-pengguna/' . $row->id) ?>" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

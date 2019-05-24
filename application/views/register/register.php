@@ -17,11 +17,10 @@ License: You must have a valid license purchased only from themeforest(the above
 <!--[if !IE]><!-->
 <html lang="en">
     <!--<![endif]-->
-    <!-- BEGIN HEAD -->
 
     <head>
         <meta charset="utf-8" />
-        <title>Login</title>
+        <title>Register</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="" name="description" />
@@ -58,30 +57,52 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- BEGIN LOGIN -->
         <div class="content">
             <!-- BEGIN LOGIN FORM -->
-            <?= form_open('login') ?>
-                <h3 class="form-title">Login to your account</h3>
+            <?= form_open('register') ?>
+                <h3 class="form-title">Register new account</h3>
                 <?= $this->session->flashdata('msg') ?>
                 <div class="form-group">
-                    <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
                     <label class="control-label">Username</label>
-                    <div class="input-icon">
-                        <i class="fa fa-user"></i>
-                        <input class="form-control" type="text" autocomplete="off" placeholder="Username" name="username" /> </div>
+                    <input class="form-control" type="text" autocomplete="off" placeholder="Username" name="username" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Nama</label>
+                    <input class="form-control" type="text" autocomplete="off" placeholder="Nama" name="nama" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Jenis Kelamin</label>
+                    <select class="form-control" name="jenis_kelamin" required>
+                        <option value="">Pilih Jenis Kelamin</option>
+                        <option value="Laki-laki">Laki-laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Kontak</label>
+                    <input class="form-control" type="text" autocomplete="off" placeholder="Kontak" name="kontak" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Email</label>
+                    <input class="form-control" type="email" autocomplete="off" placeholder="Email" name="email" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Alamat</label>
+                    <textarea class="form-control" autocomplete="off" placeholder="Alamat" name="alamat"></textarea>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Password</label>
-                    <div class="input-icon">
-                        <i class="fa fa-lock"></i>
-                        <input class="form-control" type="password" autocomplete="off" placeholder="Password" name="password" /> </div>
+                    <input class="form-control" type="password" autocomplete="off" placeholder="Password" name="password" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Re-type Password</label>
+                    <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Password" name="rpassword" />
                 </div>
                 <div class="form-actions">
-                    <a href="<?= base_url('register') ?>" class="pull-left">Register</a>
-                    <input type="submit" name="login" value="Login" class="btn green pull-right">
+                    <a href="<?= base_url('login') ?>" class="pull-left">Login</a>
+                    <input type="submit" name="submit" value="Register" class="btn green pull-right">
                 </div>
             <?= form_close() ?>
-            <!-- END LOGIN FORM -->
         </div>
-        <!-- END LOGIN -->
+        <br><br><br>
         <!--[if lt IE 9]>
 <script src="<?= base_url() ?>/assets/global/plugins/respond.min.js"></script>
 <script src="<?= base_url() ?>/assets/global/plugins/excanvas.min.js"></script> 

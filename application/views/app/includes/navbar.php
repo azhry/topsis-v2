@@ -4,7 +4,7 @@
                 <div class="container-fluid">
                     <div class="havbar-header">
                         <!-- BEGIN LOGO -->
-                        <a id="index" class="navbar-brand" href="start.html">
+                        <a id="index" class="navbar-brand" href="<?= base_url('app') ?>">
                             <img src="<?= base_url() ?>/assets/layouts/layout6/img/logo.png" alt="Logo"> </a>
                         <!-- END LOGO -->
                         <!-- BEGIN TOPBAR ACTIONS -->

@@ -97,6 +97,17 @@ class App extends MY_Controller
                 $cond .= '(spp_bulanan >= ' . $range_spp[count($range_spp) - $spp_bulanan]['min'] . ' AND spp_bulanan <= ' . $range_spp[count($range_spp) - $spp_bulanan]['max'] . ') ';
 			}
 
+			if (!empty($this->POST('akreditasi')))
+			{
+				if (strlen($cond) > 0)
+				{
+					$cond .= 'AND ';
+				}
+
+				$akreditasi = $this->POST('akreditasi');
+                $cond .= 'akreditasi = "' . $akreditasi . '" ';
+			}
+
 			$len_fasilitas = count($this->POST('fasilitas'));
 			if ($len_fasilitas > 0)
 			{

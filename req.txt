@@ -1,0 +1,22 @@
+Judul dan footer: Sistem Pendukung Keputusan Pemilihan SDIT
+
+1. bobot: [1, 2, 3, 4, 5] pakai dropdown (o)
+2. pencarian kurang filter akreditasi sebelum biaya masuk (o)
+3. user butuh login (o)
+4. user butuh registrasi (username, password, nama, jenis kelamin, nomor hp, alamat) (o)
+5. setelah login, muncul daftar sekolah (o)
+6. user dan admin dapat edit profil (o)
+7. tampilkan alur perhitungan di user setelah melakukan pencarian
+8. admin tidak perlu fitur pencarian (o)
+9. admin dan user setelah login diarahkan ke halaman daftar SDIT (bentuk kotak-kotak) (o)
+10. edit hapus data
+11. halaman kriteria error (o)
+12. menu data pengguna (o)
+13. logo diklik ke home (o)
+14. gambar orang di navbar ganti yg lain (o)
+15. detail kriteria (o)
+16. input kriteria bobot pakai dropdown (o)
+
+-------------------------------------------------------------------------
+cd C:/xampp/htdocs/topsis
+git pull origin master

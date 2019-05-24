@@ -38,7 +38,11 @@
 						<div class="item form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="weight">Weight <span class="required">*</span></label>
 							<div class="col-md-3 col-sm-3 col-xs-12">
-								<input type="number" id="weight" name="weight" required="required" min="0" step="any" class="form-control col-md-7 col-xs-12">
+								<select name="weight" id="weight" required class="form-control col-md-7 col-xs-12">
+									<?php for ($i = 0; $i < 5; $i++): ?>
+										<option value="<?= $i + 1 ?>"><?= $i + 1 ?></option>
+									<?php endfor; ?>
+								</select>
 							</div>
 						</div>
 						<div class="item form-group">

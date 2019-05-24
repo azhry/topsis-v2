@@ -32,18 +32,12 @@
                                     <span class="title">Data Kriteria</span>
                                 </a>
                             </li>
-                            <li class="nav-item  ">
-                                <a href="<?= base_url('admin/daftar-pengguna') ?>" class="nav-link nav-toggle">
-                                    <i class="fa fa-users"></i>
-                                    <span class="title">Data Pengguna</span>
-                                </a>
-                            </li>
-                            <!-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a href="<?= base_url('admin/cari') ?>" class="nav-link nav-toggle">
                                     <i class="fa fa-search"></i>
                                     <span class="title">Cari Sekolah</span>
                                 </a>
-                            </li> -->
+                            </li>
                         </ul>
                         <!-- END SIDEBAR MENU -->
                     </div>

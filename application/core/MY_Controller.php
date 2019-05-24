@@ -114,15 +114,15 @@ class MY_Controller extends CI_Controller
 	    $files = array_diff(scandir($path), ['.', '..']);
 	    foreach ($files as $file) 
 	    {
-	    	if (is_dir($file))
+	    	if (is_dir($path . '/' . $file))
 	    	{
-	    		removeDirectory($file);	
+	    		$this->remove_directory($path . '/' . $file);	
 	    	}
 	    	else
 	    	{
-	    		if (file_exists($file))
+	    		if (file_exists($path . '/' . $file))
 	    		{
-	    			unlink($file);
+	    			unlink($path . '/' . $file);
 	    		}
 	    	}
 	    }

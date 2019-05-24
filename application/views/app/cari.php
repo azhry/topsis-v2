@@ -59,6 +59,18 @@
 									</div>
 								</div>
 								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="akreditasi">Akreditasi</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<select id="akreditasi" name="akreditasi" class="form-control col-md-7 col-xs-12">
+											<option value="">Pilih..</option>
+											<option value="A">A</option>
+											<option value="B">B</option>
+											<option value="C">C</option>
+											<option value="Belum Terakreditasi">Belum Terakreditasi</option>
+										</select>
+									</div>
+								</div>
+								<div class="item form-group">
 									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="spp_bulanan">Range Biaya SPP Bulanan</label>
 									<div class="col-md-9 col-sm-9 col-xs-12">
 										<select id="spp_bulanan" name="spp_bulanan" class="form-control col-md-7 col-xs-12">
@@ -336,10 +348,17 @@
                 <h4 class="modal-title">Atur Bobot Kriteria Pencarian</h4>
             </div>
             <div class="modal-body">
-            	<?php foreach ($kriteria as $row): ?>
+            	<?php 
+            		$bobot = [1, 2, 3, 4, 5];
+            		foreach ($kriteria as $row): 
+            	?>
             		<div class="form-group">
 						<label class="control-label" for="<?= $row->key ?>"><?= $row->kriteria ?></label>
-						<input type="number" name="<?= $row->key ?>" id="bobot_<?= $row->key ?>" class="form-control">
+						<select class="form-control" name="<?= $row->key ?>" id="bobot_<?= $row->key ?>">
+							<?php foreach ($bobot as $b): ?>
+								<option value="<?= $b ?>"><?= $b ?></option>
+							<?php endforeach; ?>
+						</select>
 					</div>
             	<?php endforeach; ?>
             </div>
@@ -383,6 +402,7 @@
 			cari: true,
 			biaya_masuk: $('#biaya_masuk').val(),
 			spp_bulanan: $('#spp_bulanan').val(),
+			akreditasi: $('#akreditasi').val(),
 			fasilitas: get_checkbox_values('fasilitas[]') || [],
 			ekstrakurikuler: get_checkbox_values('ekstrakurikuler') || [],
 			lokasi: get_checkbox_values('lokasi') || []

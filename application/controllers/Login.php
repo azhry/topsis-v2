@@ -13,6 +13,10 @@ class Login extends MY_Controller
 				case 1:
 					redirect('admin');
 					break;
+
+				case 2:
+					redirect('user');
+					break;
 			}
 		}
 

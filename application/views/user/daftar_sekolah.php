@@ -50,8 +50,6 @@
                                     <td align="middle" style="vertical-align: middle;"><?= $row->alamat ?></td>
                                     <td align="middle" style="vertical-align: middle;">
                                         <a href="<?= base_url('admin/detail-sekolah/' . $row->id) ?>" type="button" class="btn btn-info btn-xs"><i class="fa fa-eye"></i> Detail</a>
-                                        <a href="<?= base_url('admin/edit-sekolah/' . $row->id) ?>" type="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a>
-                                        <a href="<?= base_url('admin/daftar-sekolah/' . $row->id) ?>" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
