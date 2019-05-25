@@ -4,7 +4,7 @@
 *
 * @package    Topsis
 * @author     Azhary Arliansyah
-* @version    1.0
+* @version    1.1 (with cost & benefit)
 */
 
 require_once(__DIR__ . '/Criteria.php');
@@ -18,6 +18,7 @@ class Topsis
 	private $distance_result;
 	private $normalizer;
 	private $weights;
+	private $exps;
 
 	public $criteria;
 
@@ -26,11 +27,17 @@ class Topsis
 		$this->criteria 	= new Criteria();
 		$this->normalizer 	= [];
 		$this->weights 		= [];
+		$this->exps 		= null;
 
 		foreach ($this->criteria->config as $key => $value)
 		{
 			$this->weights[$key] = $value['weight'];
 		}
+	}
+
+	public function set_exps($exps)
+	{
+		$this->exps = $exps;
 	}
 
 	public function set_config($config)
@@ -66,6 +73,8 @@ class Topsis
 			return $result;
 		}, $this->result);
 
+		$_SESSION['normalized_result'] = $this->normalized_result;
+
 		return $this->normalized_result;
 	}
 
@@ -88,6 +97,8 @@ class Topsis
 	public function solution_distance()
 	{
 		$solution_matrix = $this->solution_matrix($this->weighted_result);
+		$_SESSION['solution_matrix'] = $solution_matrix;
+
 		$this->distance_result = array_map(function($row) use ($solution_matrix) {
 			$positive_sum = $negative_sum = 0;
 			foreach ($row as $key => $value)
@@ -133,8 +144,27 @@ class Topsis
 		{
 			$col = array_column($matrix, $key);
 			$len_col = count($col);
-			$solution['positive'][$key] = $len_col > 0 ? max($col) : 0;
-			$solution['negative'][$key] = $len_col > 0 ? min($col) : 0;
+
+			if ($this->exps != null)
+			{
+				switch ($this->exps[$key])
+				{
+					case 'Cost':
+						$solution['positive'][$key] = $len_col > 0 ? min($col) : 0;
+						$solution['negative'][$key] = $len_col > 0 ? max($col) : 0;	
+						break;
+
+					case 'Benefit':
+						$solution['positive'][$key] = $len_col > 0 ? max($col) : 0;
+						$solution['negative'][$key] = $len_col > 0 ? min($col) : 0;	
+						break;
+				}
+			}
+			else
+			{
+				$solution['positive'][$key] = $len_col > 0 ? max($col) : 0;
+				$solution['negative'][$key] = $len_col > 0 ? min($col) : 0;	
+			}
 		}
 
 		return $solution;

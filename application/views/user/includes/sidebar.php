@@ -15,25 +15,13 @@
                         <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
                         <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                             <li class="nav-item">
-                                <a href="<?= base_url('admin') ?>" class="nav-link nav-toggle">
+                                <a href="<?= base_url('user') ?>" class="nav-link nav-toggle">
                                     <i class="icon-home"></i>
                                     <span class="title">Dashboard</span>
                                 </a>
                             </li>
-                            <li class="nav-item  ">
-                                <a href="<?= base_url('admin/daftar-sekolah') ?>" class="nav-link nav-toggle">
-                                    <i class="icon-diamond"></i>
-                                    <span class="title">Data Sekolah</span>
-                                </a>
-                            </li>
-                            <li class="nav-item  ">
-                                <a href="<?= base_url('admin/kriteria') ?>" class="nav-link nav-toggle">
-                                    <i class="icon-puzzle"></i>
-                                    <span class="title">Data Kriteria</span>
-                                </a>
-                            </li>
                             <li class="nav-item">
-                                <a href="<?= base_url('admin/cari') ?>" class="nav-link nav-toggle">
+                                <a href="<?= base_url('user/cari') ?>" class="nav-link nav-toggle">
                                     <i class="fa fa-search"></i>
                                     <span class="title">Cari Sekolah</span>
                                 </a>

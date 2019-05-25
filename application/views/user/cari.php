@@ -46,7 +46,7 @@
 								<button class="btn red" type="button" data-toggle="modal" href="#modal">Atur Bobot Pencarian</button>
 							</div>
 							<br><br>
-							<?= form_open_multipart('admin/rank', ['class' => 'form-horizontal form-label-left']) ?>
+							<?= form_open_multipart('user/rank', ['class' => 'form-horizontal form-label-left']) ?>
 								<div class="item form-group">
 									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="biaya_masuk">Range Biaya Masuk</label>
 									<div class="col-md-9 col-sm-9 col-xs-12">
@@ -316,7 +316,7 @@
 													}
 													$foto = array_values(array_diff($foto, ['.', '..']));
 												?>
-												<a href="<?= base_url('admin/detail-sekolah/' . $row['id']) ?>">
+												<a href="<?= base_url('user/detail-sekolah/' . $row['id']) ?>">
 													<div class="w-clearfix w-preserve-3d promo-card">
 														<img width="100%" height="200" src="<?= isset($foto[0]) ? base_url($path . '/' . $foto[0]) : 'http://placehold.it/313x313' ?>">
 														<div class="blog-bar color-pink"></div>
@@ -351,7 +351,11 @@
             	<?php foreach ($kriteria as $row): ?>
             		<div class="form-group">
 						<label class="control-label" for="<?= $row->key ?>"><?= $row->kriteria ?></label>
-						<input type="number" name="<?= $row->key ?>" id="bobot_<?= $row->key ?>" class="form-control">
+						<select class="form-control" name="<?= $row->key ?>" id="bobot_<?= $row->key ?>">
+							<?php for ($i = 0; $i < 5; $i++): ?>
+								<option value="<?= $i + 1 ?>"><?= $i + 1 ?></option>
+							<?php endfor; ?>
+						</select>
 					</div>
             	<?php endforeach; ?>
             </div>
@@ -406,7 +410,7 @@
 		<?php endforeach; ?>
 
 		$.ajax({
-			url: '<?= base_url('admin/rank') ?>',
+			url: '<?= base_url('user/rank') ?>',
 			type: 'POST',
 			data: data,
 			beforeSend: function() {
@@ -420,7 +424,7 @@
 
 				let html = '';
 				for (let i = 0; i < json.length; i++) {
-					html += '<a href="<?= base_url('admin/detail-sekolah') ?>/' + json[i].id + '">' +
+					html += '<a href="<?= base_url('user/detail-sekolah') ?>/' + json[i].id + '">' +
 						'<div class="w-clearfix w-preserve-3d promo-card">' +
 								'<img width="100%" height="200" src="' + json[i].foto + '">' +
 								'<div class="blog-bar color-pink"></div>' +
