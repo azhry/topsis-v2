@@ -77,8 +77,8 @@ License: You must have a valid license purchased only from themeforest(the above
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Kontak</label>
-                    <input class="form-control" type="text" autocomplete="off" placeholder="Kontak" name="kontak" />
+                    <label class="control-label">No. Hp</label>
+                    <input class="form-control" type="text" autocomplete="off" placeholder="No.Hp" name="kontak" />
                 </div>
                 <div class="form-group">
                     <label class="control-label">Email</label>

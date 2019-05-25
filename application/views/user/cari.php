@@ -261,6 +261,9 @@
 
 							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler29" value="English Club" class="flat" /> English Club
 							                        <br/><br/>
+
+							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler30" value="Matematika" class="flat" /> Matematika
+							                        <br/><br/>
 												</div>
 											</div>
 					                    </p>

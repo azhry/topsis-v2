@@ -303,7 +303,7 @@
 					<div class="form-group">
 						<div class="col-md-6 col-md-offset-3">
 							<button type="reset" class="btn btn-primary">Reset</button>
-							<input id="submit" name="submit" type="submit" class="btn btn-success" value="Submit"/>
+							<input id="submit" name="submit" type="submit" class="btn btn-success" value="Save"/>
 						</div>
 					</div>
                 <?= form_close() ?>
