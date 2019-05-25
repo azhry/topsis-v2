@@ -9,7 +9,7 @@ Judul dan footer: Sistem Pendukung Keputusan Pemilihan SDIT
 7. tampilkan alur perhitungan di user setelah melakukan pencarian (dan cost/benefit)
 8. admin tidak perlu fitur pencarian (o)
 9. admin dan user setelah login diarahkan ke halaman daftar SDIT (bentuk kotak-kotak) (o)
-10. edit hapus data
+10. edit hapus data (o)
 11. halaman kriteria error (o)
 12. menu data pengguna (o)
 13. logo diklik ke home (o)

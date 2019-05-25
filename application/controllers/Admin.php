@@ -490,6 +490,11 @@ class Admin extends MY_Controller
 
 				for ($i = 0; $i < count($range_label); $i++)
 				{
+					if (empty($range_label[$i]) or empty($range_max[$i]) or empty($range_min[$i]) or empty($range_value[$i]))
+					{
+						continue;
+					}
+
 					$details []= [
 						'label'	=> $range_label[$i],
 						'max'	=> $range_max[$i],
@@ -505,6 +510,11 @@ class Admin extends MY_Controller
 
 				for ($i = 0; $i < count($option_label); $i++)
 				{
+					if (empty($option_label[$i]) or empty($option_value[$i]))
+					{
+						continue;
+					}
+
 					$details []= [
 						'label'	=> $option_label[$i],
 						'value'	=> $option_value[$i]
@@ -526,6 +536,8 @@ class Admin extends MY_Controller
 			redirect('admin/edit-kriteria/' . $this->data['id']);
 		}
 
+
+		$this->data['details']	= json_decode($this->data['kriteria']->details);
 		$this->data['title']	= 'Form Edit Kriteria';
 		$this->data['content']	= 'form_edit_kriteria';
 		$this->template($this->data, $this->module);
