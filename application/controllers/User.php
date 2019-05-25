@@ -342,7 +342,11 @@ class User extends MY_Controller
 				$row['spp_bulanan'] = 'Rp. ' . number_format($row['spp_bulanan'], 2, ',', '.');
 				return $row;
 			}, $rank);
-			echo json_encode($rank);
+			$data = [
+				'rank'		=> $rank,
+				'session'	=> $_SESSION
+			];
+			echo json_encode($data);
 		}
 	}
 }

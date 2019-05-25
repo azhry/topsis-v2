@@ -384,7 +384,7 @@
             </div>
             <div class="modal-body">
             	<div class="row">
-            		<div class="col-md-12">
+            		<div class="col-md-12" id="calculation">
             			<?php if (isset($_SESSION['solution_matrix'], $_SESSION['distance_result'], $_SESSION['normalized_result'], $_SESSION['result'])): ?>
 		            		<h4>Matriks Keputusan Ternormalisasi Terbobot</h4>
 		            		<table class="table table-bordered table-hover table-striped" style="width: 100% !important;">
@@ -440,12 +440,29 @@
 		            				</tr>
 		            			</thead>
 		            			<tbody>
-		            				<?php foreach ($_SESSION['distance_result'] as $key => $value): ?>
+		            				<?php foreach ($_SESSION['distance_result'] as $i => $row): ?>
 		            					<tr>
-		            						<td><?= $key ?></td>
-		            						<?php foreach ($row as $k => $cell): ?>
-		            							<td><?= $cell ?></td>
-		            						<?php endforeach; ?>
+		            						<td><?= $i + 1 ?></td>
+		            						<td><?= $row['positive'] ?></td>
+		            						<td><?= $row['negative'] ?></td>
+		            					</tr>
+		            				<?php endforeach; ?>
+		            			</tbody>
+		            		</table>
+
+		            		<h4>Table Nilai Preferensi</h4>
+		            		<table class="table table-bordered table-hover table-striped" style="width: 100% !important;">
+		            			<thead>
+		            				<tr>
+		            					<th>-</th>
+		            					<th>Preferensi</th>
+		            				</tr>
+		            			</thead>
+		            			<tbody>
+		            				<?php foreach ($_SESSION['result'] as $i => $row): ?>
+		            					<tr>
+		            						<td><?= $i + 1 ?></td>
+		            						<td><?= $row ?></td>
 		            					</tr>
 		            				<?php endforeach; ?>
 		            			</tbody>
@@ -516,24 +533,29 @@
 			},
 			success: function(response) {
 				let json = $.parseJSON(response);
+				let data = json.rank;
+				let session = json.session;
+				console.log(session);
+				showCalculation(session);
+
 				$('#result').css('display', 'block');
 				$('#loader').css('display', 'none');
 
 				let html = '';
-				for (let i = 0; i < json.length; i++) {
-					html += '<a href="<?= base_url('user/detail-sekolah') ?>/' + json[i].id + '">' +
+				for (let i = 0; i < data.length; i++) {
+					html += '<a href="<?= base_url('user/detail-sekolah') ?>/' + data[i].id + '">' +
 						'<div class="w-clearfix w-preserve-3d promo-card">' +
-								'<img width="100%" height="200" src="' + json[i].foto + '">' +
+								'<img width="100%" height="200" src="' + data[i].foto + '">' +
 								'<div class="blog-bar color-pink"></div>' +
 								'<div class="blog-post-text">' +
-									json[i].nama_sekolah +
-									'<div class="blog-description pink-text">' + json[i].biaya_masuk + '</div>' +
+									data[i].nama_sekolah +
+									'<div class="blog-description pink-text">' + data[i].biaya_masuk + '</div>' +
 								'</div>' +
 							'</div>' +
 						'</a>';
 				}
 
-				$('#result').html((json.length > 0 ? html : '<p>No results found</p>'));
+				$('#result').html((data.length > 0 ? html : '<p>No results found</p>'));
 			},
 			error: function(error) { 
 				console.log(error.responseText); 
@@ -545,5 +567,98 @@
 
 	function get_checkbox_values(name) {
 		return $('input[name="' + name + '"]:checked').map(function() { return $(this).val(); }).get();
+	}
+
+	function showCalculation(data) {
+		let html = '<h4>Matriks Keputusan Ternormalisasi Terbobot</h4>' +
+    		'<table class="table table-bordered table-hover table-striped" style="width: 100% !important;">' +
+    			'<thead>' +
+    				'<tr>' +
+    					'<th>No.</th>';
+
+    	for (let key in data.normalized_result[0]) {
+
+    		html += '<th>' + key  + '</th>';
+
+    	}
+    					
+    	html += '</tr></thead><tbody>';
+    	
+    	for (let i = 0; i < data.normalized_result.length; i++) {
+    		html += '<tr>';
+    			html += '<td>' + (i + 1) + '</td>';
+    			for (let key in data.normalized_result[i]) {
+    				html += '<td>' + data.normalized_result[i][key] + '</td>';
+    			}
+    		html += '</tr>';
+    	}
+    			
+    	html += '</tbody></table>';
+
+    	html += '<h4>Matriks Solusi Ideal</h4>' +
+            		'<table class="table table-bordered table-hover table-striped" style="width: 100% !important;">' +
+            			'<thead>' +
+            				'<tr>' +
+            					'<th>-</th>';
+
+        for (let key in data.solution_matrix.positive) {
+        	html += '<th>' + key  + '</th>';
+        }
+    	html +=	'</tr></thead><tbody>';
+
+    	for (let key in data.solution_matrix) {
+
+    		html += '<tr>';
+	    		html += '<td>' + key + '</td>';
+    			for (let k in data.solution_matrix[key]) {
+    				html += '<td>' + data.solution_matrix[key][k] + '</td>';
+    			}
+    		html += '</tr>';
+    	}
+
+		html += '</tbody></table>';
+
+		html += '<h4>Jarak Solusi Ideal</h4>' +
+            		'<table class="table table-bordered table-hover table-striped" style="width: 100% !important;">' +
+            			'<thead>' +
+            				'<tr>' +
+            					'<th>-</th>' +
+            					'<th>Jarak Positif</th>' +
+            					'<th>Jarak Negatif</th>' +
+            				'</tr>' +
+            			'</thead>' +
+            			'<tbody>';
+
+        for (let i = 0; i < data.distance_result.length; i++) {
+        	html += '<tr>';
+        		html += '<td>' + (i + 1) + '</td>';
+        		html += '<td>' + data.distance_result[i].positive + '</td>';
+        		html += '<td>' + data.distance_result[i].negative + '</td>';
+        	html += '</tr>';
+        }
+
+		html += '</tbody></table>';
+
+		html += '<h4>Table Nilai Preferensi</h4>' +
+            		'<table class="table table-bordered table-hover table-striped" style="width: 100% !important;">' +
+            			'<thead>' +
+            				'<tr>' +
+            					'<th>-</th>' +
+            					'<th>Preferensi</th>' +
+            				'</tr>' +
+            			'</thead>' +
+            			'<tbody>';
+
+        for (let i = 0; i < data.result.length; i++) {
+        	html += '<tr>';
+        		html += '<td>' + (i + 1) + '</td>';
+        		html += '<td>' + data.result[i] + '</td>';
+        	html += '</tr>';
+        }
+        
+		html += '</tbody></table>';
+    	
+    	$('#calculation').html(html);
+    		
 	}
 </script>
