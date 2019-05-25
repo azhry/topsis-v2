@@ -293,6 +293,86 @@ class Admin extends MY_Controller
 		$this->template($this->data, $this->module);
 	}
 
+	public function edit_sekolah()
+	{
+		$this->data['id']	= $this->uri->segment(3);
+		$this->check_allowance(!isset($this->data['id']));
+
+		$this->load->model('sekolah_m');
+		$this->data['sekolah']			= $this->sekolah_m->get_row(['id' => $this->data['id']]);
+		$this->check_allowance(!isset($this->data['sekolah']), ['Data sekolah tidak ditemukan', 'danger']);
+
+		$this->data['upload_dir'] 			= FCPATH . 'assets/foto/sekolah-' . $this->data['sekolah']->id;
+		if (!file_exists($this->data['upload_dir']))
+		{
+			$files = [];
+		}
+		else
+		{
+			$files = scandir($this->data['upload_dir']);
+		}
+		$this->data['files']				= array_values(array_diff($files, ['.', '..']));
+		$this->data['upload_path'] 			= base_url('assets/foto/sekolah-' . $this->data['sekolah']->id);
+
+		if ($this->POST('submit'))
+		{
+			$this->load->model('sekolah_m');
+			$assets_url = FCPATH . 'assets/';
+			$uploaded_files = $this->POST('new_uploaded_files');
+
+			$this->data['sekolah'] = [
+				'nama_sekolah'		=> $this->POST('nama_sekolah'),
+				'akreditasi'		=> $this->POST('akreditasi'),
+				'telepon'			=> json_encode($this->POST('telepon')),
+				'fasilitas'			=> json_encode($this->POST('fasilitas')),
+				'ekstrakurikuler'	=> json_encode($this->POST('ekstrakurikuler')),
+				'alamat'			=> $this->POST('alamat'),
+				'biaya_masuk'		=> $this->POST('biaya_masuk'),
+				'spp_bulanan'		=> $this->POST('spp_bulanan'),
+				'lokasi'			=> json_encode($this->POST('lokasi')),
+				'latitude'			=> $this->POST('latitude'),
+				'longitude'			=> $this->POST('longitude')
+			];
+			$this->sekolah_m->update($this->data['id'], $this->data['sekolah']);
+
+			$uploaded_dir = $assets_url . 'foto/sekolah-' . $this->data['id'];
+			$deleted_photos = $this->POST('deleted_photo');
+			if (isset($deleted_photos))
+			{
+				foreach ($deleted_photos as $photo)
+				{
+					@unlink($uploaded_dir . '/' . $photo);
+				}
+			}
+
+			if (!file_exists($uploaded_dir))
+			{
+				mkdir($uploaded_dir);	
+			}
+
+			if (isset($uploaded_files))
+			{
+				foreach ($uploaded_files as $file)
+				{
+					rename($assets_url . 'temp_files/' . $file, $uploaded_dir . '/' . $file);
+				}
+
+				$this->remove_directory($assets_url . 'temp_files/thumbnail');
+				$this->remove_directory($assets_url . 'temp_files');
+			}
+
+			$this->flashmsg('Data sekolah berhasil disimpan');
+			redirect('admin/edit-sekolah/' . $this->data['id']);
+		}
+
+		$this->data['fasilitas']			= json_decode($this->data['sekolah']->fasilitas);
+		$this->data['ekstrakurikuler']		= json_decode($this->data['sekolah']->ekstrakurikuler);
+		$this->data['lokasi']				= json_decode($this->data['sekolah']->lokasi);
+
+		$this->data['title']	= 'Form Edit Sekolah';
+		$this->data['content']	= 'form_edit_sekolah';
+		$this->template($this->data, $this->module);
+	}
 
 	public function upload_handler()
 	{
@@ -385,6 +465,69 @@ class Admin extends MY_Controller
 
 		$this->data['title']	= 'Form Penambahan Kriteria Baru';
 		$this->data['content']	= 'form_tambah_kriteria';
+		$this->template($this->data, $this->module);
+	}
+
+	public function edit_kriteria()
+	{
+		$this->data['id']	= $this->uri->segment(3);
+		$this->check_allowance(!isset($this->data['id']));
+
+		$this->load->model('kriteria_m');
+		$this->data['kriteria']			= $this->kriteria_m->get_row(['id' => $this->data['id']]);
+		$this->check_allowance(!isset($this->data['kriteria']), ['Data kriteria tidak ditemukan', 'danger']);
+
+		if ($this->POST('submit'))
+		{
+			$type 		= $this->POST('type');
+			$details 	= [];
+			if ($type == 'range')
+			{
+				$range_label 	= $this->POST('range_label');
+				$range_max 		= $this->POST('range_max');
+				$range_min		= $this->POST('range_min');
+				$range_value	= $this->POST('range_value');
+
+				for ($i = 0; $i < count($range_label); $i++)
+				{
+					$details []= [
+						'label'	=> $range_label[$i],
+						'max'	=> $range_max[$i],
+						'min'	=> $range_min[$i],
+						'value'	=> $range_value[$i]
+					];
+				} 
+			} 
+			elseif ($type == 'option')
+			{
+				$option_label 	= $this->POST('option_label');
+				$option_value	= $this->POST('option_value');
+
+				for ($i = 0; $i < count($option_label); $i++)
+				{
+					$details []= [
+						'label'	=> $option_label[$i],
+						'value'	=> $option_value[$i]
+					];
+				} 
+			}
+
+			$this->kriteria_m->update($this->data['id'], [
+				'key'		=> $this->POST('key'),
+				'type'		=> $type,
+				'bobot'		=> $this->POST('weight'),
+				'kriteria'	=> $this->POST('label'),
+				'inisial'	=> $this->POST('initial'),
+				'exp'		=> $this->POST('exp'),
+				'details'	=> json_encode($details)
+			]);
+
+			$this->flashmsg('Data kriteria berhasil disimpan');
+			redirect('admin/edit-kriteria/' . $this->data['id']);
+		}
+
+		$this->data['title']	= 'Form Edit Kriteria';
+		$this->data['content']	= 'form_edit_kriteria';
 		$this->template($this->data, $this->module);
 	}
 

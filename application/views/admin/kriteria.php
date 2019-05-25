@@ -41,8 +41,9 @@
                                     <td align="middle" style="vertical-align: middle;"><?= $row->type ?></td>
                                     <td align="middle" style="vertical-align: middle;"><?= $row->bobot ?></td>
                                     <td align="middle" style="vertical-align: middle;">
-                                        <a href="<?= base_url('admin/detail-kriteria/' . $row->id) ?>" type="button" class="btn btn-info"><i class="fa fa-eye"></i> Detail</a>
-                                        <a href="<?= base_url('admin/kriteria/' . $row->id) ?>" type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                        <a href="<?= base_url('admin/detail-kriteria/' . $row->id) ?>" type="button" class="btn btn-info btn-xs"><i class="fa fa-eye"></i> Detail</a>
+                                        <a href="<?= base_url('admin/edit-kriteria/' . $row->id) ?>" type="button" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Edit</a>
+                                        <a href="<?= base_url('admin/kriteria/' . $row->id) ?>" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

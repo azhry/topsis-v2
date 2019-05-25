@@ -4,154 +4,285 @@
 <link href="<?= base_url('assets') ?>/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
 <link href="<?= base_url('assets') ?>/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
 
-<div class="right_col" role="main">
+<div class="page-fixed-main-content">
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<div class="x_panel">
+				<div class="x_title">
+	                <h2>Edit Informasi Sekolah</h2>
+	            </div>
 				<div class="x_content">
-					<?= form_open_multipart('pemilik/edit-ruko/' . $id_ruko, ['class' => 'form-horizontal form-label-left']) ?>
-						<span class="section">Edit Informasi Ruko</span>
+					<?= form_open_multipart('admin/edit-sekolah/' . $id, ['class' => 'form-horizontal form-label-left']) ?>
 						<div class="item form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="ruko">Alamat Ruko  <span class="required">*</span>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_sekolah">Nama Sekolah  <span class="required">*</span>
 							</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
-								<input id="ruko" class="form-control col-md-7 col-xs-12" data-validate-length-range="2" name="ruko" placeholder="Contoh: Jl. Mangkunegara" required="required" type="text" value="<?= $ruko->ruko ?>"/>
+								<input value="<?= $sekolah->nama_sekolah ?>" id="nama_sekolah" class="form-control col-md-7 col-xs-12" data-validate-length-range="2" name="nama_sekolah" required="required" type="text"/>
 							</div>
 						</div>
 						<div class="item form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="biaya_sewa">Biaya Sewa <span class="required">*</span></label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="alamat">Alamat Sekolah  <span class="required">*</span>
+							</label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<textarea class="form-control col-md-7 col-xs-12" required id="alamat" name="alamat"><?= $sekolah->alamat ?></textarea>
+							</div>
+						</div>
+						<div class="item form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="telepon">Telepon  <span class="required">*</span>
+							</label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input value="<?= str_replace('"', '', $sekolah->telepon) ?>" id="telepon" class="form-control col-md-7 col-xs-12" data-validate-length-range="2" name="telepon" required="required" type="text"/>
+							</div>
+						</div>
+						<div class="item form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="biaya_masuk">Biaya Masuk <span class="required">*</span></label>
 							<div class="col-md-3 col-sm-3 col-xs-12 input-group" style="padding-left: 10px;">
 								<span class="input-group-addon" aria-hidden="true">Rp.</span>
-								<input type="number" id="biaya_sewa" name="biaya_sewa" required="required" min="1" class="form-control" value="<?= $ruko->biaya_sewa ?>">
+								<input value="<?= $sekolah->biaya_masuk ?>" type="number" id="biaya_masuk" name="biaya_masuk" required="required" min="1" class="form-control">
 							</div>
 						</div>
 						<div class="item form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="luas_bangunan">Luas Bangunan <span class="required">*</span></label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="spp_bulanan">SPP Bulanan <span class="required">*</span></label>
 							<div class="col-md-3 col-sm-3 col-xs-12 input-group" style="padding-left: 10px;">
-								<input type="number" id="luas_bangunan" name="luas_bangunan" required="required" min="1" class="form-control col-md-7 col-xs-12" value="<?= $ruko->luas_bangunan ?>">
-								<span class="input-group-addon" aria-hidden="true">m²</span>
+								<span class="input-group-addon" aria-hidden="true">Rp.</span>
+								<input value="<?= $sekolah->spp_bulanan ?>" type="number" id="spp_bulanan" name="spp_bulanan" required="required" min="1" class="form-control">
 							</div>
 						</div>
 						<div class="item form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="akses_menuju_lokasi">Akses Menuju Lokasi <span class="required">*</span></label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<p style="padding: 5px;">
-									<div class="row">
-										<div class="col-md-4">
-											<input type="checkbox" name="akses_menuju_lokasi[]" id="akses_menuju_lokasi1" value="Pejalan Kaki" data-parsley-mincheck="1" <?= in_array('Pejalan Kaki', $akses_menuju_lokasi) ? 'checked' : '' ?> class="flat" /> Pejalan Kaki
-					                        <br/><br/>
-
-					                        <input type="checkbox" name="akses_menuju_lokasi[]" id="akses_menuju_lokasi2" value="Angkutan Umum" <?= in_array('Angkutan Umum', $akses_menuju_lokasi) ? 'checked' : '' ?> class="flat" /> Angkutan Umum
-					                        <br/><br/>
-
-					                        <input type="checkbox" name="akses_menuju_lokasi[]" id="akses_menuju_lokasi3" value="Kendaraan Mobil" <?= in_array('Kendaraan Mobil', $akses_menuju_lokasi) ? 'checked' : '' ?> class="flat" /> Kendaraan Mobil
-					                        <br/><br/>
-										</div>
-										<div class="col-md-4">
-											<input type="checkbox" name="akses_menuju_lokasi[]" id="akses_menuju_lokasi4" value="Kendaraan Motor" <?= in_array('Kendaraan Motor', $akses_menuju_lokasi) ? 'checked' : '' ?> class="flat" /> Kendaraan Motor
-					                        <br/><br/>
-
-					                        <input type="checkbox" name="akses_menuju_lokasi[]" id="akses_menuju_lokasi5" value="Semuanya" <?= in_array('Semuanya', $akses_menuju_lokasi) ? 'checked' : '' ?> class="flat" /> Semuanya
-					                        <br/><br/>
-										</div>
-									</div>
-			                    </p>
-							</div>
-						</div>
-						<div class="item form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="pusat_keramaian">Pusat Keramaian <span class="required">*</span></label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<p style="padding: 5px;">
-									<div class="row">
-										<div class="col-md-4">
-											<input type="checkbox" name="pusat_keramaian[]" id="pusat_keramaian1" value="Kantor" <?= in_array('Kantor', $pusat_keramaian) ? 'checked' : '' ?> data-parsley-mincheck="1" class="flat" /> Kantor
-					                        <br/><br/>
-
-					                        <input type="checkbox" name="pusat_keramaian[]" id="pusat_keramaian2" value="Mall" <?= in_array('Mall', $pusat_keramaian) ? 'checked' : '' ?> class="flat" /> Mall
-					                        <br/><br/>
-
-					                        <input type="checkbox" name="pusat_keramaian[]" id="pusat_keramaian3" value="Pasar" <?= in_array('Pasar', $pusat_keramaian) ? 'checked' : '' ?> class="flat" /> Pasar
-					                        <br/><br/>
-
-					                        <input type="checkbox" name="pusat_keramaian[]" id="pusat_keramaian4" value="Rumah Sakit" <?= in_array('Rumah Sakit', $pusat_keramaian) ? 'checked' : '' ?> class="flat" /> Rumah Sakit
-			                        		<br/><br/>
-										</div>
-										<div class="col-md-4">
-											<input type="checkbox" name="pusat_keramaian[]" id="pusat_keramaian5" value="Sekolah" <?= in_array('Sekolah', $pusat_keramaian) ? 'checked' : '' ?> class="flat" /> Sekolah
-					                        <br/><br/>
-
-					                        <input type="checkbox" name="pusat_keramaian[]" id="pusat_keramaian6" value="Kampus" <?= in_array('Kampus', $pusat_keramaian) ? 'checked' : '' ?> class="flat" /> Kampus
-					                        <br/><br/>
-
-					                        <input type="checkbox" name="pusat_keramaian[]" id="pusat_keramaian7" value="Tidak Ada" <?= in_array('Tidak Ada', $pusat_keramaian) ? 'checked' : '' ?> class="flat" /> Tidak Ada
-					                        <br/><br/>
-										</div>
-									</div>
-			                    </p>
-							</div>
-						</div>
-						<div class="item form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="zona_parkir">Zona Parkir <span class="required">*</span></label>
-							<div class="col-md-3 col-sm-3 col-xs-12 input-group" style="padding-left: 10px;">
-								<input type="number" id="zona_parkir" name="zona_parkir" required="required" min="1" class="form-control col-md-7 col-xs-12" value="<?= $ruko->zona_parkir ?>">
-								<span class="input-group-addon" aria-hidden="true">m²</span>
-							</div>
-						</div>
-						<div class="item form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="jumlah_pesaing_serupa">Jumlah Pesaing Serupa <span class="required">*</span></label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="akreditasi">Akreditasi <span class="required">*</span></label>
 							<div class="col-md-3 col-sm-3 col-xs-12">
-								<input type="number" id="jumlah_pesaing_serupa" name="jumlah_pesaing_serupa" required="required" min="0" class="form-control col-md-7 col-xs-12" value="<?= $ruko->jumlah_pesaing_serupa ?>">
+								<select class="form-control col-md-7 col-xs-12" id="akreditasi" name="akreditasi" required>
+									<option <?= $sekolah->akreditasi == 'A' ? 'selected' : '' ?> value="A">A</option>
+									<option <?= $sekolah->akreditasi == 'B' ? 'selected' : '' ?> value="B">B</option>
+									<option <?= $sekolah->akreditasi == 'C' ? 'selected' : '' ?> value="C">C</option>
+									<option <?= $sekolah->akreditasi == 'Belum Terakreditasi' ? 'selected' : '' ?> value="Belum Terakreditasi">Belum Terakreditasi</option>
+								</select>
 							</div>
 						</div>
 						<div class="item form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tingkat_konsumtif_masyarakat">Tingkat Konsumtif Masyarakat <span class="required">*</span></label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="fasilitas">Fasilitas <span class="required">*</span></label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
-								<?php  
-									$data = [
-										'Sangat Tinggi'	=> 'Sangat Tinggi',
-										'Tinggi'		=> 'Tinggi',
-										'Cukup Tinggi'	=> 'Cukup Tinggi',
-										'Rendah'		=> 'Rendah',
-										'Sangat Rendah'	=> 'Sangat Rendah'
-									];
-									echo form_dropdown('tingkat_konsumtif_masyarakat', $data, $ruko->tingkat_konsumtif_masyarakat, ['id' => 'tingkat_konsumtif_masyarakat', 'class' => 'form-control col-md-7 col-xs-12', 'required' => 'required']);
-								?>
+								<p style="padding: 5px;">
+									<div class="row">
+										<div class="col-md-6">
+											<input type="checkbox" <?= in_array('Auditorium', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas1" value="Auditorium" data-parsley-mincheck="1" class="flat" /> Auditorium
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Kolam Renang', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas2" value="Kolam Renang" class="flat" /> Kolam Renang
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Konsultasi Psikologi', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas3" value="Konsultasi Psikologi" class="flat" /> Konsultasi Psikologi
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Katering', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas4" value="Katering" class="flat" /> Katering
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Antar Jemput Anak', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas5" value="Antar Jemput Anak" class="flat" /> Antar Jemput Anak
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Lab. Komputer', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas6" value="Lab. Komputer" class="flat" /> Lab. Komputer
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Lab. Multimedia', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas7" value="Lab. Multimedia" class="flat" /> Lab. Multimedia
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Halaman Parkir', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas8" value="Halaman Parkir" class="flat" /> Halaman Parkir
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Aula', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas9" value="Aula" class="flat" /> Aula
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Mushola / Masjid', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas10" value="Mushola / Masjid" class="flat" /> Mushola / Masjid
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Perpustakaan', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas11" value="Perpustakaan" class="flat" /> Perpustakaan
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Ruang Kelas Ber-AC', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas12" value="Ruang Kelas Ber-AC" class="flat" /> Ruang Kelas Ber-AC
+					                        <br/><br/>
+										</div>
+										<div class="col-md-6">
+											<input type="checkbox" <?= in_array('Wifi', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas13" value="Wifi" class="flat" /> Wifi
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Asuransi Kecelakaan', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas14" value="Asuransi Kecelakaan" class="flat" /> Asuransi Kecelakaan
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('CCTV', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas15" value="CCTV" class="flat" /> CCTV
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Pelayanan Kesehatan', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas16" value="Pelayanan Kesehatan" class="flat" /> Pelayanan Kesehatan
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Lab. Sains', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas17" value="Lab. Sains" class="flat" /> Lab. Sains
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Lab. Matematika', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas18" value="Lab. Matematika" class="flat" /> Lab. Matematika
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Koperasi', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas19" value="Koperasi" class="flat" /> Koperasi
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Kantin', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas20" value="Kantin" class="flat" /> Kantin
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('UKS', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas21" value="UKS" class="flat" /> UKS
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Lap. Olahraga', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas22" value="Lap. Olahraga" class="flat" /> Lap. Olahraga
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Taman Bermain', $fasilitas) ? 'checked' : '' ?> name="fasilitas[]" id="fasilitas23" value="Taman Bermain" class="flat" /> Taman Bermain
+					                        <br/><br/>
+										</div>
+									</div>
+			                    </p>
 							</div>
 						</div>
 						<div class="item form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="lingkungan_lokasi_ruko">Lingkungan Lokasi Ruko <span class="required">*</span></label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="ekstrakurikuler">Ekstrakurikuler <span class="required">*</span></label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
-								<?php  
-									$data = [
-										'Pertengahan Kota'			=> 'Pertengahan Kota',
-										'Lingkungan Perkampungan'	=> 'Lingkungan Perkampungan',
-										'Lingkungan Perumahan'		=> 'Lingkungan Perumahan',
-										'Jalan Utama'				=> 'Jalan Utama',
-										'Jalan Raya Kota'			=> 'Jalan Raya Kota',
-										'Jalan Lintas Kota'			=> 'Jalan Lintas Kota'
-									];
-									echo form_dropdown('lingkungan_lokasi_ruko', $data, $ruko->lingkungan_lokasi_ruko, ['id' => 'lingkungan_lokasi_ruko', 'class' => 'form-control col-md-7 col-xs-12', 'required' => 'required']);
-								?>
+								<p style="padding: 5px;">
+									<div class="row">
+										<div class="col-md-6">
+					                        <input type="checkbox" <?= in_array('Robotic', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler1" value="Robotic" class="flat" /> Robotic
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Panahan', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler2" value="Panahan" class="flat" /> Panahan
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Marching Band', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler3" value="Marching Band" class="flat" /> Marching Band
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Berenang', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler4" value="Berenang" class="flat" /> Berenang
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Multimedia Club', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler5" value="Multimedia Club" class="flat" /> Multimedia Club
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Tenis Meja', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler6" value="Tenis Meja" class="flat" /> Tenis Meja
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Tilawah Qur`an', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler7" value="Tilawah Qur`an" class="flat" /> Tilawah Qur`an
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Da`i Cilik', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler8" value="Da`i Cilik" class="flat" /> Da`i Cilik
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Public Speaking', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler9" value="Public Speaking" class="flat" /> Public Speaking
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Training', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler10" value="Training" class="flat" /> Training
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Melukis', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler11" value="Melukis" class="flat" /> Melukis
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Teater', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler12" value="Teater" class="flat" /> Teater
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Mewarnai', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler25" value="Mewarnai" class="flat" /> Mewarnai
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Seni Tari', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler26" value="Seni Tari" class="flat" /> Seni Tari
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Karate', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler27" value="Karate" class="flat" /> Karate
+					                        <br/><br/>
+										</div>
+
+										<div class="col-md-6">
+											<input type="checkbox" <?= in_array('Catur', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler13" value="Catur" class="flat" /> Catur
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Arabic Club', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler14" value="Arabic Club" class="flat" /> Arabic Club
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Tahfidz Al-Qur`an', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler15" value="Tahfidz Al-Qur`an" class="flat" /> Tahfidz Al-Qur`an
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Tahsin Al-Qur`an', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler16" value="Tahsin Al-Qur`an" class="flat" /> Tahsin Al-Qur`an
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Paskibra', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler17" value="Paskibra" class="flat" /> Paskibra
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Komputer', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler18" value="Komputer" class="flat" /> Komputer
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Grup Seni Islam', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler19" value="Grup Seni Islam" class="flat" /> Grup Seni Islam
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Taekwondo', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler20" value="Taekwondo" class="flat" /> Taekwondo
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Pencak Silat', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler21" value="Pencak Silat" class="flat" /> Pencak Silat
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Seni Musik', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler22" value="Seni Musik" class="flat" /> Seni Musik
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Futsal', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler23" value="Futsal" class="flat" /> Futsal
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('PMR', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler24" value="PMR" class="flat" /> PMR
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Pramuka', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler28" value="Pramuka" class="flat" /> Pramuka
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('English Club', $ekstrakurikuler) ? 'checked' : '' ?> name="ekstrakurikuler[]" id="ekstrakurikuler29" value="English Club" class="flat" /> English Club
+					                        <br/><br/>
+										</div>
+									</div>
+			                    </p>
 							</div>
 						</div>
 
 						<div class="item form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="lingkungan_lokasi_ruko">Lokasi Ruko <span class="required">*</span></label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="lokasi">Lokasi <span class="required">*</span></label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<p style="padding: 5px;">
+									<div class="row">
+										<div class="col-md-6">
+					                        <input type="checkbox" <?= in_array('Di Tepi Jalan Raya', $lokasi) ? 'checked' : '' ?> name="lokasi[]" id="lokasi1" value="Di Tepi Jalan Raya" class="flat" /> Di Tepi Jalan Raya
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Daerah Perkantoran', $lokasi) ? 'checked' : '' ?> name="lokasi[]" id="lokasi2" value="Daerah Perkantoran" class="flat" /> Daerah Perkantoran
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Di Tepi Jalan Sedang', $lokasi) ? 'checked' : '' ?> name="lokasi[]" id="lokasi3" value="Di Tepi Jalan Sedang" class="flat" /> Di Tepi Jalan Sedang
+					                        <br/><br/>
+										</div>
+										<div class="col-md-6">
+											<input type="checkbox" <?= in_array('Daerah Usaha', $lokasi) ? 'checked' : '' ?> name="lokasi[]" id="lokasi4" value="Daerah Usaha" class="flat" /> Daerah Usaha
+					                        <br/><br/>
+
+					                        <input type="checkbox" <?= in_array('Daerah Perkampungan', $lokasi) ? 'checked' : '' ?> name="lokasi[]" id="lokasi5" value="Daerah Perkampungan" class="flat" /> Daerah Perkampungan
+					                        <br/><br/>
+										</div>
+									</div>
+			                    </p>
+							</div>
+						</div>
+
+						<div class="item form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="lokasi_sekolah">Lokasi Sekolah <span class="required">*</span></label>
 							<input id="pac-input" class="controls" type="text" placeholder="Cari Lokasi"/>
 							<div id="map" style="height: 250px;"></div>
 						</div>
 						<div class="item form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="lingkungan_lokasi_ruko">Koordinat Lokasi <span class="required">*</span></label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="lokasi_sekolah">Koordinat Lokasi <span class="required">*</span></label>
 							<div class="col-md-3 col-sm-3 col-xs-12">
-								<input type="number" step="any" name="latitude" required class="form-control col-md-7 col-xs-12"/>
-								<input type="number" step="any" name="longitude" required class="form-control col-md-7 col-xs-12"/>
+								<input type="number" value="<?= $sekolah->latitude ?>" step="any" name="latitude" required class="form-control col-md-7 col-xs-12"/>
+								<input type="number" value="<?= $sekolah->longitude ?>" step="any" name="longitude" required class="form-control col-md-7 col-xs-12"/>
 							</div>
 						</div>
 
 						<div class="item form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="lingkungan_lokasi_ruko">Foto Ruko <span class="required">*</span></label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="lokasi">Foto Sekolah </label>
 							<div class="col-md-3 col-sm-3 col-xs-12">
-								<input type="file" id="foto_ruko" name="foto_ruko[]" data-url="<?= base_url('pemilik/upload-handler') ?>" class="form-control col-md-7 col-xs-12" multiple>
+								<input type="file" id="foto_sekolah" name="foto_sekolah[]" data-url="<?= base_url('admin/upload-handler') ?>" class="form-control col-md-7 col-xs-12" multiple>
 							</div>
 						</div>
 						<div class="item form-group">
@@ -234,8 +365,8 @@
 
 	function initMap() {
 		// koordinat palembang
-		let lat = <?= $ruko->latitude ?>;
-		let lng = <?= $ruko->longitude ?>;
+		let lat = <?= $sekolah->latitude ?>;
+		let lng = <?= $sekolah->longitude ?>;
 		let currentLocation = new google.maps.LatLng(lat, lng);
 
 		let map = new google.maps.Map(document.getElementById('map'), {
@@ -351,14 +482,14 @@
 
 			new PNotify({
 				title: 'Data Berhasil Disimpan',
-				text: 'Informasi ruko yang anda masukkan telah berhasil tersimpan',
+				text: 'Informasi sekolah yang anda masukkan telah berhasil tersimpan',
 				type: 'success',
 				styling: 'bootstrap3'
 			});
 
 		<?php endif;  ?>
 
-	    $('#foto_ruko').fileupload({
+	    $('#foto_sekolah').fileupload({
 	        dataType: 'json',
 	        progressall: function (e, data) {
 		        let progress = parseInt(data.loaded / data.total * 100, 10);
@@ -373,7 +504,7 @@
 		        }
 		    },
 	        done: function (e, data) {
-	        	let files = data.result['foto_ruko'];
+	        	let files = data.result['foto_sekolah'];
 	        	let file = files[0];
 	        	$('#list-files').append('<li>' +
 					'<a>' +

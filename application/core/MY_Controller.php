@@ -80,11 +80,16 @@ class MY_Controller extends CI_Controller
 		return FALSE;
 	}	
 
-	protected function dump($var)
+	protected function dump($var, $exit = 0)
 	{
 		echo '<pre>';
 		var_dump($var);
 		echo '</pre>';
+
+		if ($exit != 0)
+		{
+			exit;
+		}
 	}
 
 	protected function go_back( $index ) 
