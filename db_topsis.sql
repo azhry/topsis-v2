@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 18 Mei 2019 pada 14.53
+-- Generation Time: 25 Mei 2019 pada 12.21
 -- Versi Server: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -65,6 +65,7 @@ CREATE TABLE `pengguna` (
   `password` char(32) NOT NULL,
   `id_role` int(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
+  `jenis_kelamin` enum('Laki-laki','Perempuan') NOT NULL DEFAULT 'Laki-laki',
   `email` varchar(255) NOT NULL,
   `alamat` text NOT NULL,
   `kontak` varchar(15) NOT NULL,
@@ -76,8 +77,10 @@ CREATE TABLE `pengguna` (
 -- Dumping data untuk tabel `pengguna`
 --
 
-INSERT INTO `pengguna` (`id`, `username`, `password`, `id_role`, `nama`, `email`, `alamat`, `kontak`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 1, 'Admin', 'admin@gmail.com', '-', '-', '2019-05-18 12:41:52', '2019-05-18 12:41:52');
+INSERT INTO `pengguna` (`id`, `username`, `password`, `id_role`, `nama`, `jenis_kelamin`, `email`, `alamat`, `kontak`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 1, 'Admin', 'Perempuan', 'test@gmail.com', 'Komplek Bougenville KM. 7 Palembang', '081234265011', '2019-05-18 12:41:52', '2019-05-24 23:03:19'),
+(2, 'user', 'e10adc3949ba59abbe56e057f20f883e', 2, 'User', 'Laki-laki', 'user@gmail.com', '-', '', '2019-05-22 07:41:27', '2019-05-22 07:41:27'),
+(5, 'h3h3', 'e10adc3949ba59abbe56e057f20f883e', 2, 'testttt', 'Laki-laki', 'test@gmail.com', 'Komplek Bougenville KM. 7 Palembang', '081234265011', '2019-05-24 20:46:33', '2019-05-24 23:02:15');
 
 -- --------------------------------------------------------
 
@@ -97,7 +100,8 @@ CREATE TABLE `role` (
 --
 
 INSERT INTO `role` (`id`, `role`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', '2019-05-18 12:40:48', '2019-05-18 12:40:48');
+(1, 'Admin', '2019-05-18 12:40:48', '2019-05-18 12:40:48'),
+(2, 'User', '2019-05-22 07:40:49', '2019-05-22 07:40:49');
 
 -- --------------------------------------------------------
 
@@ -127,8 +131,8 @@ CREATE TABLE `sekolah` (
 --
 
 INSERT INTO `sekolah` (`id`, `nama_sekolah`, `alamat`, `latitude`, `longitude`, `telepon`, `akreditasi`, `biaya_masuk`, `spp_bulanan`, `fasilitas`, `ekstrakurikuler`, `lokasi`, `created_at`, `updated_at`) VALUES
-(1, 'SD IT Mushab bin Umair', 'Jl. KH. Wahid Hasyim Lr. Kedukan, Kel. 5 Ulu, Kec. SU I Palembang', -2.995048253248413, 104.6933458618164, '\"081234265011\"', 'C', 7650000, 305000, '[\"Mushola \\/ Masjid\",\"UKS\",\"Lap. Olahraga\"]', '[\"Public Speaking\",\"Karate\",\"Arabic Club\",\"Tahfidz Al-Qur`an\",\"Tahsin Al-Qur`an\",\"Pramuka\",\"English Club\"]', '[\"Daerah Perkampungan\"]', '2019-05-18 02:28:47', '2019-05-18 02:28:47'),
-(2, 'SD IT Auldi Palembang', 'Jl. KH. Azhari No. 1A Kel. Tangga Takat SU II Palembang', -2.998476785815303, 104.80973227539062, '\"0711-510978\"', 'A', 15635000, 660000, '[\"Lab. Komputer\",\"Mushola \\/ Masjid\",\"Perpustakaan\",\"Wifi\",\"CCTV\",\"Lab. Sains\",\"Lab. Matematika\",\"Kantin\",\"UKS\",\"Ruang Kelas Ber-AC\"]', '[\"Robotic\",\"Marching Band\",\"Melukis\",\"Seni Tari\",\"Karate\"]', '[\"Di Tepi Jalan Sedang\",\"Daerah Usaha\",\"Daerah Perkampungan\"]', '2019-05-18 10:14:55', '2019-05-18 10:16:08');
+(3, 'SD IT Mushab bin Umai', 'Jl. KH. Wahid Hasyim Lr. Kedukan, Kel. 5 Ulu, Kec. SU I Palembang', -2.990934, 104.7754, '\"081366649499\"', 'C', 7650000, 305000, '[\"Mushola \\/ Masjid\",\"UKS\",\"Lap. Olahraga\"]', '[\"Public Speaking\",\"Training\",\"Karate\",\"Arabic Club\",\"Tahfidz Al-Qur`an\",\"Tahsin Al-Qur`an\",\"Pramuka\",\"English Club\"]', '[\"Daerah Perkampungan\"]', '2019-05-24 23:38:57', '2019-05-25 00:18:08'),
+(4, 'SD IT Auldi Palembang', 'Jl. KH. Azhari No. 1A Kel. Tangga Takat SU II Palembang', -3.002591010709101, 104.7098253540039, '\"0711-510978\"', 'A', 15635000, 660000, '[\"Lab. Komputer\",\"Mushola \\/ Masjid\",\"Perpustakaan\",\"Ruang Kelas Ber-AC\",\"Wifi\",\"CCTV\",\"Lab. Sains\",\"Lab. Matematika\",\"Kantin\",\"UKS\"]', '[\"Robotic\",\"Marching Band\",\"Melukis\",\"Seni Tari\",\"Karate\"]', '[\"Di Tepi Jalan Sedang\",\"Daerah Usaha\",\"Daerah Perkampungan\"]', '2019-05-25 01:11:49', '2019-05-25 01:11:49');
 
 --
 -- Indexes for dumped tables
@@ -167,25 +171,25 @@ ALTER TABLE `sekolah`
 -- AUTO_INCREMENT for table `kriteria`
 --
 ALTER TABLE `kriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `sekolah`
 --
 ALTER TABLE `sekolah`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

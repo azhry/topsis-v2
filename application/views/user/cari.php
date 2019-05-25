@@ -43,7 +43,11 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="text-center">
-								<button class="btn red" type="button" data-toggle="modal" href="#modal">Atur Bobot Pencarian</button>
+								<button class="btn red btn-xs" type="button" data-toggle="modal" href="#modal">Atur Bobot Pencarian</button>
+								<button type="button" onclick="cari(); return false;" class="btn btn-success btn-xs">
+									<i class="fa fa-search"></i> Cari
+								</button>
+								<button class="btn yellow btn-xs" type="button" data-toggle="modal" href="#perhitungan">Tampilkan Perhitungan</button>
 							</div>
 							<br><br>
 							<?= form_open_multipart('user/rank', ['class' => 'form-horizontal form-label-left']) ?>
@@ -362,6 +366,97 @@
             <div class="modal-footer">
                 <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                 <button type="button" class="btn green" onclick="atur_bobot();" data-dismiss="modal">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="perhitungan" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Alur Perhitungan</h4>
+            </div>
+            <div class="modal-body">
+            	<div class="row">
+            		<div class="col-md-12">
+            			<?php if (isset($_SESSION['solution_matrix'], $_SESSION['distance_result'], $_SESSION['normalized_result'], $_SESSION['result'])): ?>
+		            		<h4>Matriks Keputusan Ternormalisasi Terbobot</h4>
+		            		<table class="table table-bordered table-hover table-striped" style="width: 100% !important;">
+		            			<thead>
+		            				<tr>
+		            					<th>No.</th>
+		            					<?php foreach ($_SESSION['normalized_result'][0] as $key => $value): ?>
+			            					<th><?= $key ?></th>
+			            				<?php endforeach; ?>
+		            				</tr>
+		            			</thead>
+		            			<tbody>
+		            				<?php foreach ($_SESSION['normalized_result'] as $i => $row): ?>
+		            					<tr>
+		            						<td><?= $i + 1 ?></td>
+		            						<?php foreach ($row as $k => $cell): ?>
+		            							<td><?= $cell ?></td>
+		            						<?php endforeach; ?>
+		            					</tr>
+		            				<?php endforeach; ?>
+		            			</tbody>
+		            		</table>
+
+		            		<h4>Matriks Solusi Ideal</h4>
+		            		<table class="table table-bordered table-hover table-striped" style="width: 100% !important;">
+		            			<thead>
+		            				<tr>
+		            					<th>-</th>
+		            					<?php foreach ($_SESSION['solution_matrix']['positive'] as $key => $value): ?>
+			            					<th><?= $key ?></th>
+			            				<?php endforeach; ?>
+		            				</tr>
+		            			</thead>
+		            			<tbody>
+		            				<?php foreach ($_SESSION['solution_matrix'] as $key => $value): ?>
+		            					<tr>
+		            						<td><?= $key ?></td>
+		            						<?php foreach ($row as $k => $cell): ?>
+		            							<td><?= $cell ?></td>
+		            						<?php endforeach; ?>
+		            					</tr>
+		            				<?php endforeach; ?>
+		            			</tbody>
+		            		</table>
+
+		            		<h4>Jarak Solusi Ideal</h4>
+		            		<table class="table table-bordered table-hover table-striped" style="width: 100% !important;">
+		            			<thead>
+		            				<tr>
+		            					<th>-</th>
+		            					<th>Jarak Positif</th>
+		            					<th>Jarak Negatif</th>
+		            				</tr>
+		            			</thead>
+		            			<tbody>
+		            				<?php foreach ($_SESSION['distance_result'] as $key => $value): ?>
+		            					<tr>
+		            						<td><?= $key ?></td>
+		            						<?php foreach ($row as $k => $cell): ?>
+		            							<td><?= $cell ?></td>
+		            						<?php endforeach; ?>
+		            					</tr>
+		            				<?php endforeach; ?>
+		            			</tbody>
+		            		</table>
+		            	<?php else: ?>
+		            		<p>Anda belum melakukan pencarian</p>
+		            		<?php var_dump($_SESSION); ?>
+		            	<?php endif; ?>
+            		</div>
+            	</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
             </div>
         </div>
         <!-- /.modal-content -->

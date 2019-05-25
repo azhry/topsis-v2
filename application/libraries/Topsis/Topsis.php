@@ -112,6 +112,7 @@ class Topsis
 			];
 		}, $this->weighted_result);
 
+		$_SESSION['distance_result'] = $this->distance_result;
 		return $this->distance_result;
 	}
 
@@ -120,7 +121,7 @@ class Topsis
 		$result = array_map(function($row) {
 			return $this->preference($row['positive'], $row['negative']);
 		}, $this->distance_result);
-		
+		$_SESSION['result'] = $result;
 		return $result;
 	}
 
