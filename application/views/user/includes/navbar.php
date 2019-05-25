@@ -20,7 +20,11 @@
                                 <ul class="dropdown-menu-v2" role="menu">
                                     <?php if (isset($id_role)): ?>
                                     <li>
+                                        <?php if ($id_role == 1): ?>
                                         <a href="<?= base_url('admin/profil') ?>">
+                                        <?php else: ?>
+                                        <a href="<?= base_url('user/profil') ?>">
+                                        <?php endif; ?>
                                             <i class="icon-user"></i> Profil
                                         </a>
                                     </li>

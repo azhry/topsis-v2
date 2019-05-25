@@ -3,6 +3,7 @@
 <div class="page-fixed-main-content">
     <div class="row">
         <div class="col-md-12">
+            <h3 class="text-center">Daftar SDIT Kota Palembang</h3>
             <div class="promotion-section">
                 <div class="w-container promotion-container">
                     <div class="promo-flex">
@@ -23,7 +24,7 @@
                                     $foto = array_values(array_diff($foto, ['.', '..']));
                                 ?>
                                 <a href="<?= base_url('user/detail-sekolah/' . $row['id']) ?>">
-                                    <div class="w-clearfix w-preserve-3d promo-card" style="display: inline-block !important;">
+                                    <div class="w-clearfix w-preserve-3d promo-card" style="display: inline-block !important; margin: 10px;">
                                         <img width="100%" height="200" src="<?= isset($foto[0]) ? base_url($path . '/' . $foto[0]) : 'http://placehold.it/313x313' ?>">
                                         <div class="blog-bar color-pink"></div>
                                         <div class="blog-post-text">

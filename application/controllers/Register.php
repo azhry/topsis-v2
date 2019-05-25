@@ -23,7 +23,7 @@ class Register extends MY_Controller
 			$this->data['pengguna'] = [
 				'username'		=> $this->POST('username'),
 				'password'		=> md5($password),
-				'id_role'		=> 1,
+				'id_role'		=> 2,
 				'nama'			=> $this->POST('nama'),
 				'email'			=> $this->POST('email'),
 				'alamat'		=> $this->POST('alamat'),
