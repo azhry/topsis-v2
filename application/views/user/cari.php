@@ -52,17 +52,6 @@
 							<br><br>
 							<?= form_open_multipart('user/rank', ['class' => 'form-horizontal form-label-left']) ?>
 								<div class="item form-group">
-									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="biaya_masuk">Range Biaya Masuk</label>
-									<div class="col-md-9 col-sm-9 col-xs-12">
-										<select id="biaya_masuk" name="biaya_masuk" class="form-control col-md-7 col-xs-12">
-											<option value="">Pilih..</option>
-											<?php $v = 0; for ($i = count($range['biaya_masuk']) - 1; $i >= 0; $i--): ?>
-												<option value="<?= ++$v ?>"><?= 'Rp. ' . number_format($range['biaya_masuk'][$i]['min'], 2, ',', '.') . ' - ' . 'Rp. ' . number_format($range['biaya_masuk'][$i]['max'], 2, ',', '.') ?></option>
-											<?php endfor; ?>
-										</select>
-									</div>
-								</div>
-								<div class="item form-group">
 									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="akreditasi">Akreditasi</label>
 									<div class="col-md-9 col-sm-9 col-xs-12">
 										<select id="akreditasi" name="akreditasi" class="form-control col-md-7 col-xs-12">
@@ -74,6 +63,19 @@
 										</select>
 									</div>
 								</div>
+
+								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="biaya_masuk">Range Biaya Masuk</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<select id="biaya_masuk" name="biaya_masuk" class="form-control col-md-7 col-xs-12">
+											<option value="">Pilih..</option>
+											<?php $v = 0; for ($i = count($range['biaya_masuk']) - 1; $i >= 0; $i--): ?>
+												<option value="<?= ++$v ?>"><?= 'Rp. ' . number_format($range['biaya_masuk'][$i]['min'], 2, ',', '.') . ' - ' . 'Rp. ' . number_format($range['biaya_masuk'][$i]['max'], 2, ',', '.') ?></option>
+											<?php endfor; ?>
+										</select>
+									</div>
+								</div>
+								
 								<div class="item form-group">
 									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="spp_bulanan">Range Biaya SPP Bulanan</label>
 									<div class="col-md-9 col-sm-9 col-xs-12">
