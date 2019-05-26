@@ -24,7 +24,7 @@
                                 <th style="text-align: center;">Nama Sekolah</th>
                                 <th style="text-align: center;">Akreditasi</th>
                                 <th style="text-align: center;">Alamat</th>
-                                <th style="text-align: center;">-</th>
+                                <th style="text-align: center;">Aksi</th>
                             </tr>
                         </thead>
 
@@ -49,9 +49,9 @@
                                     <td align="middle" style="vertical-align: middle;"><?= $row->akreditasi ?></td>
                                     <td align="middle" style="vertical-align: middle;"><?= $row->alamat ?></td>
                                     <td align="middle" style="vertical-align: middle;">
-                                        <a href="<?= base_url('admin/detail-sekolah/' . $row->id) ?>" type="button" class="btn btn-info btn-xs"><i class="fa fa-eye"></i> </a>
-                                        <a href="<?= base_url('admin/edit-sekolah/' . $row->id) ?>" type="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> </a>
-                                        <a href="<?= base_url('admin/daftar-sekolah/' . $row->id) ?>" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                                        <a href="<?= base_url('admin/detail-sekolah/' . $row->id) ?>" type="button" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Detail</a>
+                                        <a href="<?= base_url('admin/edit-sekolah/' . $row->id) ?>" type="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>Edit</a>
+                                        <a href="<?= base_url('admin/daftar-sekolah/' . $row->id) ?>" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i>Hapus</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
