@@ -169,70 +169,76 @@
 				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler8" value="Da`i Cilik" class="flat" /> Da`i Cilik
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler9" value="Public Speaking" class="flat" /> Public Speaking
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler9" value="Public Speaking" class="flat" /> Public Speaking Training
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler10" value="Training" class="flat" /> Training
+
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler10" value="Melukis" class="flat" /> Melukis
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler11" value="Melukis" class="flat" /> Melukis
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler11" value="Teater" class="flat" /> Teater
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler12" value="Teater" class="flat" /> Teater
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler24" value="Mewarnai" class="flat" /> Mewarnai
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler25" value="Mewarnai" class="flat" /> Mewarnai
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler25" value="Seni Tari" class="flat" /> Seni Tari
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler26" value="Seni Tari" class="flat" /> Seni Tari
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler26" value="Karate" class="flat" /> Karate
 				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler27" value="Karate" class="flat" /> Karate
+										
+										<input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler30" value="Science Club" class="flat" /> Science Club
 				                        <br/><br/>
 									</div>
 
 									<div class="col-md-6">
-										<input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler13" value="Catur" class="flat" /> Catur
+										<input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler12" value="Catur" class="flat" /> Catur
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler14" value="Arabic Club" class="flat" /> Arabic Club
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler13" value="Arabic Club" class="flat" /> Arabic Club
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler15" value="Tahfidz Al-Qur`an" class="flat" /> Tahfidz Al-Qur`an
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler14" value="Tahfidz Al-Qur`an" class="flat" /> Tahfidz Al-Qur`an
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler16" value="Tahsin Al-Qur`an" class="flat" /> Tahsin Al-Qur`an
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler15" value="Tahsin Al-Qur`an" class="flat" /> Tahsin Al-Qur`an
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler17" value="Paskibra" class="flat" /> Paskibra
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler16" value="Paskibra" class="flat" /> Paskibra
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler18" value="Komputer" class="flat" /> Komputer
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler17" value="Komputer" class="flat" /> Komputer
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler19" value="Grup Seni Islam" class="flat" /> Grup Seni Islam
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler18" value="Grup Seni Islam" class="flat" /> Grup Seni Islam
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler20" value="Taekwondo" class="flat" /> Taekwondo
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler19" value="Taekwondo" class="flat" /> Taekwondo
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler21" value="Pencak Silat" class="flat" /> Pencak Silat
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler20" value="Pencak Silat" class="flat" /> Pencak Silat
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler22" value="Seni Musik" class="flat" /> Seni Musik
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler21" value="Seni Musik" class="flat" /> Seni Musik
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler23" value="Futsal" class="flat" /> Futsal
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler22" value="Futsal" class="flat" /> Futsal
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler24" value="PMR" class="flat" /> PMR
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler23" value="PMR" class="flat" /> PMR
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler28" value="Pramuka" class="flat" /> Pramuka
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler27" value="Pramuka" class="flat" /> Pramuka
 				                        <br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler29" value="English Club" class="flat" /> English Club
+				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler28" value="English Club" class="flat" /> English Club
 				                        <br/><br/>
+										
+										<input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler29" value="Matematika" class="flat" /> Matematika
+				                        <br/><br/>
+										
+										
 									</div>
 								</div>
 		                    </p>
@@ -303,7 +309,7 @@
 					<div class="form-group">
 						<div class="col-md-6 col-md-offset-3">
 							<button type="reset" class="btn btn-primary">Reset</button>
-							<input id="submit" name="submit" type="submit" class="btn btn-success" value="Submit"/>
+							<input id="submit" name="submit" type="submit" class="btn btn-success" value="Save"/>
 						</div>
 					</div>
                 <?= form_close() ?>

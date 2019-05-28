@@ -3,6 +3,7 @@
 <div class="page-fixed-main-content">
     <div class="row">
         <div class="col-md-12">
+		<h3 class="text-center">Daftar SDIT Kota Palembang</h3>
             <div class="promotion-section">
                 <div class="w-container promotion-container">
                     <div class="promo-flex">

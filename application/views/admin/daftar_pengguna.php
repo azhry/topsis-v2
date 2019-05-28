@@ -25,7 +25,7 @@
                                 <th style="text-align: center;">Jenis Kelamin</th>
                                 <th style="text-align: center;">Email</th>
                                 <th style="text-align: center;">Role</th>
-                                <th style="text-align: center;">-</th>
+                                <th style="text-align: center;">Aksi</th>
                             </tr>
                         </thead>
 
