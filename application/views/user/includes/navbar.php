@@ -4,8 +4,8 @@
                 <div class="container-fluid">
                     <div class="havbar-header">
                         <!-- BEGIN LOGO -->
-                        <a id="index" class="navbar-brand" href="<?= base_url('admin') ?>">
-                            <img src="<?= base_url() ?>/assets/layouts/layout6/img/logo.png" alt="Logo"> </a>
+                        <a id="index" class="navbar-brand" href="<?= base_url('user') ?>">
+                            <img src="<?= base_url() ?>/assets/Logo.png" alt="Logo"> </a>
                         <!-- END LOGO -->
                         <!-- BEGIN TOPBAR ACTIONS -->
                         <div class="topbar-actions">

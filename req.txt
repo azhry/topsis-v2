@@ -6,7 +6,7 @@ Judul dan footer: Sistem Pendukung Keputusan Pemilihan SDIT
 4. user butuh registrasi (username, password, nama, jenis kelamin, nomor hp, alamat) (o)
 5. setelah login, muncul daftar sekolah (o)
 6. user dan admin dapat edit profil (o)
-7. tampilkan alur perhitungan di user setelah melakukan pencarian (dan cost/benefit)
+7. tampilkan alur perhitungan di user setelah melakukan pencarian (dan cost/benefit) (o)
 8. admin tidak perlu fitur pencarian (o)
 9. admin dan user setelah login diarahkan ke halaman daftar SDIT (bentuk kotak-kotak) (o)
 10. edit hapus data (o)
@@ -20,3 +20,15 @@ Judul dan footer: Sistem Pendukung Keputusan Pemilihan SDIT
 -------------------------------------------------------------------------
 cd C:/xampp/htdocs/topsis
 git pull origin master
+
+-------------------------------------------------------------------------
+1. muncul alert ketika back dari detail
+2. pada dropdown bobot tambah labelnya (misal: 1 - sangat murah)
+3. 
+
+-------------------------------------------------------------------------
+cd C:/xampp/htdocs/topsis
+git pull origin master
+git add .
+git commit -m "pesan commit"
+git push origin master
