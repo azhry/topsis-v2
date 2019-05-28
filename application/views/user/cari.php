@@ -364,11 +364,13 @@
 						<label class="control-label" for="<?= $row->key ?>"><?= $row->kriteria ?></label>
 						<select class="form-control" name="<?= $row->key ?>" id="bobot_<?= $row->key ?>">
 							<?php  
-								$details = json_decode($row->details);
-								foreach ($details as $detail):
+								$labels = [
+									'Sangat Tidak Penting', 'Tidak Penting', 'Netral', 'Penting', 'Sangat Penting'
+								];
+								for ($i = 0; $i < 5; $i++):
 							?>
-								<option value="<?= $detail->value ?>"><?= $detail->value . ' - ' . $detail->label ?></option>
-							<?php endforeach; ?>
+								<option value="<?= $i + 1 ?>"><?= $i + 1 . ' (' . $labels[$i] . ')' ?></option>
+							<?php endfor; ?>
 						</select>
 					</div>
             	<?php endforeach; ?>
