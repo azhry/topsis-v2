@@ -23,8 +23,7 @@ git pull origin master
 
 -------------------------------------------------------------------------
 1. muncul alert ketika back dari detail
-2. pada dropdown bobot tambah labelnya (misal: 1 - sangat murah)
-3. 
+2. pada dropdown bobot tambah labelnya (misal: 1 - sangat murah) (o)
 
 -------------------------------------------------------------------------
 cd C:/xampp/htdocs/topsis

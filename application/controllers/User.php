@@ -167,6 +167,7 @@ class User extends MY_Controller
 		$rank = $this->topsis->rank();
 		$this->data['sekolah']	= $rank;
 		$this->data['kriteria']	= $kriteria;
+
 		$this->data['title']	= 'Cari Sekolah';
 		$this->data['content']	= 'cari';
 		$this->template($this->data, $this->module);

@@ -65,7 +65,7 @@ class Admin extends MY_Controller
 
 		$this->load->model('pengguna_m');
 		$this->data['pengguna']		= $this->pengguna_m->get_row(['id' => $this->data['id']]);
-		$this->check_allowance(!isset($this->data['pengguna']), ['Data tidak ditemukan', 'danger']);
+		// $this->check_allowance(!isset($this->data['pengguna']), ['Data tidak ditemukan', 'danger']);
 
 		$this->load->model('role_m');
 		$this->data['pengguna']->role = $this->role_m->get_row(['id' => $this->data['pengguna']->id_role]);
@@ -231,7 +231,7 @@ class Admin extends MY_Controller
 
 		$this->load->model('sekolah_m');
 		$this->data['sekolah']			= $this->sekolah_m->get_row(['id' => $this->data['id']]);
-		$this->check_allowance(!isset($this->data['sekolah']), ['Data sekolah tidak ditemukan', 'danger']);
+		// $this->check_allowance(!isset($this->data['sekolah']), ['Data sekolah tidak ditemukan', 'danger']);
 
 		$this->data['upload_dir'] 			= FCPATH . 'assets/foto/sekolah-' . $this->data['sekolah']->id;
 		if (!file_exists($this->data['upload_dir']))
@@ -404,7 +404,7 @@ class Admin extends MY_Controller
 
 		$this->load->model('kriteria_m');
 		$this->data['kriteria']			= $this->kriteria_m->get_row(['id' => $this->data['id']]);
-		$this->check_allowance(!isset($this->data['kriteria']), ['Data kriteria tidak ditemukan', 'danger']);
+		// $this->check_allowance(!isset($this->data['kriteria']), ['Data kriteria tidak ditemukan', 'danger']);
 
 		$this->data['title']				= 'Detail Kriteria';
 		$this->data['content']				= 'detail_kriteria';

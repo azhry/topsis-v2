@@ -101,7 +101,6 @@ class MY_Controller extends CI_Controller
 	{
 		if ( $condition ) 
 		{
-
 			$this->flashmsg( $message[0], $message[1] );
 			$this->go_back( $redirect_index );
 			exit;

@@ -120,7 +120,7 @@
 							                        <input type="checkbox" name="fasilitas[]" id="fasilitas9" value="Aula" class="flat" /> Aula
 							                        <br/><br/>
 
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas10" value="Mushola / Masjid" class="flat" /> Mushola / Masjid
+							                        <input type="checkbox" name="fasilitas[]" id="fasilitas10" value="Mushola __ Masjid" class="flat" /> Mushola / Masjid
 							                        <br/><br/>
 
 							                        <input type="checkbox" name="fasilitas[]" id="fasilitas11" value="Perpustakaan" class="flat" /> Perpustakaan
@@ -363,9 +363,12 @@
             		<div class="form-group">
 						<label class="control-label" for="<?= $row->key ?>"><?= $row->kriteria ?></label>
 						<select class="form-control" name="<?= $row->key ?>" id="bobot_<?= $row->key ?>">
-							<?php for ($i = 0; $i < 5; $i++): ?>
-								<option value="<?= $i + 1 ?>"><?= $i + 1 ?></option>
-							<?php endfor; ?>
+							<?php  
+								$details = json_decode($row->details);
+								foreach ($details as $detail):
+							?>
+								<option value="<?= $detail->value ?>"><?= $detail->value . ' - ' . $detail->label ?></option>
+							<?php endforeach; ?>
 						</select>
 					</div>
             	<?php endforeach; ?>
