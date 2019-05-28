@@ -51,14 +51,16 @@ License: You must have a valid license purchased only from themeforest(the above
     <body class=" login">
         <!-- BEGIN LOGO -->
         <div class="logo">
-            <h3>Sistem Pendukung Keputusan Pemilihan SDIT</h3>
+            <h3>Sistem Pendukung Keputusan</h3>
+			<h3>Pemilihan Sekolah Dasar Islam Terpadu (SDIT)</h3>
+			<h3>Di Kota Palembang</h3>
         </div>
         <!-- END LOGO -->
         <!-- BEGIN LOGIN -->
         <div class="content">
             <!-- BEGIN LOGIN FORM -->
             <?= form_open('register') ?>
-                <h3 class="form-title">Register new account</h3>
+                <h3 class="form-title">Registrasi Akun Baru</h3>
                 <?= $this->session->flashdata('msg') ?>
                 <div class="form-group">
                     <label class="control-label">Username</label>

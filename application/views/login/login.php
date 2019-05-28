@@ -52,7 +52,9 @@ License: You must have a valid license purchased only from themeforest(the above
     <body class=" login">
         <!-- BEGIN LOGO -->
         <div class="logo">
-            <h3>Sistem Pendukung Keputusan Pemilihan SDIT</h3>
+            <h3>Sistem Pendukung Keputusan</h3>
+			<h3>Pemilihan Sekolah Dasar Islam Terpadu (SDIT)</h3>
+			<h3>Di Kota Palembang</h3>
         </div>
         <!-- END LOGO -->
         <!-- BEGIN LOGIN -->
