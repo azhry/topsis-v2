@@ -5,44 +5,51 @@
 <link href="<?= base_url('assets') ?>/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
 <div class="page-fixed-main-content">
+    <!-- BEGIN PAGE BASE CONTENT -->
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
-                <h2>Daftar Kriteria</h2>
+                <div class="x_title">
+                    <h2>Daftar Sekolah</h2>
+                </div>
                 <div class="x_content">
-                    <div class="row">
-                        <div class="col-md-8">
-                        </div>
-                        <div class="col-md-4">
-                            <a href="<?= base_url('admin/tambah-kriteria') ?>" class="btn btn-success pull-right">
-                                <i class="fa fa-plus-square"></i> Tambah Kriteria
-                            </a>
-                        </div>
-                    </div>
-                    <?= $this->session->flashdata('msg') ?>
+                    <a href="<?= base_url('admin/tambah-sekolah') ?>" class="btn green">
+                        <i class="fa fa-plus"></i> Tambah Data
+                    </a>
+                    <br><br>
                     <table id="datatable-fixed-header" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th style="text-align: center;">Label</th>
-                                <th style="text-align: center;">Key</th>
-                                <th style="text-align: center;">Type</th>
-                                <th style="text-align: center;">Weight</th>
-                                <th style="text-align: center;">Action</th>
+                                <th style="text-align: center;">Foto</th>
+                                <th style="text-align: center;">Nama Sekolah</th>
+                                <th style="text-align: center;">Akreditasi</th>
+                                <th style="text-align: center;">Alamat</th>
+                                <th style="text-align: center;">-</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <?php foreach ($kriteria as $row): ?>
+                            <?php foreach ($sekolah as $row): ?>
+                                <?php  
+                                    if (!file_exists($upload_dir . $row->id)) 
+                                    {
+                                        $foto = [];
+                                    }
+                                    else
+                                    {
+                                        $foto = array_values(array_diff(scandir($upload_dir . $row->id), ['.', '..']));    
+                                    }
+                                    
+                                ?>
                                 <tr>
                                     <td align="middle" style="vertical-align: middle;">
-                                        <?= $row->kriteria ?>
+                                        <img src="<?= count($foto) > 0 ? base_url('assets/foto/sekolah-' . $row->id . '/' . $foto[0]) : 'http://placehold.it/100' ?>" width="100" height="100">
                                     </td>
-                                    <td align="middle" style="vertical-align: middle;"><?= $row->key ?></td>
-                                    <td align="middle" style="vertical-align: middle;"><?= $row->type ?></td>
-                                    <td align="middle" style="vertical-align: middle;"><?= $row->bobot ?></td>
+                                    <td align="middle" style="vertical-align: middle;"><?= $row->nama_sekolah ?></td>
+                                    <td align="middle" style="vertical-align: middle;"><?= $row->akreditasi ?></td>
+                                    <td align="middle" style="vertical-align: middle;"><?= $row->alamat ?></td>
                                     <td align="middle" style="vertical-align: middle;">
-                                        <a href="<?= base_url('admin/detail-kriteria/' . $row->id) ?>" type="button" class="btn btn-info"><i class="fa fa-eye"></i> Detail</a>
-                                        <a href="<?= base_url('admin/kriteria/' . $row->id) ?>" type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                        <a href="<?= base_url('admin/detail-sekolah/' . $row->id) ?>" type="button" class="btn btn-info btn-xs"><i class="fa fa-eye"></i> Detail</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -52,6 +59,7 @@
             </div>
         </div>
     </div>
+    <!-- END PAGE BASE CONTENT -->
 </div>
 
 <!-- DataTables -->

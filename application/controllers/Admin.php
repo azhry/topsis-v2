@@ -1,5 +1,8 @@
 <?php 
 
+define('JUMLAH_FASILITAS', 23);
+define('JUMLAH_EKSTRAKURIKULER', 29);
+
 class Admin extends MY_Controller
 {
 	public function __construct()
@@ -222,6 +225,23 @@ class Admin extends MY_Controller
 		$this->data['title']		= 'Daftar Sekolah';
 		$this->data['content']		= 'daftar_sekolah';
 		$this->template($this->data, $this->module);
+	}
+
+	public function verifikasi_sekolah()
+	{
+		$this->data['id']	= $this->uri->segment(3);
+		$this->check_allowance(!isset($this->data['id']));
+
+		$this->load->model('sekolah_m');
+		$this->data['sekolah']			= $this->sekolah_m->get_row(['id' => $this->data['id']]);
+
+		if (isset($this->data['sekolah']))
+		{
+			$this->sekolah_m->update($this->data['id'], ['valid' => 1]);
+			$this->flashmsg('Data sekolah berhasil diverifikasi');
+		}
+		
+		redirect('admin/detail-sekolah/' . $this->data['id']);	
 	}
 
 	public function detail_sekolah()
@@ -490,7 +510,7 @@ class Admin extends MY_Controller
 
 				for ($i = 0; $i < count($range_label); $i++)
 				{
-					if (empty($range_label[$i]) or empty($range_max[$i]) or empty($range_min[$i]) or empty($range_value[$i]))
+					if (empty($range_label[$i]) or !isset($range_max[$i]) or !isset($range_min[$i]) or empty($range_value[$i]))
 					{
 						continue;
 					}
@@ -540,6 +560,81 @@ class Admin extends MY_Controller
 		$this->data['details']	= json_decode($this->data['kriteria']->details);
 		$this->data['title']	= 'Form Edit Kriteria';
 		$this->data['content']	= 'form_edit_kriteria';
+		$this->template($this->data, $this->module);
+	}
+
+	public function perhitungan()
+	{
+		$this->load->model('kriteria_m');
+		$this->load->library('Topsis/topsis');
+		$kriteria = $this->kriteria_m->get();
+		$config = [];
+		foreach ($kriteria as $row)
+		{
+			$details = json_decode($row->details, true);
+
+			if ($row->type == 'range')
+			{
+				$max = PHP_INT_MIN;
+				$min = PHP_INT_MAX;
+				$max_idx = -1;
+				$min_idx = -1;
+				for ($i = 0; $i < count($details); $i++)
+				{
+					if ($details[$i]['max'] > $max)
+					{
+						$max = $details[$i]['max'];
+						$max_idx = $i;
+					}
+
+					if ($details[$i]['min'] < $min)
+					{
+						$min = $details[$i]['min'];
+						$min_idx = $i;
+					}
+				}
+				$details[$max_idx]['max'] = null;
+				$details[$min_idx]['min'] = null;
+			}
+
+			$config[$row->key] = [
+				'key'		=> $row->key,
+				'weight'	=> $row->bobot,
+				'label'		=> $row->kriteria,
+				'type'		=> $row->type,
+				'values'	=> $details
+			];
+		}
+
+		$this->topsis->set_config($config);
+		$this->load->model('sekolah_m');
+		
+		$this->data['range']	= $this->sekolah_m->get_range();
+		$this->data['criteria']	= $this->topsis->criteria;
+		$this->data['config']	= $this->data['criteria']->get_config();
+
+		$this->data['sekolah']		= json_decode(json_encode($this->sekolah_m->get()), true);
+		$this->data['sekolah']		= array_map(function($sekolah) {
+
+			$fasilitas 					= count(json_decode($sekolah['fasilitas'])) / JUMLAH_FASILITAS;
+			$ekstrakurikuler 			= count(json_decode($sekolah['ekstrakurikuler'])) / JUMLAH_EKSTRAKURIKULER;
+			$sekolah['fasilitas'] 		= round($fasilitas, 2);
+			$sekolah['ekstrakurikuler'] = round($ekstrakurikuler, 2);
+			return $sekolah;
+
+		}, $this->data['sekolah']);
+		$_SESSION['sekolah'] = $this->data['sekolah'];
+		
+		$matrix = $this->topsis->fit($this->data['sekolah'], ['nama_sekolah', 'id', 'alamat', 'latitude', 'longitude', 'telepon', 'created_at', 'updated_at', 'id_user', 'valid']);
+		$weight = $this->topsis->weight();
+		$distance = $this->topsis->solution_distance();
+		$rank = $this->topsis->rank();
+		$this->data['sekolah']	= $rank;
+		$_SESSION['ranked'] = $this->data['sekolah'];
+		$this->data['kriteria']	= $kriteria;
+
+		$this->data['title'] 	= 'Alur Perhitungan Topsis';
+		$this->data['content']	= 'alur_perhitungan';
 		$this->template($this->data, $this->module);
 	}
 
@@ -594,7 +689,7 @@ class Admin extends MY_Controller
 
 		$this->data['sekolah']		= json_decode(json_encode($this->sekolah_m->get()), true);
 		
-		$matrix = $this->topsis->fit($this->data['sekolah'], ['nama_sekolah', 'id', 'alamat', 'latitude', 'longitude', 'telepon', 'created_at', 'updated_at']);
+		$matrix = $this->topsis->fit($this->data['sekolah'], ['nama_sekolah', 'id', 'alamat', 'latitude', 'longitude', 'telepon', 'created_at', 'updated_at', 'valid', 'id_user']);
 		$weight = $this->topsis->weight();
 		$distance = $this->topsis->solution_distance();
 		$rank = $this->topsis->rank();
@@ -712,6 +807,7 @@ class Admin extends MY_Controller
 			$this->load->library('Topsis/topsis');
 			$kriteria = $this->kriteria_m->get();
 			$config = [];
+			$exps = [];
 			foreach ($kriteria as $row)
 			{
 				$details = json_decode($row->details);
@@ -745,11 +841,25 @@ class Admin extends MY_Controller
 					'weight'	=> $this->POST('bobot_' . $row->key),
 					'label'		=> $row->kriteria,
 					'type'		=> $row->type,
+					'exp'		=> $row->exp,
 					'values'	=> $details
 				];
+
+				$exps[$row->key] = $row->exp;
 			}
 			$this->topsis->set_config($config);
-			$this->topsis->fit($this->data['sekolah'], ['nama_sekolah', 'id', 'alamat', 'latitude', 'longitude', 'telepon', 'created_at', 'updated_at']);
+			$this->topsis->set_exps($exps);
+			$this->topsis->fit($this->data['sekolah'], ['nama_sekolah', 'id', 'alamat', 'latitude', 'longitude', 'telepon', 'created_at', 'updated_at', 'valid', 'id_user']);
+			$this->data['sekolah']		= array_map(function($sekolah) {
+
+				$fasilitas 					= count(json_decode($sekolah['fasilitas'])) / JUMLAH_FASILITAS;
+				$ekstrakurikuler 			= count(json_decode($sekolah['ekstrakurikuler'])) / JUMLAH_EKSTRAKURIKULER;
+				$sekolah['fasilitas'] 		= $fasilitas;
+				$sekolah['ekstrakurikuler'] = $ekstrakurikuler;
+				return $sekolah;
+
+			}, $this->data['sekolah']);
+			$_SESSION['sekolah'] = $this->data['sekolah'];
 			$this->topsis->weight();
 			$this->topsis->solution_distance();
 			$rank = $this->topsis->rank();
@@ -770,7 +880,11 @@ class Admin extends MY_Controller
 				$row['spp_bulanan'] = 'Rp. ' . number_format($row['spp_bulanan'], 2, ',', '.');
 				return $row;
 			}, $rank);
-			echo json_encode($rank);
+			$data = [
+				'rank'		=> $rank,
+				'session'	=> $_SESSION
+			];
+			echo json_encode($data);
 		}
 	}
 }

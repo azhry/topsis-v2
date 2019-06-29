@@ -38,6 +38,12 @@
                                     <span class="title">Data Pengguna</span>
                                 </a>
                             </li>
+                            <li class="nav-item  ">
+                                <a href="<?= base_url('admin/perhitungan') ?>" class="nav-link nav-toggle">
+                                    <i class="icon-diamond"></i>
+                                    <span class="title">Perhitungan</span>
+                                </a>
+                            </li>
                             <!-- <li class="nav-item">
                                 <a href="<?= base_url('admin/cari') ?>" class="nav-link nav-toggle">
                                     <i class="fa fa-search"></i>

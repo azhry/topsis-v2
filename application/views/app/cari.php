@@ -43,21 +43,14 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="text-center">
-								<button class="btn red" type="button" data-toggle="modal" href="#modal">Atur Bobot Pencarian</button>
+								<!-- <button class="btn red btn-xs" type="button" data-toggle="modal" href="#modal">Atur Bobot Pencarian</button> -->
+								<button type="button" onclick="cari(); return false;" class="btn btn-success btn-xs">
+									<i class="fa fa-search"></i> Cari
+								</button>
+								<!-- <button class="btn yellow btn-xs" type="button" data-toggle="modal" href="#perhitungan">Tampilkan Perhitungan</button> -->
 							</div>
 							<br><br>
-							<?= form_open_multipart('app/rank', ['class' => 'form-horizontal form-label-left']) ?>
-								<div class="item form-group">
-									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="biaya_masuk">Range Biaya Masuk</label>
-									<div class="col-md-9 col-sm-9 col-xs-12">
-										<select id="biaya_masuk" name="biaya_masuk" class="form-control col-md-7 col-xs-12">
-											<option value="">Pilih..</option>
-											<?php $v = 0; for ($i = count($range['biaya_masuk']) - 1; $i >= 0; $i--): ?>
-												<option value="<?= ++$v ?>"><?= 'Rp. ' . number_format($range['biaya_masuk'][$i]['min'], 2, ',', '.') . ' - ' . 'Rp. ' . number_format($range['biaya_masuk'][$i]['max'], 2, ',', '.') ?></option>
-											<?php endfor; ?>
-										</select>
-									</div>
-								</div>
+							<?= form_open_multipart('user/rank', ['class' => 'form-horizontal form-label-left']) ?>
 								<div class="item form-group">
 									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="akreditasi">Akreditasi</label>
 									<div class="col-md-9 col-sm-9 col-xs-12">
@@ -70,6 +63,19 @@
 										</select>
 									</div>
 								</div>
+
+								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="biaya_masuk">Range Biaya Masuk</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<select id="biaya_masuk" name="biaya_masuk" class="form-control col-md-7 col-xs-12">
+											<option value="">Pilih..</option>
+											<?php $v = 0; for ($i = count($range['biaya_masuk']) - 1; $i >= 0; $i--): ?>
+												<option value="<?= ++$v ?>"><?= 'Rp. ' . number_format($range['biaya_masuk'][$i]['min'], 2, ',', '.') . ' - ' . 'Rp. ' . number_format($range['biaya_masuk'][$i]['max'], 2, ',', '.') ?></option>
+											<?php endfor; ?>
+										</select>
+									</div>
+								</div>
+								
 								<div class="item form-group">
 									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="spp_bulanan">Range Biaya SPP Bulanan</label>
 									<div class="col-md-9 col-sm-9 col-xs-12">
@@ -81,185 +87,43 @@
 										</select>
 									</div>
 								</div>
+
 								<div class="item form-group">
 									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="fasilitas">Fasilitas</label>
 									<div class="col-md-9 col-sm-9 col-xs-12">
-										<p style="padding: 5px;">
-											<div class="row">
-												<div class="col-md-6">
-													<input type="checkbox" name="fasilitas[]" id="fasilitas1" value="Auditorium" data-parsley-mincheck="1" class="flat" /> Auditorium
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas2" value="Kolam Renang" class="flat" /> Kolam Renang
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas3" value="Konsultasi Psikologi" class="flat" /> Konsultasi Psikologi
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas4" value="Katering" class="flat" /> Katering
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas5" value="Antar Jemput Anak" class="flat" /> Antar Jemput Anak
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas6" value="Lab. Komputer" class="flat" /> Lab. Komputer
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas7" value="Lab. Multimedia" class="flat" /> Lab. Multimedia
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas8" value="Halaman Parkir" class="flat" /> Halaman Parkir
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas9" value="Aula" class="flat" /> Aula
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas10" value="Mushola / Masjid" class="flat" /> Mushola / Masjid
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas11" value="Perpustakaan" class="flat" /> Perpustakaan
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas12" value="Ruang Kelas Ber-AC" class="flat" /> Ruang Kelas Ber-AC
-							                        <br/><br/>
-												</div>
-												<div class="col-md-6">
-													<input type="checkbox" name="fasilitas[]" id="fasilitas13" value="Wifi" class="flat" /> Wifi
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas14" value="Asuransi Kecelakaan" class="flat" /> Asuransi Kecelakaan
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas15" value="CCTV" class="flat" /> CCTV
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas16" value="Pelayanan Kesehatan" class="flat" /> Pelayanan Kesehatan
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas17" value="Lab. Sains" class="flat" /> Lab. Sains
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas18" value="Lab. Matematika" class="flat" /> Lab. Matematika
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas19" value="Koperasi" class="flat" /> Koperasi
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas20" value="Kantin" class="flat" /> Kantin
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas21" value="UKS" class="flat" /> UKS
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas22" value="Lap. Olahraga" class="flat" /> Lap. Olahraga
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="fasilitas[]" id="fasilitas23" value="Taman Bermain" class="flat" /> Taman Bermain
-							                        <br/><br/>
-												</div>
-											</div>
-					                    </p>
+										<select id="fasilitas" name="fasilitas" class="form-control col-md-7 col-xs-12">
+											<option value="">Pilih..</option>
+											<?php $v = 0; for ($i = count($criteria->config['fasilitas']['values']) - 1; $i >= 0; $i--): ?>
+												<?php if ($criteria->config['fasilitas']['values'][$i]['min'] == null): ?>
+													<option value="<?= ++$v ?>"><?= '< ' . $criteria->config['fasilitas']['values'][$i]['max'] . ' (' . $criteria->config['fasilitas']['values'][$i]['label'] . ')' ?></option>
+												<?php elseif ($criteria->config['fasilitas']['values'][$i]['max'] == null): ?>
+													<option value="<?= ++$v ?>"><?= '> ' . $criteria->config['fasilitas']['values'][$i]['min'] . ' (' . $criteria->config['fasilitas']['values'][$i]['label'] . ')' ?></option>
+												<?php else: ?>
+													<option value="<?= ++$v ?>"><?= $criteria->config['fasilitas']['values'][$i]['min'] . ' - ' . $criteria->config['fasilitas']['values'][$i]['max'] . ' (' . $criteria->config['fasilitas']['values'][$i]['label'] . ')' ?></option>
+												<?php endif; ?>
+											<?php endfor; ?>
+										</select>
 									</div>
 								</div>
+
 								<div class="item form-group">
 									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="ekstrakurikuler">Ekstrakurikuler</label>
 									<div class="col-md-9 col-sm-9 col-xs-12">
-										<p style="padding: 5px;">
-											<div class="row">
-												<div class="col-md-6">
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler1" value="Robotic" class="flat" /> Robotic
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler2" value="Panahan" class="flat" /> Panahan
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler3" value="Marching Band" class="flat" /> Marching Band
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler4" value="Berenang" class="flat" /> Berenang
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler5" value="Multimedia Club" class="flat" /> Multimedia Club
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler6" value="Tenis Meja" class="flat" /> Tenis Meja
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler7" value="Tilawah Qur`an" class="flat" /> Tilawah Qur`an
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler8" value="Da`i Cilik" class="flat" /> Da`i Cilik
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler9" value="Public Speaking" class="flat" /> Public Speaking
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler10" value="Training" class="flat" /> Training
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler11" value="Melukis" class="flat" /> Melukis
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler12" value="Teater" class="flat" /> Teater
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler25" value="Mewarnai" class="flat" /> Mewarnai
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler26" value="Seni Tari" class="flat" /> Seni Tari
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler27" value="Karate" class="flat" /> Karate
-							                        <br/><br/>
-												</div>
-
-												<div class="col-md-6">
-													<input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler13" value="Catur" class="flat" /> Catur
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler14" value="Arabic Club" class="flat" /> Arabic Club
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler15" value="Tahfidz Al-Qur`an" class="flat" /> Tahfidz Al-Qur`an
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler16" value="Tahsin Al-Qur`an" class="flat" /> Tahsin Al-Qur`an
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler17" value="Paskibra" class="flat" /> Paskibra
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler18" value="Komputer" class="flat" /> Komputer
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler19" value="Grup Seni Islam" class="flat" /> Grup Seni Islam
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler20" value="Taekwondo" class="flat" /> Taekwondo
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler21" value="Pencak Silat" class="flat" /> Pencak Silat
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler22" value="Seni Musik" class="flat" /> Seni Musik
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler23" value="Futsal" class="flat" /> Futsal
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler24" value="PMR" class="flat" /> PMR
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler28" value="Pramuka" class="flat" /> Pramuka
-							                        <br/><br/>
-
-							                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler29" value="English Club" class="flat" /> English Club
-							                        <br/><br/>
-												</div>
-											</div>
-					                    </p>
+										<select id="ekstrakurikuler" name="ekstrakurikuler" class="form-control col-md-7 col-xs-12">
+											<option value="">Pilih..</option>
+											<?php $v = 0; for ($i = count($criteria->config['ekstrakurikuler']['values']) - 1; $i >= 0; $i--): ?>
+												<?php if ($criteria->config['ekstrakurikuler']['values'][$i]['min'] == null): ?>
+													<option value="<?= ++$v ?>"><?= '< ' . $criteria->config['ekstrakurikuler']['values'][$i]['max'] . ' (' . $criteria->config['ekstrakurikuler']['values'][$i]['label'] . ')' ?></option>
+												<?php elseif ($criteria->config['ekstrakurikuler']['values'][$i]['max'] == null): ?>
+													<option value="<?= ++$v ?>"><?= '> ' . $criteria->config['ekstrakurikuler']['values'][$i]['min'] . ' (' . $criteria->config['ekstrakurikuler']['values'][$i]['label'] . ')' ?></option>
+												<?php else: ?>
+													<option value="<?= ++$v ?>"><?= $criteria->config['ekstrakurikuler']['values'][$i]['min'] . ' - ' . $criteria->config['ekstrakurikuler']['values'][$i]['max'] . ' (' . $criteria->config['ekstrakurikuler']['values'][$i]['label'] . ')' ?></option>
+												<?php endif; ?>
+											<?php endfor; ?>
+										</select>
 									</div>
 								</div>
+
 								<div class="item form-group">
 									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="lokasi">Lokasi</label>
 									<div class="col-md-9 col-sm-9 col-xs-12">
@@ -286,7 +150,30 @@
 					                    </p>
 									</div>
 								</div>
-		                      
+								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="jarak">Jarak</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<select id="jarak" name="jarak" class="form-control col-md-7 col-xs-12">
+											<option value="">Pilih..</option>
+											<?php $v = 0; for ($i = count($criteria->config['jarak']['values']) - 1; $i >= 0; $i--): ?>
+												<?php if ($criteria->config['jarak']['values'][$i]['min'] == null): ?>
+													<option value="<?= $criteria->config['jarak']['values'][$i]['value'] ?>"><?= '< ' . $criteria->config['jarak']['values'][$i]['max'] . ' (' . $criteria->config['jarak']['values'][$i]['label'] . ')' ?></option>
+												<?php elseif ($criteria->config['jarak']['values'][$i]['max'] == null): ?>
+													<option value="<?= $criteria->config['jarak']['values'][$i]['value'] ?>"><?= '> ' . $criteria->config['jarak']['values'][$i]['min'] . ' (' . $criteria->config['jarak']['values'][$i]['label'] . ')' ?></option>
+												<?php else: ?>
+													<option value="<?= $criteria->config['jarak']['values'][$i]['value'] ?>"><?= $criteria->config['jarak']['values'][$i]['min'] . ' - ' . $criteria->config['jarak']['values'][$i]['max'] . ' (' . $criteria->config['jarak']['values'][$i]['label'] . ')' ?></option>
+												<?php endif; ?>
+											<?php endfor; ?>
+										</select>
+									</div>
+								</div>
+
+								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="lokasi_sekolah">Peta <span id="jarak"></span></label>
+									<input id="pac-input" class="controls" type="text" placeholder="Cari Lokasi"/>
+									<div id="map" style="height: 250px;"></div>
+								</div>
+
 								<div class="ln_solid"></div>
 								<div class="form-group">
 									<div class="col-md-6 col-md-offset-3">
@@ -316,7 +203,7 @@
 													}
 													$foto = array_values(array_diff($foto, ['.', '..']));
 												?>
-												<a href="<?= base_url('admin/detail-sekolah/' . $row['id']) ?>">
+												<a href="<?= base_url('user/detail-sekolah/' . $row['id']) ?>">
 													<div class="w-clearfix w-preserve-3d promo-card">
 														<img width="100%" height="200" src="<?= isset($foto[0]) ? base_url($path . '/' . $foto[0]) : 'http://placehold.it/313x313' ?>">
 														<div class="blog-bar color-pink"></div>
@@ -340,38 +227,6 @@
 	</div>
 </div>
 
-<div class="modal fade" id="modal" tabindex="-1" role="basic" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Atur Bobot Kriteria Pencarian</h4>
-            </div>
-            <div class="modal-body">
-            	<?php 
-            		$bobot = [1, 2, 3, 4, 5];
-            		foreach ($kriteria as $row): 
-            	?>
-            		<div class="form-group">
-						<label class="control-label" for="<?= $row->key ?>"><?= $row->kriteria ?></label>
-						<select class="form-control" name="<?= $row->key ?>" id="bobot_<?= $row->key ?>">
-							<?php foreach ($bobot as $b): ?>
-								<option value="<?= $b ?>"><?= $b ?></option>
-							<?php endforeach; ?>
-						</select>
-					</div>
-            	<?php endforeach; ?>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                <button type="button" class="btn green" onclick="atur_bobot();" data-dismiss="modal">Save changes</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-
 <!-- PNotifyy -->
 <script src="<?= base_url('assets') ?>/vendors/pnotify/dist/pnotify.js"></script>
 <script src="<?= base_url('assets') ?>/vendors/pnotify/dist/pnotify.buttons.js"></script>
@@ -379,7 +234,143 @@
 <script src="<?= base_url('assets') ?>/vendors/iCheck/icheck.min.js"></script>
 
 <script type="text/javascript">
-	let aturBobot = false;
+	// koordinat palembang
+	var lat = -2.990934;
+	var lng = 104.7754;
+
+	function initMap() {
+		
+
+		let map = new google.maps.Map(document.getElementById('map'), {
+			center: {lat: lat, lng: lng},
+			zoom: 12
+		});
+
+		let input = document.getElementById('pac-input');
+        let searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        let markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          let places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          let bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+              map: map,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+
+            $('input[name=latitude]').val(place.geometry.location.lat);
+			$('input[name=longitude]').val(place.geometry.location.lng);
+          });
+          map.fitBounds(bounds);
+        });
+
+        function setMarker(latLng) {
+        	// Clear out the old markers.
+			markers.forEach(function(marker) {	
+				marker.setMap(null);
+			});
+			markers = [];
+
+			// Create a marker for each place.
+            markers.push(new google.maps.Marker({
+				map: map,
+				position: latLng
+            }));
+        }
+
+        if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				let pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+				lat = pos.lat;
+				lng = pos.lng;
+				setMarker(pos);
+				cari();
+			});
+		}
+		else {
+			let pos = {
+				lat: lat,
+				lng: lng
+			};
+			setMarker(pos);
+		}
+
+		// let unsriLocation = new google.maps.LatLng(-2.986570, 104.731808);
+  //       let request = {
+  //       	origin: { lat: lat, lng: lng },
+  //       	destination: unsriLocation,
+  //       	travelMode: google.maps.TravelMode.DRIVING
+  //       };
+
+  //       let directionService = new google.maps.DirectionsService();
+  //       directionService.route(request, function(response, status) {
+  //       	$('#jarak').text('(' + (response.routes[0].legs[0].distance.value / 1000).toString().replace('.', ',') + ' km)');
+  //       });
+        
+
+        map.addListener('click', function(e) {
+        	let clickedLat = e.latLng.lat();
+        	let clickedLng = e.latLng.lng();
+        	
+        	request = {
+	        	origin: { lat: clickedLat, lng: clickedLng },
+	        	destination: unsriLocation,
+	        	travelMode: google.maps.TravelMode.DRIVING
+	        };
+
+	        directionService.route(request, function(response, status) {
+	        	$('#jarak').text('(' + (response.routes[0].legs[0].distance.value / 1000).toString().replace('.', ',') + ' km)');
+	        });
+
+        	setMarker({ lat: clickedLat, lng: clickedLng });
+        	lat = clickedLat;
+        	lng = clickedLng;
+        	cari();
+        });
+	}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV1CNPBI4qy_Wr5jDjKe0Pb40u9Tn27UA&libraries=places&callback=initMap&libraries=places&sensor=false&language=id" async defer></script>
+
+<script type="text/javascript">
 	let bobot = {};
 
 	function atur_bobot() {
@@ -393,23 +384,21 @@
 	}
 
 	function cari() {
-		if (!aturBobot) {
-			alert('Anda harus mengatur bobot pencarian terlebih dahulu');
-			return;
-		}
-
 		const data = {
 			cari: true,
 			biaya_masuk: $('#biaya_masuk').val(),
 			spp_bulanan: $('#spp_bulanan').val(),
 			akreditasi: $('#akreditasi').val(),
-			fasilitas: get_checkbox_values('fasilitas[]') || [],
-			ekstrakurikuler: get_checkbox_values('ekstrakurikuler') || [],
-			lokasi: get_checkbox_values('lokasi') || []
+			fasilitas: $('#fasilitas').val(),
+			ekstrakurikuler: $('#ekstrakurikuler').val(),
+			lokasi: get_checkbox_values('lokasi') || [],
+			lat: lat,
+			lng: lng,
+			jarak: $('#jarak').val()
 		};
 
 		<?php foreach ($kriteria as $row): ?>
-			data['bobot_<?= $row->key ?>'] = bobot['<?= $row->key ?>'];
+			data['bobot_<?= $row->key ?>'] = <?= $row->bobot ?>;
 		<?php endforeach; ?>
 
 		$.ajax({
@@ -421,25 +410,30 @@
 				$('#loader').css('display', 'block');
 			},
 			success: function(response) {
+				console.log(response);
 				let json = $.parseJSON(response);
+				let data = json.rank;
+				let session = json.session;
+				console.log(json);
+
 				$('#result').css('display', 'block');
 				$('#loader').css('display', 'none');
 
 				let html = '';
-				for (let i = 0; i < json.length; i++) {
-					html += '<a href="<?= base_url('app/detail-sekolah') ?>/' + json[i].id + '">' +
+				for (let i = 0; i < data.length; i++) {
+					html += '<a href="<?= base_url('app/detail-sekolah') ?>/' + data[i].id + '">' +
 						'<div class="w-clearfix w-preserve-3d promo-card">' +
-								'<img width="100%" height="200" src="' + json[i].foto + '">' +
+								'<img width="100%" height="200" src="' + data[i].foto + '">' +
 								'<div class="blog-bar color-pink"></div>' +
 								'<div class="blog-post-text">' +
-									json[i].nama_sekolah +
-									'<div class="blog-description pink-text">' + json[i].biaya_masuk + '</div>' +
+									data[i].nama_sekolah +
+									'<div class="blog-description pink-text">' + data[i].biaya_masuk + '</div>' +
 								'</div>' +
 							'</div>' +
 						'</a>';
 				}
 
-				$('#result').html((json.length > 0 ? html : '<p>No results found</p>'));
+				$('#result').html((data.length > 0 ? html : '<p>No results found</p>'));
 			},
 			error: function(error) { 
 				console.log(error.responseText); 
@@ -452,4 +446,5 @@
 	function get_checkbox_values(name) {
 		return $('input[name="' + name + '"]:checked').map(function() { return $(this).val(); }).get();
 	}
+	
 </script>

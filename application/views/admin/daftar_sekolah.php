@@ -24,6 +24,7 @@
                                 <th style="text-align: center;">Nama Sekolah</th>
                                 <th style="text-align: center;">Akreditasi</th>
                                 <th style="text-align: center;">Alamat</th>
+                                <th style="text-align: center;">Status</th>
                                 <th style="text-align: center;">Aksi</th>
                             </tr>
                         </thead>
@@ -48,6 +49,7 @@
                                     <td align="middle" style="vertical-align: middle;"><?= $row->nama_sekolah ?></td>
                                     <td align="middle" style="vertical-align: middle;"><?= $row->akreditasi ?></td>
                                     <td align="middle" style="vertical-align: middle;"><?= $row->alamat ?></td>
+                                    <td align="middle" style="vertical-align: middle;"><?= $row->valid == 1 ? 'Terverifikasi' : 'Belum Terverifikasi' ?></td>
                                     <td align="middle" style="vertical-align: middle;">
                                         <a href="<?= base_url('admin/detail-sekolah/' . $row->id) ?>" type="button" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Detail</a>
                                         <a href="<?= base_url('admin/edit-sekolah/' . $row->id) ?>" type="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>Edit</a>

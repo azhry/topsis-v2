@@ -73,7 +73,8 @@ class Topsis
 			return $result;
 		}, $this->result);
 
-		$_SESSION['normalized_result'] = $this->normalized_result;
+		$_SESSION['unormalized_result']	= $this->result;
+		$_SESSION['normalized_result'] 	= $this->normalized_result;
 
 		return $this->normalized_result;
 	}

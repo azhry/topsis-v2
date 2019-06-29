@@ -23,7 +23,7 @@
                                     }
                                     $foto = array_values(array_diff($foto, ['.', '..']));
                                 ?>
-                                <a href="<?= base_url('app/detail-sekolah/' . $row['id']) ?>">
+                                <a href="<?= base_url('user/detail-sekolah/' . $row['id']) ?>">
                                     <div class="w-clearfix w-preserve-3d promo-card" style="display: inline-block !important; margin: 10px;">
                                         <img width="100%" height="200" src="<?= isset($foto[0]) ? base_url($path . '/' . $foto[0]) : 'http://placehold.it/313x313' ?>">
                                         <div class="blog-bar color-pink"></div>

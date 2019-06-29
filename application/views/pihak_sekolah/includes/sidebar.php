@@ -15,15 +15,15 @@
                         <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
                         <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                             <li class="nav-item">
-                                <a href="<?= base_url('app') ?>" class="nav-link nav-toggle">
+                                <a href="<?= base_url('pihak-sekolah') ?>" class="nav-link nav-toggle">
                                     <i class="icon-home"></i>
                                     <span class="title">Dashboard</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url('app/cari') ?>" class="nav-link nav-toggle">
-                                    <i class="fa fa-search"></i>
-                                    <span class="title">Cari Sekolah</span>
+                                <a href="<?= base_url('pihak-sekolah/edit-sekolah') ?>" class="nav-link nav-toggle">
+                                    <i class="fa fa-list"></i>
+                                    <span class="title">Edit Data Sekolah</span>
                                 </a>
                             </li>
                         </ul>

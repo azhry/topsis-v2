@@ -7,6 +7,7 @@
 					<h3>Detail Informasi Sekolah</h3>
 				</div>
 				<div class="x_content">
+					<?= $this->session->flashdata('msg') ?>
 					<div class="row">
 						<div class="col-md-5">
 							<div class="demo">
@@ -121,6 +122,19 @@
 										</td>
 										<td><?= $sekolah->telepon ?></td>
 									</tr>
+									<?php if ($sekolah->valid == 0): ?>
+									<tr>
+										<td></td>
+										<td>
+											<a class="btn btn-success" href="<?= base_url('admin/verifikasi-sekolah/' . $sekolah->id ) ?>">Verifikasi</a>
+										</td>
+									</tr>
+									<?php else: ?>
+									<tr>
+										<td><b>Status</b></td>
+										<td>Terverifikasi</td>
+									</tr>
+									<?php endif; ?>
 								</tbody>
 							</table>
 						</div>

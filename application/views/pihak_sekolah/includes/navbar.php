@@ -23,7 +23,7 @@
                                         <?php if ($id_role == 1): ?>
                                         <a href="<?= base_url('admin/profil') ?>">
                                         <?php else: ?>
-                                        <a href="<?= base_url('user/profil') ?>">
+                                        <a href="<?= base_url('pihak-sekolah/profil') ?>">
                                         <?php endif; ?>
                                             <i class="icon-user"></i> Profil
                                         </a>

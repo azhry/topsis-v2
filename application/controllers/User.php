@@ -161,7 +161,7 @@ class User extends MY_Controller
 
 		$this->data['sekolah']		= json_decode(json_encode($this->sekolah_m->get()), true);
 		
-		$matrix = $this->topsis->fit($this->data['sekolah'], ['nama_sekolah', 'id', 'alamat', 'latitude', 'longitude', 'telepon', 'created_at', 'updated_at']);
+		$matrix = $this->topsis->fit($this->data['sekolah'], ['nama_sekolah', 'id', 'alamat', 'latitude', 'longitude', 'telepon', 'created_at', 'updated_at', 'id_user']);
 		$weight = $this->topsis->weight();
 		$distance = $this->topsis->solution_distance();
 		$rank = $this->topsis->rank();
