@@ -135,7 +135,7 @@ class App extends MY_Controller
 
 				$biaya_masuk = $this->POST('biaya_masuk');
 				$range_masuk = $range['biaya_masuk'];
-                $cond .= '(biaya_masuk >= ' . $range_masuk[count($range_masuk) - $biaya_masuk]['min'] . ' OR biaya_masuk <= ' . $range_masuk[count($range_masuk) - $biaya_masuk]['max'] . ') ';
+                $cond .= '(biaya_masuk >= ' . $range_masuk[count($range_masuk) - $biaya_masuk]['min'] . ' AND biaya_masuk <= ' . $range_masuk[count($range_masuk) - $biaya_masuk]['max'] . ') ';
 			}
 
 			if (!empty($this->POST('spp_bulanan')))
@@ -402,13 +402,22 @@ class App extends MY_Controller
 		$lonFrom = deg2rad($longitudeFrom);
 		$latTo = deg2rad($latitudeTo);
 		$lonTo = deg2rad($longitudeTo);
-
+	
 		$lonDelta = $lonTo - $lonFrom;
 		$a = pow(cos($latTo) * sin($lonDelta), 2) +
 		pow(cos($latFrom) * sin($latTo) - sin($latFrom) * cos($latTo) * cos($lonDelta), 2);
 		$b = sin($latFrom) * sin($latTo) + cos($latFrom) * cos($latTo) * cos($lonDelta);
 
 		$angle = atan2(sqrt($a), $b);
-		return $angle * $earthRadius;
+		return $angle * $earthRadius; 
+		
+		/*
+		$latDelta = $latTo - $latFrom;
+		$a = pow(sin($latDelta/2), 2);
+		$a += cos(deg2rad($latTo)) * cos(deg2rad($latTo)) * pow(sin(deg2rad($lonDelta/29)), 2);
+		$c = 2 * atan2(sqrt($a), sqrt(1-$a)); 
+
+		$distance = 2 * $earthRadius * $c;
+		return $distance; */
 	}
 }
