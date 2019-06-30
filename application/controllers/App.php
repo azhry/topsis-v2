@@ -230,12 +230,12 @@ class App extends MY_Controller
 			$this->data['sekolah']	= $this->sekolah_m->get($cond);
 			$lat = $this->POST('lat');
 			$lng = $this->POST('lng');
-			// $this->data['sekolah']	= array_map(function($sekolah) use ($lat, $lng) {
+			$this->data['sekolah']	= array_map(function($sekolah) use ($lat, $lng) {
 
-			// 	$sekolah->jarak = $this->vincentyGreatCircleDistance($lat, $lng, $sekolah->latitude, $sekolah->longitude) / 1000; // convert meter to kilometer
-			// 	return $sekolah;
+				$sekolah->jarak = $this->vincentyGreatCircleDistance($lat, $lng, $sekolah->latitude, $sekolah->longitude) / 1000; // convert meter to kilometer
+				return $sekolah;
 
-			// }, $this->data['sekolah']);
+			}, $this->data['sekolah']);
 			
 			$fasilitas 			= $this->POST('fasilitas');
 			$ekstrakurikuler 	= $this->POST('ekstrakurikuler');
