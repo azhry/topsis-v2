@@ -16,7 +16,7 @@
                         <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                             <li class="nav-item">
                                 <a href="<?= base_url('pihak-sekolah') ?>" class="nav-link nav-toggle">
-                                    <i class="icon-home"></i>
+                                    <i class="fa fa-home"></i>
                                     <span class="title">Dashboard</span>
                                 </a>
                             </li>

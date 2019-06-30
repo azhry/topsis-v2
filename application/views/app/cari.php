@@ -50,7 +50,7 @@
 								<!-- <button class="btn yellow btn-xs" type="button" data-toggle="modal" href="#perhitungan">Tampilkan Perhitungan</button> -->
 							</div>
 							<br><br>
-							<?= form_open_multipart('user/rank', ['class' => 'form-horizontal form-label-left']) ?>
+							<?= form_open_multipart('app/rank', ['class' => 'form-horizontal form-label-left']) ?>
 								<div class="item form-group">
 									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="akreditasi">Akreditasi</label>
 									<div class="col-md-9 col-sm-9 col-xs-12">
@@ -203,7 +203,7 @@
 													}
 													$foto = array_values(array_diff($foto, ['.', '..']));
 												?>
-												<a href="<?= base_url('user/detail-sekolah/' . $row['id']) ?>">
+												<a href="<?= base_url('app/detail-sekolah/' . $row['id']) ?>">
 													<div class="w-clearfix w-preserve-3d promo-card">
 														<img width="100%" height="200" src="<?= isset($foto[0]) ? base_url($path . '/' . $foto[0]) : 'http://placehold.it/313x313' ?>">
 														<div class="blog-bar color-pink"></div>
