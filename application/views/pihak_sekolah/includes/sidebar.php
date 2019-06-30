@@ -23,7 +23,7 @@
                             <li class="nav-item">
                                 <a href="<?= base_url('pihak-sekolah/edit-sekolah') ?>" class="nav-link nav-toggle">
                                     <i class="fa fa-list"></i>
-                                    <span class="title">Edit Data Sekolah</span>
+                                    <span class="title">Data Sekolah</span>
                                 </a>
                             </li>
                         </ul>
