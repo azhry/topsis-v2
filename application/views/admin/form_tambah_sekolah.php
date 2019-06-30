@@ -273,6 +273,14 @@
 					</div>
 
 					<div class="item form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="jarak">Jarak (km)  <span class="required">*</span>
+						</label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<input id="nama_sekolahjarak" class="form-control col-md-7 col-xs-12" data-validate-length-range="2" name="jarak" required="required" type="text"/>
+						</div>
+					</div>
+
+					<div class="item form-group">
 						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="lokasi_sekolah">Lokasi Sekolah <span class="required">*</span></label>
 						<input id="pac-input" class="controls" type="text" placeholder="Cari Lokasi"/>
 						<div id="map" style="height: 250px;"></div>

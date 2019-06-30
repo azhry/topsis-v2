@@ -15,7 +15,7 @@ class App extends MY_Controller
 	public function index()
 	{
 		$this->load->model('sekolah_m');
-		$this->data['sekolah']	= $this->sekolah_m->get();
+		$this->data['sekolah']	= $this->sekolah_m->get(['valid' => 1]);
 		$this->data['title']	= 'Dashboard';
 		$this->data['content']	= 'dashboard';
 		$this->template($this->data, $this->module);
@@ -104,7 +104,7 @@ class App extends MY_Controller
 
 		$this->data['config']	= $this->data['criteria']->get_config();
 
-		$this->data['sekolah']		= json_decode(json_encode($this->sekolah_m->get()), true);
+		$this->data['sekolah']		= json_decode(json_encode($this->sekolah_m->get(['valid' => 1])), true);
 		
 		$matrix = $this->topsis->fit($this->data['sekolah'], ['nama_sekolah', 'id', 'alamat', 'latitude', 'longitude', 'telepon', 'created_at', 'updated_at', 'id_user', 'valid']);
 		$weight = $this->topsis->weight();
@@ -124,20 +124,25 @@ class App extends MY_Controller
 		{
 			$this->load->model('sekolah_m');
 			$range = $this->sekolah_m->get_range();
-			$cond = '';
+			$cond = 'valid = 1 ';
 			
 			if (!empty($this->POST('biaya_masuk')))
 			{
+				if (strlen($cond) > 0)
+				{
+					$cond .= 'OR ';
+				}
+
 				$biaya_masuk = $this->POST('biaya_masuk');
 				$range_masuk = $range['biaya_masuk'];
-                $cond .= '(biaya_masuk >= ' . $range_masuk[count($range_masuk) - $biaya_masuk]['min'] . ' AND biaya_masuk <= ' . $range_masuk[count($range_masuk) - $biaya_masuk]['max'] . ') ';
+                $cond .= '(biaya_masuk >= ' . $range_masuk[count($range_masuk) - $biaya_masuk]['min'] . ' OR biaya_masuk <= ' . $range_masuk[count($range_masuk) - $biaya_masuk]['max'] . ') ';
 			}
 
 			if (!empty($this->POST('spp_bulanan')))
 			{
 				if (strlen($cond) > 0)
 				{
-					$cond .= 'AND ';
+					$cond .= 'OR ';
 				}
 
 				$spp_bulanan = $this->POST('spp_bulanan');
@@ -149,7 +154,7 @@ class App extends MY_Controller
 			{
 				if (strlen($cond) > 0)
 				{
-					$cond .= 'AND ';
+					$cond .= 'OR ';
 				}
 
 				$akreditasi = $this->POST('akreditasi');
@@ -161,7 +166,7 @@ class App extends MY_Controller
 			{
 				if (strlen($cond) > 0)
 				{
-					$cond .= 'AND ';
+					$cond .= 'OR ';
 				}
 
 				$i = 0;
@@ -171,7 +176,7 @@ class App extends MY_Controller
 					$cond .= 'lokasi LIKE "%' . $row . '%"';
 					if ($i++ < $len_lokasi - 1)
 					{
-						$cond .= ' AND ';
+						$cond .= ' OR ';
 					}
 				}
 				$cond .= ') ';
@@ -225,12 +230,12 @@ class App extends MY_Controller
 			$this->data['sekolah']	= $this->sekolah_m->get($cond);
 			$lat = $this->POST('lat');
 			$lng = $this->POST('lng');
-			$this->data['sekolah']	= array_map(function($sekolah) use ($lat, $lng) {
+			// $this->data['sekolah']	= array_map(function($sekolah) use ($lat, $lng) {
 
-				$sekolah->jarak = $this->vincentyGreatCircleDistance($lat, $lng, $sekolah->latitude, $sekolah->longitude) / 1000; // convert meter to kilometer
-				return $sekolah;
+			// 	$sekolah->jarak = $this->vincentyGreatCircleDistance($lat, $lng, $sekolah->latitude, $sekolah->longitude) / 1000; // convert meter to kilometer
+			// 	return $sekolah;
 
-			}, $this->data['sekolah']);
+			// }, $this->data['sekolah']);
 			
 			$fasilitas 			= $this->POST('fasilitas');
 			$ekstrakurikuler 	= $this->POST('ekstrakurikuler');

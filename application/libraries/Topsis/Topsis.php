@@ -91,7 +91,7 @@ class Topsis
 			}
 			return $result;
 		}, $this->normalized_result);
-
+		$_SESSION['weighted_result'] = $this->weighted_result;
 		return $this->weighted_result;
 	}
 

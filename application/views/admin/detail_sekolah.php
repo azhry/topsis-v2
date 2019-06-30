@@ -118,6 +118,12 @@
 									</tr>
 									<tr>
 										<td>
+											<b>Jarak</b>
+										</td>
+										<td><?= $sekolah->jarak ?> km</td>
+									</tr>
+									<tr>
+										<td>
 											<b>Telepon</b>
 										</td>
 										<td><?= $sekolah->telepon ?></td>
