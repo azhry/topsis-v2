@@ -82,7 +82,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <input type="submit" name="login" value="Login" class="btn green pull-right">
                 </div>
                 <div class="form-actions">
-                    <a href="<?= base_url('app') ?>" class="pull-left">Go to App</a>
+                    <a href="<?= base_url('app') ?>" class="pull-left">Menuju Halaman Utama</a>
                 </div>
             <?= form_close() ?>
             <!-- END LOGIN FORM -->
