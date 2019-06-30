@@ -61,7 +61,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="content">
             <!-- BEGIN LOGIN FORM -->
             <?= form_open('login') ?>
-                <h3 class="form-title">Login to your account</h3>
+                <h3 class="form-title">Login Ke Akunmu</h3>
                 <?= $this->session->flashdata('msg') ?>
                 <div class="form-group">
                     <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
@@ -82,7 +82,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <input type="submit" name="login" value="Login" class="btn green pull-right">
                 </div>
                 <div class="form-actions">
-                    <a href="<?= base_url('app') ?>" class="pull-left">Go to App</a>
+                    <a href="<?= base_url('app') ?>" class="pull-left">Menuju Halaman Utama</a>
                 </div>
             <?= form_close() ?>
             <!-- END LOGIN FORM -->
