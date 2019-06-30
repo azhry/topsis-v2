@@ -78,7 +78,11 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
                 <div class="form-actions">
                     <a href="<?= base_url('register') ?>" class="pull-left">Register</a>
+
                     <input type="submit" name="login" value="Login" class="btn green pull-right">
+                </div>
+                <div class="form-actions">
+                    <a href="<?= base_url('app') ?>" class="pull-left">Go to App</a>
                 </div>
             <?= form_close() ?>
             <!-- END LOGIN FORM -->
