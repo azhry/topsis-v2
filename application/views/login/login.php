@@ -61,7 +61,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="content">
             <!-- BEGIN LOGIN FORM -->
             <?= form_open('login') ?>
-                <h3 class="form-title">Login to your account</h3>
+                <h3 class="form-title">Login Ke Akunmu</h3>
                 <?= $this->session->flashdata('msg') ?>
                 <div class="form-group">
                     <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
