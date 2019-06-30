@@ -50,7 +50,7 @@
 								<!-- <button class="btn yellow btn-xs" type="button" data-toggle="modal" href="#perhitungan">Tampilkan Perhitungan</button> -->
 							</div>
 							<br><br>
-							<?= form_open_multipart('app/rank', ['class' => 'form-horizontal form-label-left']) ?>
+							<div class="form-horizontal form-label-left">
 								<div class="item form-group">
 									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="akreditasi">Akreditasi</label>
 									<div class="col-md-9 col-sm-9 col-xs-12">
@@ -182,7 +182,7 @@
 										</a>
 									</div>
 								</div>
-		                    <?= form_close() ?>
+							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="promotion-section">
