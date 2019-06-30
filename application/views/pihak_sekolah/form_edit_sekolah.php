@@ -9,7 +9,7 @@
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<div class="x_panel">
 				<div class="x_title">
-	                <h2>Edit Informasi Sekolah</h2>
+	                <h2>Informasi Sekolah</h2>
 	            </div>
 				<div class="x_content">
 					<?= form_open_multipart('pihak-sekolah/edit-sekolah', ['class' => 'form-horizontal form-label-left']) ?>

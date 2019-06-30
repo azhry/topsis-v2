@@ -157,11 +157,11 @@
 											<option value="">Pilih..</option>
 											<?php $v = 0; for ($i = count($criteria->config['jarak']['values']) - 1; $i >= 0; $i--): ?>
 												<?php if ($criteria->config['jarak']['values'][$i]['min'] == null): ?>
-													<option value="<?= $criteria->config['jarak']['values'][$i]['value'] ?>"><?= '< ' . $criteria->config['jarak']['values'][$i]['max'] . ' (' . $criteria->config['jarak']['values'][$i]['label'] . ')' ?></option>
+													<option value="<?= $criteria->config['jarak']['values'][$i]['value'] ?>"><?= '< ' . $criteria->config['jarak']['values'][$i]['max'] . ' km (' . $criteria->config['jarak']['values'][$i]['label'] . ')' ?></option>
 												<?php elseif ($criteria->config['jarak']['values'][$i]['max'] == null): ?>
-													<option value="<?= $criteria->config['jarak']['values'][$i]['value'] ?>"><?= '> ' . $criteria->config['jarak']['values'][$i]['min'] . ' (' . $criteria->config['jarak']['values'][$i]['label'] . ')' ?></option>
+													<option value="<?= $criteria->config['jarak']['values'][$i]['value'] ?>"><?= '> ' . $criteria->config['jarak']['values'][$i]['min'] . ' km (' . $criteria->config['jarak']['values'][$i]['label'] . ')' ?></option>
 												<?php else: ?>
-													<option value="<?= $criteria->config['jarak']['values'][$i]['value'] ?>"><?= $criteria->config['jarak']['values'][$i]['min'] . ' - ' . $criteria->config['jarak']['values'][$i]['max'] . ' (' . $criteria->config['jarak']['values'][$i]['label'] . ')' ?></option>
+													<option value="<?= $criteria->config['jarak']['values'][$i]['value'] ?>"><?= $criteria->config['jarak']['values'][$i]['min'] . ' km - ' . $criteria->config['jarak']['values'][$i]['max'] . ' km (' . $criteria->config['jarak']['values'][$i]['label'] . ')' ?></option>
 												<?php endif; ?>
 											<?php endfor; ?>
 										</select>
@@ -177,9 +177,9 @@
 								<div class="ln_solid"></div>
 								<div class="form-group">
 									<div class="col-md-6 col-md-offset-3">
-										<button type="button" onclick="cari(); return false;" class="btn btn-success">
-											<i class="fa fa-search"></i> Cari
-										</button>
+										<a href="#index" type="button" onclick="cari(); return false;" class="btn btn-success go2top">
+											Cari
+										</a>
 									</div>
 								</div>
 		                    <?= form_close() ?>
@@ -350,15 +350,15 @@
         	let clickedLat = e.latLng.lat();
         	let clickedLng = e.latLng.lng();
         	
-        	request = {
-	        	origin: { lat: clickedLat, lng: clickedLng },
-	        	destination: unsriLocation,
-	        	travelMode: google.maps.TravelMode.DRIVING
-	        };
+        	// request = {
+	        // 	origin: { lat: clickedLat, lng: clickedLng },
+	        // 	destination: { lat: lat, lng: lng },
+	        // 	travelMode: google.maps.TravelMode.DRIVING
+	        // };
 
-	        directionService.route(request, function(response, status) {
-	        	$('#jarak').text('(' + (response.routes[0].legs[0].distance.value / 1000).toString().replace('.', ',') + ' km)');
-	        });
+	        // directionService.route(request, function(response, status) {
+	        // 	$('#jarak').text('(' + (response.routes[0].legs[0].distance.value / 1000).toString().replace('.', ',') + ' km)');
+	        // });
 
         	setMarker({ lat: clickedLat, lng: clickedLng });
         	lat = clickedLat;
@@ -428,12 +428,13 @@
 								'<div class="blog-post-text">' +
 									data[i].nama_sekolah +
 									'<div class="blog-description pink-text">' + data[i].biaya_masuk + '</div>' +
+									'<div class="blog-description blue-text"><small>' + Math.round(data[i].jarak, 2) + ' km</small></div>' +
 								'</div>' +
 							'</div>' +
 						'</a>';
 				}
 
-				$('#result').html((data.length > 0 ? html : '<p>No results found</p>'));
+				$('#result').html((data.length > 0 ? html : '<p>Sekolah Tidak Ditemukan</p>'));
 			},
 			error: function(error) { 
 				console.log(error.responseText); 

@@ -34,7 +34,7 @@
                             </li>
                             <li class="nav-item  ">
                                 <a href="<?= base_url('admin/daftar-pengguna') ?>" class="nav-link nav-toggle">
-                                    <i class="fa fa-users"></i>
+                                    <i class="icon-user"></i>
                                     <span class="title">Data Pengguna</span>
                                 </a>
                             </li>

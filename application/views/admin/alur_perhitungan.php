@@ -32,29 +32,58 @@
                                 </tbody>
                             </table>
 
-                            <h4>Matriks Keputusan Ternormalisasi Terbobot</h4>
-                            <table class="table table-bordered table-hover table-striped" style="width: 100% !important;">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Nama Sekolah</th>
-                                        <?php foreach ($_SESSION['normalized_result'][0] as $key => $value): ?>
-                                            <th><?= $key ?></th>
-                                        <?php endforeach; ?>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($_SESSION['normalized_result'] as $i => $row): ?>
+                            <h4>Matriks Keputusan Ternormalisasi</h4>
+                            <div style="width: 100%; overflow-x: scroll;">
+                                <table class="table table-bordered table-hover table-striped" style="width: 100% !important;">
+                                    <thead>
                                         <tr>
-                                            <td><?= $i + 1 ?></td>
-                                            <td><?= $_SESSION['sekolah'][$i]['nama_sekolah'] ?></td>
-                                            <?php foreach ($row as $k => $cell): ?>
-                                                <td><?= $cell ?></td>
+                                            <th>No.</th>
+                                            <th>Nama Sekolah</th>
+                                            <?php foreach ($_SESSION['normalized_result'][0] as $key => $value): ?>
+                                                <th><?= $key ?></th>
                                             <?php endforeach; ?>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($_SESSION['normalized_result'] as $i => $row): ?>
+                                            <tr>
+                                                <td><?= $i + 1 ?></td>
+                                                <td><?= $_SESSION['sekolah'][$i]['nama_sekolah'] ?></td>
+                                                <?php foreach ($row as $k => $cell): ?>
+                                                    <td><?= $cell ?></td>
+                                                <?php endforeach; ?>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>    
+                            </div>
+                            
+
+                            <h4>Matriks Keputusan Ternormalisasi Terbobot</h4>
+                            <div style="width: 100%; overflow-x: scroll;">
+                                <table class="table table-bordered table-hover table-striped" style="width: 100% !important;">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Nama Sekolah</th>
+                                            <?php foreach ($_SESSION['weighted_result'][0] as $key => $value): ?>
+                                                <th><?= $key ?></th>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($_SESSION['weighted_result'] as $i => $row): ?>
+                                            <tr>
+                                                <td><?= $i + 1 ?></td>
+                                                <td><?= $_SESSION['sekolah'][$i]['nama_sekolah'] ?></td>
+                                                <?php foreach ($row as $k => $cell): ?>
+                                                    <td><?= $cell ?></td>
+                                                <?php endforeach; ?>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
 
                             <h4>Matriks Solusi Ideal</h4>
                             <table class="table table-bordered table-hover table-striped" style="width: 100% !important;">
@@ -132,45 +161,45 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $.ajax({
-            url: '<?= base_url('admin/rank') ?>',
-            type: 'POST',
-            data: data,
-            beforeSend: function() {
-                $('#result').css('display', 'none');
-                $('#loader').css('display', 'block');
-            },
-            success: function(response) {
-                let json = $.parseJSON(response);
-                let data = json.rank;
-                let session = json.session;
-                showCalculation(session);
+        // $.ajax({
+        //     url: '<?= base_url('admin/rank') ?>',
+        //     type: 'POST',
+        //     data: data,
+        //     beforeSend: function() {
+        //         $('#result').css('display', 'none');
+        //         $('#loader').css('display', 'block');
+        //     },
+        //     success: function(response) {
+        //         let json = $.parseJSON(response);
+        //         let data = json.rank;
+        //         let session = json.session;
+        //         showCalculation(session);
 
-                $('#result').css('display', 'block');
-                $('#loader').css('display', 'none');
+        //         $('#result').css('display', 'block');
+        //         $('#loader').css('display', 'none');
 
-                let html = '';
-                for (let i = 0; i < data.length; i++) {
-                    html += '<a href="<?= base_url('user/detail-sekolah') ?>/' + data[i].id + '">' +
-                        '<div class="w-clearfix w-preserve-3d promo-card">' +
-                                '<img width="100%" height="200" src="' + data[i].foto + '">' +
-                                '<div class="blog-bar color-pink"></div>' +
-                                '<div class="blog-post-text">' +
-                                    data[i].nama_sekolah +
-                                    '<div class="blog-description pink-text">' + data[i].biaya_masuk + '</div>' +
-                                '</div>' +
-                            '</div>' +
-                        '</a>';
-                }
+        //         let html = '';
+        //         for (let i = 0; i < data.length; i++) {
+        //             html += '<a href="<?= base_url('user/detail-sekolah') ?>/' + data[i].id + '">' +
+        //                 '<div class="w-clearfix w-preserve-3d promo-card">' +
+        //                         '<img width="100%" height="200" src="' + data[i].foto + '">' +
+        //                         '<div class="blog-bar color-pink"></div>' +
+        //                         '<div class="blog-post-text">' +
+        //                             data[i].nama_sekolah +
+        //                             '<div class="blog-description pink-text">' + data[i].biaya_masuk + '</div>' +
+        //                         '</div>' +
+        //                     '</div>' +
+        //                 '</a>';
+        //         }
 
-                $('#result').html((data.length > 0 ? html : '<p>No results found</p>'));
-            },
-            error: function(error) { 
-                console.log(error.responseText); 
-                $('#result').css('display', 'block');
-                $('#loader').css('display', 'none');    
-            }
-        });
+        //         $('#result').html((data.length > 0 ? html : '<p>No results found</p>'));
+        //     },
+        //     error: function(error) { 
+        //         console.log(error.responseText); 
+        //         $('#result').css('display', 'block');
+        //         $('#loader').css('display', 'none');    
+        //     }
+        // });
     });
     function showCalculation(data) {
         let html = '<h4>Data</h4>' +
