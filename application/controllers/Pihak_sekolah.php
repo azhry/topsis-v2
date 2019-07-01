@@ -23,6 +23,9 @@ class Pihak_sekolah extends MY_Controller
 			$this->flashmsg('Anda harus login sebagai pihak sekolah', 'danger');
 			redirect('login');
 		}
+
+		$this->load->model('pengguna_m');
+		$this->data['pengguna'] = $this->pengguna_m->get_row(['id' => $this->data['id_pengguna']]);
 	}
 
 	public function index()
@@ -206,5 +209,42 @@ class Pihak_sekolah extends MY_Controller
 	public function upload_handler()
 	{
 		require_once(FCPATH . '/assets/jQuery-File-Upload-9.23.0/server/php/index.php');
+	}
+
+	public function send_confirm_email()
+	{
+		$this->data['id'] = $this->input->get('id');
+		if (!isset($this->data['id']))
+		{
+			$this->flashmsg('Required parameter is missing', 'danger');
+			redirect('pihak-sekolah');
+			exit;
+		}
+
+		$this->load->model('pengguna_m');
+		$pengguna = $this->pengguna_m->get_row(['id' => $this->data['id']]);
+		if (!isset($pengguna))
+		{
+			$this->flashmsg('Data not found', 'danger');
+			redirect('pihak-sekolah');
+			exit;
+		}	
+
+		$this->load->library('CI_PHPMailer/ci_phpmailer');
+		try 
+		{
+			// assume you are using gmail
+			$this->ci_phpmailer->setServer('smtp.gmail.com');
+			$this->ci_phpmailer->setAuth('azhryarliansyah@gmail.com', '4kuGanteng');
+			$this->ci_phpmailer->setAlias('sistem@pendidikan.edu', 'Sistem'); // you can use whatever alias you want
+			$this->ci_phpmailer->sendMessage($this->data['pengguna']->email, 'Konfirmasi Email', 'Anda dapat melakukan konfirmasi akun dengan klik link berikut: <a href="' . base_url('register/confirm-email?id=' . $this->data['id']) . '">' . base_url('register/confirm-email?id=' . $this->data['id']) . '</a>');    
+		} 
+		catch (Exception $e)
+		{
+			$this->ci_phpmailer->displayError();
+		}
+
+		$this->flashmsg('Email konfirmasi telah dikirim');
+		redirect('pihak-sekolah');
 	}
 }

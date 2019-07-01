@@ -2,6 +2,12 @@
 <div class="page-fixed-main-content">
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
+			<?= $this->session->flashdata('msg') ?>
+			<?php if (isset($pengguna) && $pengguna->status == 0): ?>
+				<div class="alert alert-warning">
+					Email anda belum dikonfirmasi. Anda dapat melakukan konfirmasi email dengan membuka pesan yang dikirim pada inbox email <b><?= $pengguna->email ?></b>. Klik <a href="<?= base_url('pihak-sekolah/send-confirm-email?id=' . $pengguna->id) ?>">kirim ulang</a> jika ingin mengirim link konfirmasi ulang.
+				</div>
+			<?php endif; ?>
 			<div class="x_panel">
 				<div class="x_title">
 					<h3>Detail Informasi Sekolah</h3>
