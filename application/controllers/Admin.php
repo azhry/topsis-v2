@@ -571,6 +571,7 @@ class Admin extends MY_Controller
 		$this->load->library('Topsis/topsis');
 		$kriteria = $this->kriteria_m->get();
 		$config = [];
+		$exps = [];
 		foreach ($kriteria as $row)
 		{
 			$details = json_decode($row->details, true);
@@ -604,11 +605,15 @@ class Admin extends MY_Controller
 				'weight'	=> $row->bobot,
 				'label'		=> $row->kriteria,
 				'type'		=> $row->type,
+				'exp'		=> $row->exp,
 				'values'	=> $details
 			];
+
+			$exps[$row->key] = $row->exp;
 		}
 
 		$this->topsis->set_config($config);
+		$this->topsis->set_exps($exps);
 		$this->load->model('sekolah_m');
 		
 		$this->data['range']	= $this->sekolah_m->get_range();
@@ -647,6 +652,7 @@ class Admin extends MY_Controller
 		$this->load->library('Topsis/topsis');
 		$kriteria = $this->kriteria_m->get();
 		$config = [];
+		$exps = [];
 		foreach ($kriteria as $row)
 		{
 			$details = json_decode($row->details, true);
@@ -680,10 +686,14 @@ class Admin extends MY_Controller
 				'weight'	=> $row->bobot,
 				'label'		=> $row->kriteria,
 				'type'		=> $row->type,
+				'exp'		=> $row->exp,
 				'values'	=> $details
 			];
+
+			$exps[$row->key] = $row->exp;
 		}
 		$this->topsis->set_config($config);
+		$this->topsis->set_exps($exps);
 		$this->load->model('sekolah_m');
 		
 		$this->data['range']	= $this->sekolah_m->get_range();

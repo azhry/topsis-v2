@@ -99,7 +99,7 @@
                                     <?php foreach ($_SESSION['solution_matrix'] as $key => $value): ?>
                                         <tr>
                                             <td><?= $key ?></td>
-                                            <?php foreach ($row as $k => $cell): ?>
+                                            <?php foreach ($value as $k => $cell): ?>
                                                 <td><?= $cell ?></td>
                                             <?php endforeach; ?>
                                         </tr>

@@ -280,7 +280,7 @@ class App extends MY_Controller
 					$res = ($fasilitas == $f_result);
 				}
 				
-				if ($res && !empty($ekstrakurikuler))
+				if (!empty($ekstrakurikuler))
 				{
 					$c_ekstrakurikuler = count(json_decode($sekolah->ekstrakurikuler)) / JUMLAH_EKSTRAKURIKULER;
 
@@ -313,7 +313,14 @@ class App extends MY_Controller
 						}
 					} 
 
-					$res = ($ekstrakurikuler == $e_result);
+					if (!empty($fasilitas))
+					{
+						$res = $res || ($ekstrakurikuler == $e_result);
+					}
+					else
+					{
+						$res = ($ekstrakurikuler == $e_result);
+					}
 				}
 				
 				if ($res && !empty($jarak))

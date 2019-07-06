@@ -99,7 +99,6 @@ class Topsis
 	{
 		$solution_matrix = $this->solution_matrix($this->weighted_result);
 		$_SESSION['solution_matrix'] = $solution_matrix;
-
 		$this->distance_result = array_map(function($row) use ($solution_matrix) {
 			$positive_sum = $negative_sum = 0;
 			foreach ($row as $key => $value)
@@ -146,7 +145,6 @@ class Topsis
 		{
 			$col = array_column($matrix, $key);
 			$len_col = count($col);
-
 			if ($this->exps != null)
 			{
 				switch ($this->exps[$key])
