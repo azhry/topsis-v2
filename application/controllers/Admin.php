@@ -292,7 +292,8 @@ class Admin extends MY_Controller
 				'lokasi'			=> json_encode($this->POST('lokasi')),
 				'latitude'			=> $this->POST('latitude'),
 				'longitude'			=> $this->POST('longitude'),
-				'jarak'				=> $this->POST('jarak')
+				'jarak'				=> $this->POST('jarak'),
+				'id_user'			=> $this->data['id_pengguna']
 			];
 			$this->sekolah_m->insert($this->data['sekolah']);
 
@@ -353,7 +354,8 @@ class Admin extends MY_Controller
 				'lokasi'			=> json_encode($this->POST('lokasi')),
 				'latitude'			=> $this->POST('latitude'),
 				'longitude'			=> $this->POST('longitude'),
-				'jarak'				=> $this->POST('jarak')
+				'jarak'				=> $this->POST('jarak'),
+				'id_user'			=> $this->data['id_pengguna']
 			];
 			$this->sekolah_m->update($this->data['id'], $this->data['sekolah']);
 
