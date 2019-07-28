@@ -221,6 +221,11 @@ class App extends MY_Controller
 					$cond .= '(';
 					foreach ($this->data['filter']['fasilitas'] as $akses)
 					{
+						if ($akses == 'Mushola / Masjid')
+						{
+							$akses = 'Mushola';
+						}
+						
 						$cond .= 'fasilitas LIKE "%' . $akses . '%"';
 						if ($i++ < $len_fasilitas - 1)
 						{
