@@ -65,75 +65,25 @@
 							<p style="padding: 5px;">
 								<div class="row">
 									<div class="col-md-6">
-										<input type="checkbox" name="fasilitas[]" id="fasilitas1" value="Auditorium" data-parsley-mincheck="1" class="flat" /> Auditorium
-				                        <br/><br/>
+										<?php 
+											$detail_fasilitas = json_decode($fasilitas->details);
+											for ($i = 0; $i < count($detail_fasilitas) / 2; $i++): 
+										?>
+											<input type="checkbox" name="fasilitas[]" id="fasilitas<?= $i + 1 ?>" value="<?= $detail_fasilitas[$i]->label ?>" data-parsley-mincheck="1" class="flat" /> <?= $detail_fasilitas[$i]->label ?>
+				                        	<br/><br/>
 
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas2" value="Kolam Renang" class="flat" /> Kolam Renang
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas3" value="Konsultasi Psikologi" class="flat" /> Konsultasi Psikologi
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas4" value="Katering" class="flat" /> Katering
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas5" value="Antar Jemput Anak" class="flat" /> Antar Jemput Anak
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas6" value="Lab. Komputer" class="flat" /> Lab. Komputer
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas7" value="Lab. Multimedia" class="flat" /> Lab. Multimedia
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas8" value="Halaman Parkir" class="flat" /> Halaman Parkir
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas9" value="Aula" class="flat" /> Aula
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas10" value="Mushola / Masjid" class="flat" /> Mushola / Masjid
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas11" value="Perpustakaan" class="flat" /> Perpustakaan
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas12" value="Ruang Kelas Ber-AC" class="flat" /> Ruang Kelas Ber-AC
-				                        <br/><br/>
+										<?php endfor; ?>
 									</div>
 									<div class="col-md-6">
-										<input type="checkbox" name="fasilitas[]" id="fasilitas13" value="Wifi" class="flat" /> Wifi
-				                        <br/><br/>
+										<?php 
+											$detail_fasilitas = json_decode($fasilitas->details);
+											for ($i = count($detail_fasilitas) / 2; $i < count($detail_fasilitas); $i++): 
+										?>
+											<input type="checkbox" name="fasilitas[]" id="fasilitas<?= $i + 1 ?>" value="<?= $detail_fasilitas[$i]->label ?>" data-parsley-mincheck="1" class="flat" /> <?= $detail_fasilitas[$i]->label ?>
+				                        	<br/><br/>
 
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas14" value="Asuransi Kecelakaan" class="flat" /> Asuransi Kecelakaan
-				                        <br/><br/>
+										<?php endfor; ?>
 
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas15" value="CCTV" class="flat" /> CCTV
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas16" value="Pelayanan Kesehatan" class="flat" /> Pelayanan Kesehatan
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas17" value="Lab. Sains" class="flat" /> Lab. Sains
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas18" value="Lab. Matematika" class="flat" /> Lab. Matematika
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas19" value="Koperasi" class="flat" /> Koperasi
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas20" value="Kantin" class="flat" /> Kantin
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas21" value="UKS" class="flat" /> UKS
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas22" value="Lap. Olahraga" class="flat" /> Lap. Olahraga
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="fasilitas[]" id="fasilitas23" value="Taman Bermain" class="flat" /> Taman Bermain
-				                        <br/><br/>
 									</div>
 								</div>
 		                    </p>
@@ -145,100 +95,25 @@
 							<p style="padding: 5px;">
 								<div class="row">
 									<div class="col-md-6">
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler1" value="Robotic" class="flat" /> Robotic
-				                        <br/><br/>
+										<?php 
+											$detail_ekstrakurikuler = json_decode($ekstrakurikuler->details);
+											for ($i = 0; $i < count($detail_ekstrakurikuler) / 2; $i++): 
+										?>
+											<input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler<?= $i + 1 ?>" value="<?= $detail_ekstrakurikuler[$i]->label ?>" data-parsley-mincheck="1" class="flat" /> <?= $detail_ekstrakurikuler[$i]->label ?>
+				                        	<br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler2" value="Panahan" class="flat" /> Panahan
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler3" value="Marching Band" class="flat" /> Marching Band
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler4" value="Berenang" class="flat" /> Berenang
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler5" value="Multimedia Club" class="flat" /> Multimedia Club
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler6" value="Tenis Meja" class="flat" /> Tenis Meja
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler7" value="Tilawah Qur`an" class="flat" /> Tilawah Qur`an
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler8" value="Da`i Cilik" class="flat" /> Da`i Cilik
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler9" value="Public Speaking" class="flat" /> Public Speaking Training
-				                        <br/><br/>
-
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler10" value="Melukis" class="flat" /> Melukis
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler11" value="Teater" class="flat" /> Teater
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler24" value="Mewarnai" class="flat" /> Mewarnai
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler25" value="Seni Tari" class="flat" /> Seni Tari
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler26" value="Karate" class="flat" /> Karate
-				                        <br/><br/>
-										
-										<input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler30" value="Science Club" class="flat" /> Science Club
-				                        <br/><br/>
+										<?php endfor; ?>
 									</div>
-
 									<div class="col-md-6">
-										<input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler12" value="Catur" class="flat" /> Catur
-				                        <br/><br/>
+										<?php 
+											$detail_ekstrakurikuler = json_decode($ekstrakurikuler->details);
+											for ($i = count($detail_ekstrakurikuler) / 2; $i < count($detail_ekstrakurikuler); $i++): 
+										?>
+											<input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler<?= $i + 1 ?>" value="<?= $detail_ekstrakurikuler[$i]->label ?>" data-parsley-mincheck="1" class="flat" /> <?= $detail_ekstrakurikuler[$i]->label ?>
+				                        	<br/><br/>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler13" value="Arabic Club" class="flat" /> Arabic Club
-				                        <br/><br/>
+										<?php endfor; ?>
 
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler14" value="Tahfidz Al-Qur`an" class="flat" /> Tahfidz Al-Qur`an
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler15" value="Tahsin Al-Qur`an" class="flat" /> Tahsin Al-Qur`an
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler16" value="Paskibra" class="flat" /> Paskibra
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler17" value="Komputer" class="flat" /> Komputer
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler18" value="Grup Seni Islam" class="flat" /> Grup Seni Islam
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler19" value="Taekwondo" class="flat" /> Taekwondo
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler20" value="Pencak Silat" class="flat" /> Pencak Silat
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler21" value="Seni Musik" class="flat" /> Seni Musik
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler22" value="Futsal" class="flat" /> Futsal
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler23" value="PMR" class="flat" /> PMR
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler27" value="Pramuka" class="flat" /> Pramuka
-				                        <br/><br/>
-
-				                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler28" value="English Club" class="flat" /> English Club
-				                        <br/><br/>
-										
-										<input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler29" value="Matematika" class="flat" /> Matematika
-				                        <br/><br/>
-										
-										
 									</div>
 								</div>
 		                    </p>
@@ -269,6 +144,19 @@
 									</div>
 								</div>
 		                    </p>
+						</div>
+					</div>
+
+					<div class="item form-group">
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="halaman_parkir">Halaman Parkir <span class="required">*</span></label>
+						<div class="col-md-3 col-sm-3 col-xs-12">
+							<select class="form-control col-md-7 col-xs-12" id="halaman_parkir" name="halaman_parkir" required>
+								<option value="Sangat Luas">Sangat Luas</option>
+								<option value="Luas">Luas</option>
+								<option value="Cukup Luas">Cukup Luas</option>
+								<option value="Tidak Luas">Tidak Luas</option>
+								<option value="Sangat Tidak Luas">Sangat Tidak Luas</option>
+							</select>
 						</div>
 					</div>
 

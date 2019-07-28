@@ -21,7 +21,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url('app/cari') ?>" class="nav-link nav-toggle">
+                                <a href="<?= base_url('app/cari2') ?>" class="nav-link nav-toggle">
                                     <i class="fa fa-search"></i>
                                     <span class="title">Cari Sekolah</span>
                                 </a>

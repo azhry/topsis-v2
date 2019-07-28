@@ -99,7 +99,8 @@ class Pihak_sekolah extends MY_Controller
 				'lokasi'			=> json_encode($this->POST('lokasi')),
 				'latitude'			=> $this->POST('latitude'),
 				'longitude'			=> $this->POST('longitude'),
-				'id_user'			=> $this->data['id_pengguna']
+				'id_user'			=> $this->data['id_pengguna'],
+				'halaman_parkir'	=> $this->POST('halaman_parkir')
 			];
 
 			if (isset($this->data['sekolah']))
@@ -157,6 +158,9 @@ class Pihak_sekolah extends MY_Controller
 			$this->data['lokasi'] 			= [];
 		}
 		
+		$this->load->model('kriteria_m');
+		$this->data['fasilitas_k'] 		= $this->kriteria_m->get_row(['id' => 4]);
+		$this->data['ekstrakurikuler_k'] 	= $this->kriteria_m->get_row(['id' => 5]);
 
 		$this->data['title']	= 'Form Edit Sekolah';
 		$this->data['content']	= 'form_edit_sekolah';

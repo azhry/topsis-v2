@@ -118,6 +118,348 @@ class App extends MY_Controller
 		$this->template($this->data, $this->module);
 	}
 
+	public function append_filter()
+	{
+		if ($this->POST('submit'))
+		{
+			$this->data['filter'] = $this->session->userdata('filter');
+			if (!isset($this->data['filter']))
+			{
+				$this->data['filter'] = [];
+			}
+
+			$currentPage = $this->POST('current_page');
+			switch ($currentPage)
+			{
+				case 0:
+					$this->data['filter']['akreditasi']	= $this->POST('akreditasi');	
+					break;
+
+				case 1:
+					$this->data['filter']['biaya_masuk'] = $this->POST('biaya_masuk');
+					break;
+
+				case 2:
+					$this->data['filter']['spp_bulanan'] = $this->POST('spp_bulanan');
+					break;
+
+				case 3:
+					$this->data['filter']['fasilitas'] = $this->POST('fasilitas');
+					break;
+
+				case 4:
+					$this->data['filter']['ekstrakurikuler'] = $this->POST('ekstrakurikuler');
+					break;
+
+				case 5:
+					$this->data['filter']['lokasi'] = $this->POST('lokasi');
+					break;
+
+				case 6:
+					$this->data['filter']['halaman_parkir'] = $this->POST('halaman_parkir');
+					break;
+
+				case 7:
+					$this->session->set_userdata('lat', $this->POST('lat'));
+					$this->session->set_userdata('lng', $this->POST('lng'));
+					$this->session->set_userdata('d_value', $this->POST('jarak'));
+					$this->data['filter']['jarak'] = $this->POST('jarak');
+					break;
+			}
+
+			$this->session->set_userdata(['filter' => $this->data['filter']]);
+			$this->load->model('sekolah_m');
+			$range = $this->sekolah_m->get_range();
+			$cond = 'valid = 1 ';
+
+			if (isset($this->data['filter']['biaya_masuk']))
+			{
+				if (strlen($cond) > 0)
+				{
+					$cond .= 'AND ';
+				}
+
+				$biaya_masuk = $this->data['filter']['biaya_masuk'];
+				$range_masuk = $range['biaya_masuk'];
+                $cond .= '(biaya_masuk >= ' . $range_masuk[count($range_masuk) - $biaya_masuk]['min'] . ' AND biaya_masuk <= ' . $range_masuk[count($range_masuk) - $biaya_masuk]['max'] . ') ';
+			}
+
+			if (isset($this->data['filter']['spp_bulanan']))
+			{
+				if (strlen($cond) > 0)
+				{
+					$cond .= 'AND ';
+				}
+
+				$spp_bulanan = $this->data['filter']['spp_bulanan'];
+				$range_spp = $range['spp_bulanan'];
+                $cond .= '(spp_bulanan >= ' . $range_spp[count($range_spp) - $spp_bulanan]['min'] . ' AND spp_bulanan <= ' . $range_spp[count($range_spp) - $spp_bulanan]['max'] . ') ';
+			}
+
+			if (isset($this->data['filter']['akreditasi']))
+			{
+				if (strlen($cond) > 0)
+				{
+					$cond .= 'AND ';
+				}
+
+				$akreditasi = $this->data['filter']['akreditasi'];
+                $cond .= 'akreditasi = "' . $akreditasi . '" ';
+			}
+
+			if (isset($this->data['filter']['fasilitas']))
+			{
+				$len_fasilitas = count($this->data['filter']['fasilitas']);
+				if ($len_fasilitas > 0)
+				{
+					if (strlen($cond) > 0)
+					{
+						$cond .= 'AND ';
+					}
+
+					$i = 0;
+					$cond .= '(';
+					foreach ($this->data['filter']['fasilitas'] as $akses)
+					{
+						$cond .= 'fasilitas LIKE "%' . $akses . '%"';
+						if ($i++ < $len_fasilitas - 1)
+						{
+							$cond .= ' AND ';
+						}
+					}
+					$cond .= ') ';
+				}	
+			}
+
+			if (isset($this->data['filter']['ekstrakurikuler']))
+			{
+				$len_ekstrakurikuler = count($this->data['filter']['ekstrakurikuler']);
+				if ($len_ekstrakurikuler > 0)
+				{
+					if (strlen($cond) > 0)
+					{
+						$cond .= 'AND ';
+					}
+
+					$i = 0;
+					$cond .= '(';
+					foreach ($this->data['filter']['ekstrakurikuler'] as $row)
+					{
+						$cond .= 'ekstrakurikuler LIKE "%' . $row . '%"';
+						if ($i++ < $len_ekstrakurikuler - 1)
+						{
+							$cond .= ' AND ';
+						}
+					}
+					$cond .= ') ';
+				}
+			}
+			
+			if (isset($this->data['filter']['lokasi']))
+			{
+				$len_lokasi = count($this->data['filter']['lokasi']);
+				if ($len_lokasi > 0)
+				{
+					if (strlen($cond) > 0)
+					{
+						$cond .= 'AND ';
+					}
+
+					$i = 0;
+					$cond .= '(';
+					foreach ($this->data['filter']['lokasi'] as $row)
+					{
+						$cond .= 'lokasi LIKE "%' . $row . '%"';
+						if ($i++ < $len_lokasi - 1)
+						{
+							$cond .= ' OR ';
+						}
+					}
+					$cond .= ') ';
+				}	
+			}
+
+			if (isset($this->data['filter']['halaman_parkir']))
+			{
+				if (strlen($cond) > 0)
+				{
+					$cond .= 'AND ';
+				}
+
+				$halaman_parkir = $this->data['filter']['halaman_parkir'];
+                $cond .= 'halaman_parkir = "' . $halaman_parkir . '" ';
+			}
+
+			$this->session->set_userdata(['cond' => $cond]);
+
+			redirect('app/cari2/' . $this->POST('next_page'));
+			exit;
+		}
+
+		redirect('app/cari2');
+		exit;
+	}
+
+	public function cari2()
+	{
+		$this->data['current_page'] = $this->uri->segment(3);
+		if (!isset($this->data['current_page']))
+		{
+			$this->data['current_page'] = 0;
+			$this->session->unset_userdata('cond');
+			$this->session->unset_userdata('lat');
+			$this->session->unset_userdata('lng');
+			$this->session->unset_userdata('filter');
+			$this->session->unset_userdata('d_value');
+		}
+
+		$this->load->library('Topsis/topsis');
+		$this->load->model('kriteria_m');
+		$this->data['kriteria'] = $this->kriteria_m->get();
+		$config = [];
+		$exps = [];
+		foreach ($this->data['kriteria'] as $row)
+		{
+			$details = json_decode($row->details, true);
+
+			if ($row->type == 'range')
+			{
+				$max = PHP_INT_MIN;
+				$min = PHP_INT_MAX;
+				$max_idx = -1;
+				$min_idx = -1;
+				for ($i = 0; $i < count($details); $i++)
+				{
+					if ($details[$i]['max'] > $max)
+					{
+						$max = $details[$i]['max'];
+						$max_idx = $i;
+					}
+
+					if ($details[$i]['min'] < $min)
+					{
+						$min = $details[$i]['min'];
+						$min_idx = $i;
+					}
+				}
+				$details[$max_idx]['max'] = null;
+				$details[$min_idx]['min'] = null;
+			}
+
+			$config[$row->key] = [
+				'key'		=> $row->key,
+				'weight'	=> $row->bobot,
+				'label'		=> $row->kriteria,
+				'type'		=> $row->type,
+				'exp'		=> $row->exp,
+				'values'	=> $details
+			];
+
+			$exps[$row->key] = $row->exp;
+		}
+		$this->topsis->set_config($config);
+		$this->topsis->set_exps($exps);
+		$this->load->model('sekolah_m');
+		
+		$this->data['range']	= $this->sekolah_m->get_range();
+		$this->data['criteria']	= $this->topsis->criteria;
+		$this->data['config']	= $this->data['criteria']->get_config();
+
+		$cond = $this->session->userdata('cond');
+		if (isset($cond))
+		{
+			$this->data['sekolah']	= $this->sekolah_m->get($cond);
+		}
+		else
+		{
+			$this->data['sekolah']	= $this->sekolah_m->get(['valid' => 1]);	
+		}
+
+
+		$lat = $this->session->userdata('lat');
+		$lng = $this->session->userdata('lng');
+		$dValue = $this->session->userdata('d_value');
+		if (isset($lat, $lng))
+		{
+			$this->data['sekolah']	= array_map(function($sekolah) use ($lat, $lng) {
+
+				$sekolah->jarak = $this->vincentyGreatCircleDistance($lat, $lng, $sekolah->latitude, $sekolah->longitude) / 1000; // convert meter to kilometer
+				return $sekolah;
+
+			}, $this->data['sekolah']);	
+
+			$this->data['sekolah'] = array_filter($this->data['sekolah'], function($sekolah) use ($dValue) {
+				switch ($dValue) 
+				{
+	        		case 1:
+	        			if ($sekolah->jarak < 10.1) 
+	        			{
+	        				return false;
+	        			}
+	        			break;
+
+	        		case 2:
+	        			if ($sekolah->jarak < 8.1 || $sekolah->jarak > 10) 
+	        			{
+	        				return false;
+	        			}
+	        			break;
+
+	        		case 3:
+	        			if ($sekolah->jarak < 4.1 || $sekolah->jarak > 8) 
+	        			{
+	        				return false;
+	        			}
+	        			break;
+
+	        		case 4:
+	        			if ($sekolah->jarak < 2.1 || $sekolah->jarak > 4) 
+	        			{
+	        				return false;
+	        			}
+	        			break;
+
+	        		case 5:
+	        			if ($sekolah->jarak > 2) 
+	        			{
+	        				return false;
+	        			}
+	        			break;
+	        	}	
+
+	        	return true;
+			});
+		}
+		
+		$this->topsis->set_config($config);
+		$this->topsis->set_exps($exps);
+		$this->topsis->fit($this->data['sekolah'], ['nama_sekolah', 'id', 'alamat', 'latitude', 'longitude', 'telepon', 'created_at', 'updated_at', 'id_user', 'valid']);
+		$this->topsis->weight();
+		$this->topsis->solution_distance();
+		$rank = $this->topsis->rank();
+		$rank = array_map(function($row) {
+			$row = (array)$row;
+			$path = 'assets/foto/sekolah-' . $row['id'];
+			if (!file_exists(FCPATH . $path))
+			{
+				$foto = [];
+			}
+			else 
+			{
+				$foto = scandir(FCPATH . $path);
+			}
+			$foto = array_values(array_diff($foto, ['.', '..']));
+			$row['foto'] = isset($foto[0]) ? base_url($path . '/' . $foto[0]) : 'http://placehold.it/313x313';
+			$row['biaya_masuk'] = 'Rp. ' . number_format($row['biaya_masuk'], 2, ',', '.');
+			$row['spp_bulanan'] = 'Rp. ' . number_format($row['spp_bulanan'], 2, ',', '.');
+			return $row;
+		}, $rank);
+		
+		$this->data['title']	= 'Cari Sekolah';
+		$this->data['content']	= 'cari2';
+		$this->template($this->data, $this->module);
+	}
+
 	public function rank()
 	{
 		if ($this->POST('cari'))

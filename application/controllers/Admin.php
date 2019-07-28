@@ -293,7 +293,8 @@ class Admin extends MY_Controller
 				'latitude'			=> $this->POST('latitude'),
 				'longitude'			=> $this->POST('longitude'),
 				'jarak'				=> $this->POST('jarak'),
-				'id_user'			=> $this->data['id_pengguna']
+				'id_user'			=> $this->data['id_pengguna'],
+				'halaman_parkir'	=> $this->POST('halaman_parkir')
 			];
 			$this->sekolah_m->insert($this->data['sekolah']);
 
@@ -309,6 +310,10 @@ class Admin extends MY_Controller
 			$this->flashmsg('Data sekolah berhasil disimpan');
 			redirect('admin/tambah-sekolah');
 		}
+
+		$this->load->model('kriteria_m');
+		$this->data['fasilitas'] 		= $this->kriteria_m->get_row(['id' => 4]);
+		$this->data['ekstrakurikuler'] 	= $this->kriteria_m->get_row(['id' => 5]);
 
 		$this->data['title']	= 'Form Penambahan Sekolah Baru';
 		$this->data['content']	= 'form_tambah_sekolah';
@@ -355,7 +360,8 @@ class Admin extends MY_Controller
 				'latitude'			=> $this->POST('latitude'),
 				'longitude'			=> $this->POST('longitude'),
 				'jarak'				=> $this->POST('jarak'),
-				'id_user'			=> $this->data['id_pengguna']
+				'id_user'			=> $this->data['id_pengguna'],
+				'halaman_parkir'	=> $this->POST('halaman_parkir')
 			];
 			$this->sekolah_m->update($this->data['id'], $this->data['sekolah']);
 
@@ -392,6 +398,10 @@ class Admin extends MY_Controller
 		$this->data['fasilitas']			= json_decode($this->data['sekolah']->fasilitas);
 		$this->data['ekstrakurikuler']		= json_decode($this->data['sekolah']->ekstrakurikuler);
 		$this->data['lokasi']				= json_decode($this->data['sekolah']->lokasi);
+
+		$this->load->model('kriteria_m');
+		$this->data['fasilitas_k'] 		= $this->kriteria_m->get_row(['id' => 4]);
+		$this->data['ekstrakurikuler_k'] 	= $this->kriteria_m->get_row(['id' => 5]);
 
 		$this->data['title']	= 'Form Edit Sekolah';
 		$this->data['content']	= 'form_edit_sekolah';
@@ -624,15 +634,15 @@ class Admin extends MY_Controller
 
 		$this->data['sekolah']		= json_decode(json_encode($this->sekolah_m->get()), true);
 
-		$this->data['sekolah']		= array_map(function($sekolah) {
+		// $this->data['sekolah']		= array_map(function($sekolah) {
 
-			$fasilitas 					= count(json_decode($sekolah['fasilitas'])) / JUMLAH_FASILITAS;
-			$ekstrakurikuler 			= count(json_decode($sekolah['ekstrakurikuler'])) / JUMLAH_EKSTRAKURIKULER;
-			$sekolah['fasilitas'] 		= round($fasilitas, 2);
-			$sekolah['ekstrakurikuler'] = round($ekstrakurikuler, 2);
-			return $sekolah;
+		// 	$fasilitas 					= count(json_decode($sekolah['fasilitas'])) / JUMLAH_FASILITAS;
+		// 	$ekstrakurikuler 			= count(json_decode($sekolah['ekstrakurikuler'])) / JUMLAH_EKSTRAKURIKULER;
+		// 	$sekolah['fasilitas'] 		= round($fasilitas, 2);
+		// 	$sekolah['ekstrakurikuler'] = round($ekstrakurikuler, 2);
+		// 	return $sekolah;
 
-		}, $this->data['sekolah']);
+		// }, $this->data['sekolah']);
 		$_SESSION['sekolah'] = $this->data['sekolah'];
 		
 		$matrix = $this->topsis->fit($this->data['sekolah'], ['nama_sekolah', 'id', 'alamat', 'latitude', 'longitude', 'telepon', 'created_at', 'updated_at', 'id_user', 'valid']);
