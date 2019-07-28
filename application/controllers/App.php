@@ -454,6 +454,9 @@ class App extends MY_Controller
 			$row['spp_bulanan'] = 'Rp. ' . number_format($row['spp_bulanan'], 2, ',', '.');
 			return $row;
 		}, $rank);
+
+		$this->data['fasilitas_k'] 		= $this->kriteria_m->get_row(['id' => 4]);
+		$this->data['ekstrakurikuler_k'] 	= $this->kriteria_m->get_row(['id' => 5]);
 		
 		$this->data['title']	= 'Cari Sekolah';
 		$this->data['content']	= 'cari2';

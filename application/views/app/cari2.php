@@ -129,75 +129,25 @@
 												<p style="padding: 5px;">
 													<div class="row">
 														<div class="col-md-6">
-															<input type="checkbox" name="fasilitas[]" id="fasilitas1" value="Auditorium" data-parsley-mincheck="1" class="flat" /> Auditorium
-									                        <br/><br/>
+															<?php 
+																$detail_fasilitas = json_decode($fasilitas_k->details);
+																for ($i = 0; $i < count($detail_fasilitas) / 2; $i++): 
+															?>
+																<input type="checkbox" name="fasilitas[]" id="fasilitas<?= $i + 1 ?>" value="<?= $detail_fasilitas[$i]->label ?>" data-parsley-mincheck="1" class="flat" /> <?= $detail_fasilitas[$i]->label ?>
+									                        	<br/><br/>
 
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas2" value="Kolam Renang" class="flat" /> Kolam Renang
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas3" value="Konsultasi Psikologi" class="flat" /> Konsultasi Psikologi
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas4" value="Katering" class="flat" /> Katering
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas5" value="Antar Jemput Anak" class="flat" /> Antar Jemput Anak
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas6" value="Lab. Komputer" class="flat" /> Lab. Komputer
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas7" value="Lab. Multimedia" class="flat" /> Lab. Multimedia
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas8" value="Halaman Parkir" class="flat" /> Halaman Parkir
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas9" value="Aula" class="flat" /> Aula
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas10" value="Mushola / Masjid" class="flat" /> Mushola / Masjid
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas11" value="Perpustakaan" class="flat" /> Perpustakaan
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas12" value="Ruang Kelas Ber-AC" class="flat" /> Ruang Kelas Ber-AC
-									                        <br/><br/>
+															<?php endfor; ?>
 														</div>
 														<div class="col-md-6">
-															<input type="checkbox" name="fasilitas[]" id="fasilitas13" value="Wifi" class="flat" /> Wifi
-									                        <br/><br/>
+															<?php 
+																$detail_fasilitas = json_decode($fasilitas_k->details);
+																for ($i = count($detail_fasilitas) / 2; $i < count($detail_fasilitas); $i++): 
+															?>
+																<input type="checkbox" name="fasilitas[]" id="fasilitas<?= $i + 1 ?>" value="<?= $detail_fasilitas[$i]->label ?>" data-parsley-mincheck="1" class="flat" /> <?= $detail_fasilitas[$i]->label ?>
+									                        	<br/><br/>
 
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas14" value="Asuransi Kecelakaan" class="flat" /> Asuransi Kecelakaan
-									                        <br/><br/>
+															<?php endfor; ?>
 
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas15" value="CCTV" class="flat" /> CCTV
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas16" value="Pelayanan Kesehatan" class="flat" /> Pelayanan Kesehatan
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas17" value="Lab. Sains" class="flat" /> Lab. Sains
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas18" value="Lab. Matematika" class="flat" /> Lab. Matematika
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas19" value="Koperasi" class="flat" /> Koperasi
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas20" value="Kantin" class="flat" /> Kantin
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas21" value="UKS" class="flat" /> UKS
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas22" value="Lap. Olahraga" class="flat" /> Lap. Olahraga
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="fasilitas[]" id="fasilitas23" value="Taman Bermain" class="flat" /> Taman Bermain
-									                        <br/><br/>
 														</div>
 													</div>
 							                    </p>
@@ -221,94 +171,25 @@
 												<p style="padding: 5px;">
 													<div class="row">
 														<div class="col-md-6">
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler1" value="Robotic" class="flat" /> Robotic
-									                        <br/><br/>
+															<?php 
+																$detail_ekstrakurikuler = json_decode($ekstrakurikuler_k->details);
+																for ($i = 0; $i < count($detail_ekstrakurikuler) / 2; $i++): 
+															?>
+																<input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler<?= $i + 1 ?>" value="<?= $detail_ekstrakurikuler[$i]->label ?>" data-parsley-mincheck="1" class="flat" /> <?= $detail_ekstrakurikuler[$i]->label ?>
+									                        	<br/><br/>
 
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler2" value="Panahan" class="flat" /> Panahan
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler3" value="Marching Band" class="flat" /> Marching Band
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler4" value="Berenang" class="flat" /> Berenang
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler5" value="Multimedia Club" class="flat" /> Multimedia Club
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler6" value="Tenis Meja" class="flat" /> Tenis Meja
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler7" value="Tilawah Qur`an" class="flat" /> Tilawah Qur`an
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler8" value="Da`i Cilik" class="flat" /> Da`i Cilik
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler9" value="Public Speaking" class="flat" /> Public Speaking
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler10" value="Training" class="flat" /> Training
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler11" value="Melukis" class="flat" /> Melukis
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler12" value="Teater" class="flat" /> Teater
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler25" value="Mewarnai" class="flat" /> Mewarnai
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler26" value="Seni Tari" class="flat" /> Seni Tari
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler27" value="Karate" class="flat" /> Karate
-									                        <br/><br/>
+															<?php endfor; ?>
 														</div>
-
 														<div class="col-md-6">
-															<input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler13" value="Catur" class="flat" /> Catur
-									                        <br/><br/>
+															<?php 
+																$detail_ekstrakurikuler = json_decode($ekstrakurikuler_k->details);
+																for ($i = count($detail_ekstrakurikuler) / 2; $i < count($detail_ekstrakurikuler); $i++): 
+															?>
+																<input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler<?= $i + 1 ?>" value="<?= $detail_ekstrakurikuler[$i]->label ?>" data-parsley-mincheck="1" class="flat" /> <?= $detail_ekstrakurikuler[$i]->label ?>
+									                        	<br/><br/>
 
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler14" value="Arabic Club" class="flat" /> Arabic Club
-									                        <br/><br/>
+															<?php endfor; ?>
 
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler15" value="Tahfidz Al-Qur`an" class="flat" /> Tahfidz Al-Qur`an
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler16" value="Tahsin Al-Qur`an" class="flat" /> Tahsin Al-Qur`an
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler17" value="Paskibra" class="flat" /> Paskibra
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler18" value="Komputer" class="flat" /> Komputer
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler19" value="Grup Seni Islam" class="flat" /> Grup Seni Islam
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler20" value="Taekwondo" class="flat" /> Taekwondo
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler21" value="Pencak Silat" class="flat" /> Pencak Silat
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler22" value="Seni Musik" class="flat" /> Seni Musik
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler23" value="Futsal" class="flat" /> Futsal
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler24" value="PMR" class="flat" /> PMR
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler28" value="Pramuka" class="flat" /> Pramuka
-									                        <br/><br/>
-
-									                        <input type="checkbox" name="ekstrakurikuler[]" id="ekstrakurikuler29" value="English Club" class="flat" /> English Club
-									                        <br/><br/>
 														</div>
 													</div>
 							                    </p>
@@ -441,6 +322,11 @@
 										<i class="fa fa-search"></i> Cari
 									</button>	
 								<?php endif; ?>
+								<?php if ($current_page > 0): ?>
+									<a type="button" href="<?= base_url('app/cari2/' . ($this->uri->segment(3) - 1)) ?>" class="btn btn-warning">
+										<i class="fa fa-arrow-left"></i> Kembali
+									</a>
+								<?php endif; ?>
 								<a href="<?= base_url('app/cari2') ?>" type="button" class="btn btn-danger">
 									<i class="fa fa-refresh"></i> Ulangi
 								</a>
@@ -564,7 +450,7 @@
 			$('#lng').val(place.geometry.location.lng);
 			setMarker(place.geometry.location);
 			<?php foreach ($sekolah as $row): ?>
-	  			appendMarker({ lat: <?= $row->latitude ?>, lng: <?= $row->longitude ?> });
+	  			appendMarker({ lat: <?= $row->latitude ?>, lng: <?= $row->longitude ?> }, '<?= $row->nama_sekolah ?>');
 	  		<?php endforeach; ?>
           });
 
@@ -586,73 +472,60 @@
         }
 
         function appendMarker(latLng, sekolah) {
-        	yourLocation = new google.maps.LatLng(lat, lng);
-        	let request = {
-	        	origin: yourLocation,
-	        	destination: latLng,
-	        	travelMode: google.maps.TravelMode.DRIVING
-	        };
-	        let directionService = new google.maps.DirectionsService();
-	        directionService.route(request, function(response, status) {
-	        	
-	        	if (response != null) {
-	        		let marked = true;	
-	        		const distance = parseFloat(response.routes[0].legs[0].distance.value / 1000);
-		        	dValue = $('#jarak').val();
-		        	if (dValue != undefined && dValue != '') {
-		        		console.log(distance + ":" + dValue);
-		        		dValue = parseInt(dValue);
-		        		switch (dValue) {
-			        		case 1:
-			        			if (distance < 10.1) {
-			        				marked = false;
-			        			}
-			        			break;
 
-			        		case 2:
-			        			if (distance < 8.1 || distance > 10) {
-			        				marked = false;
-			        			}
-			        			break;
+        	let marked = true;	
+	        const distance = vincentyGreatCircleDistance(lat, lng, latLng.lat, latLng.lng) / 1000;
+	        dValue = $('#jarak').val();
+        	if (dValue != undefined && dValue != '') {
+        		console.log(sekolah + ":" + distance);
+        		dValue = parseInt(dValue);
+        		switch (dValue) {
+	        		case 1:
+	        			if (distance < 10.1) {
+	        				marked = false;
+	        			}
+	        			break;
 
-			        		case 3:
-			        			if (distance < 4.1 || distance > 8) {
-			        				marked = false;
-			        			}
-			        			break;
+	        		case 2:
+	        			if (distance < 8.1 || distance > 10) {
+	        				marked = false;
+	        			}
+	        			break;
 
-			        		case 4:
-			        			if (distance < 2.1 || distance > 4) {
-			        				marked = false;
-			        			}
-			        			break;
+	        		case 3:
+	        			if (distance < 4.1 || distance > 8) {
+	        				marked = false;
+	        			}
+	        			break;
 
-			        		case 5:
-			        			console.log('5555---');
-			        			if (distance > 2) {
-			        				marked = false;
-			        			}
-			        			break;
-			        	}	
-		        	}
-		        	console.log(marked);
-		        	if (marked) {
-		        		const infowindow = new google.maps.InfoWindow({
-		        			content: '<h5>' + sekolah + '</h5>'
-		        		});
-		        		const marker = new google.maps.Marker({
-							map: map,
-							position: latLng,
-							icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-			            });
-			            marker.addListener('click', function() {
-				          	infowindow.open(map, marker);
-				        });
-			            markers.push(marker);	
-		        	}
-	        	}
-	        	
-	        });
+	        		case 4:
+	        			if (distance < 2.1 || distance > 4) {
+	        				marked = false;
+	        			}
+	        			break;
+
+	        		case 5:
+	        			if (distance > 2) {
+	        				marked = false;
+	        			}
+	        			break;
+	        	}	
+        	}
+
+        	if (marked) {
+        		const infowindow = new google.maps.InfoWindow({
+        			content: '<h5>' + sekolah + '</h5>'
+        		});
+        		const marker = new google.maps.Marker({
+					map: map,
+					position: latLng,
+					icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+	            });
+	            marker.addListener('click', function() {
+		          	infowindow.open(map, marker);
+		        });
+	            markers.push(marker);	
+        	}
 
             
         }
@@ -718,6 +591,56 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV1CNPBI4qy_Wr5jDjKe0Pb40u9Tn27UA&libraries=places&callback=initMap&libraries=places&language=id" async defer></script>
 
 <script type="text/javascript">
+
+	function toRad(n) {
+	 return n * Math.PI / 180;
+	};
+	function vincentyGreatCircleDistance(lat1, lon1, lat2, lon2) {
+	 var a = 6378137,
+	     b = 6356752.3142,
+	     f = 1 / 298.257223563, // WGS-84 ellipsoid params
+	     L = toRad(lon2-lon1),
+	     U1 = Math.atan((1 - f) * Math.tan(toRad(lat1))),
+	     U2 = Math.atan((1 - f) * Math.tan(toRad(lat2))),
+	     sinU1 = Math.sin(U1),
+	     cosU1 = Math.cos(U1),
+	     sinU2 = Math.sin(U2),
+	     cosU2 = Math.cos(U2),
+	     lambda = L,
+	     lambdaP,
+	     iterLimit = 100;
+	 do {
+	  var sinLambda = Math.sin(lambda),
+	      cosLambda = Math.cos(lambda),
+	      sinSigma = Math.sqrt((cosU2 * sinLambda) * (cosU2 * sinLambda) + (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda) * (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda));
+	  if (0 === sinSigma) {
+	   return 0; // co-incident points
+	  };
+	  var cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda,
+	      sigma = Math.atan2(sinSigma, cosSigma),
+	      sinAlpha = cosU1 * cosU2 * sinLambda / sinSigma,
+	      cosSqAlpha = 1 - sinAlpha * sinAlpha,
+	      cos2SigmaM = cosSigma - 2 * sinU1 * sinU2 / cosSqAlpha,
+	      C = f / 16 * cosSqAlpha * (4 + f * (4 - 3 * cosSqAlpha));
+	  if (isNaN(cos2SigmaM)) {
+	   cos2SigmaM = 0; // equatorial line: cosSqAlpha = 0 (§6)
+	  };
+	  lambdaP = lambda;
+	  lambda = L + (1 - C) * f * sinAlpha * (sigma + C * sinSigma * (cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM)));
+	 } while (Math.abs(lambda - lambdaP) > 1e-12 && --iterLimit > 0);
+
+	 if (!iterLimit) {
+	  return NaN; // formula failed to converge
+	 };
+
+	 var uSq = cosSqAlpha * (a * a - b * b) / (b * b),
+	     A = 1 + uSq / 16384 * (4096 + uSq * (-768 + uSq * (320 - 175 * uSq))),
+	     B = uSq / 1024 * (256 + uSq * (-128 + uSq * (74 - 47 * uSq))),
+	     deltaSigma = B * sinSigma * (cos2SigmaM + B / 4 * (cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM) - B / 6 * cos2SigmaM * (-3 + 4 * sinSigma * sinSigma) * (-3 + 4 * cos2SigmaM * cos2SigmaM))),
+	     s = b * A * (sigma - deltaSigma);
+	 return s.toFixed(3); // round to 1mm precision
+	};
+
 	// let bobot = {};
 
 	// function atur_bobot() {
