@@ -79,7 +79,10 @@
 												<?php  
 													foreach ($fasilitas as $row)
 													{
-														echo '<li>' . $row . '</li>';
+														if ($row != 'Halaman Parkir')
+														{
+															echo '<li>' . $row . '</li>';	
+														}
 													}
 												?>
 											</ul>
@@ -114,6 +117,18 @@
 												?>
 											</ul>
 										</td>
+									</tr>
+									<tr>
+										<td>
+											<b>Halaman Parkir</b>
+										</td>
+										<td><?= $sekolah->halaman_parkir ?></td>
+									</tr>
+									<tr>
+										<td>
+											<b>Jarak</b>
+										</td>
+										<td><?= $sekolah->jarak ?> km</td>
 									</tr>
 									<tr>
 										<td>
